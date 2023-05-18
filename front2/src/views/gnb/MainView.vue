@@ -1,12 +1,22 @@
 <template>
   <div>
     <header-nav></header-nav>
-    <calender-ui></calender-ui>
-    <parts-ui></parts-ui>
-    <part-ranking-ui></part-ranking-ui>
-    <achievements-ui></achievements-ui>
-    <today-luck-ui></today-luck-ui>
-    <streak-ui></streak-ui>
+    <div class="main-body">
+      <div class="left">
+        <calender-ui></calender-ui>
+        <achievements-ui></achievements-ui>
+      </div>
+      <div class="center">
+        <parts-ui></parts-ui>
+      </div>
+      <div class="right">
+        <part-ranking-ui></part-ranking-ui>
+        <today-luck-ui></today-luck-ui>
+      </div>
+    </div>
+    <div>
+      <streak-ui></streak-ui>
+    </div>
   </div>
 </template>
 
@@ -33,4 +43,32 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.main-body {
+  display: inline-flex;
+}
+.main-calendar {
+  border: solid black;
+}
+.main-achieve {
+  height: 350px;
+  width: 400px;
+  border: solid black;
+}
+.main-partranking {
+  height: 350px;
+  width: 400px;
+  border: solid black;
+}
+.main-todayluck {
+  height: 350px;
+  width: 400px;
+  border: solid black;
+}
+.main-streak {
+  margin: auto;
+  height: 50px;
+  width: 1350px;
+  border: solid black;
+}
+</style>
