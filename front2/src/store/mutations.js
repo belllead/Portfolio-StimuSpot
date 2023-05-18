@@ -5,4 +5,7 @@ export default {
   CLEAR_PART(state) {
     state.selectedPart = null;
   },
+  GET_ACHIEVEMENTS(state, payload) {
+    state.achievements = payload;
+  },
 };
