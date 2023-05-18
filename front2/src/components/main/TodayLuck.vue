@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-todayluck">
     <h2>오늘의 운세</h2>
     <div>
       <div>오늘의 운세</div>

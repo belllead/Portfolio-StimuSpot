@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-streak">
     <h2>스트릭</h2>
     <div class="streak-bar">
       <div
