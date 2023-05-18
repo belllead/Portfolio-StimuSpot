@@ -1,11 +1,6 @@
 <template>
   <div>
     <h2>운동부위</h2>
-    <!-- <button @click="selectTriceps">삼두</button>
-    <button @click="selectBiceps">이두</button>
-    <button @click="selectShoulder">어깨</button>
-    <button @click="selectChest">가슴</button>
-    <button @click="selectAbs">복근</button> -->
     <svg
       width="550"
       height="500"
@@ -251,7 +246,11 @@
           />
         </g>
       </g>
-      <g id="chest" @click="selectChest">
+      <g
+        id="chest"
+        :class="{ focused: selectedPart === 'chest' }"
+        @click="selectChest"
+      >
         <path
           class="path"
           d="M133.23 119.113C131.87 117.3 118.273 105.969 109.209 110.501C106.036 113.221 94.2525 133.162 94.7057 134.522C94.7057 137.695 113.741 148.572 118.273 148.572C124.165 145.853 129.604 142.68 132.776 138.601C133.683 134.069 134.136 123.645 133.23 119.113Z"
@@ -265,7 +264,11 @@
           stroke-linejoin="round"
         />
       </g>
-      <g id="shoulder" @click="selectShoulder">
+      <g
+        id="shoulder"
+        :class="{ focused: selectedPart === 'shoulder' }"
+        @click="selectShoulder"
+      >
         <path
           class="path"
           d="M106.036 110.501C101.504 115.94 93.7993 129.537 92.8928 132.709C85.6413 132.709 74.3107 138.148 72.951 139.054C71.5914 139.961 70.6849 119.566 82.4687 110.954C93.346 104.156 105.13 109.142 106.036 110.501Z"
@@ -291,7 +294,11 @@
           stroke-linejoin="round"
         />
       </g>
-      <g id="bicep" @click="selectBicep">
+      <g
+        id="bicep"
+        :class="{ focused: selectedPart === 'bicep' }"
+        @click="selectBicep"
+      >
         <path
           class="path"
           d="M66.1527 158.996C66.6059 166.701 70.8843 168.609 72.0446 174.406C73.4042 181.204 72.4978 189.815 72.4978 189.815C72.4978 189.815 90.6267 168.967 92.4396 135.429C92.4396 135.429 64.793 137.695 66.1527 158.996Z"
@@ -317,7 +324,11 @@
           stroke-linejoin="round"
         />
       </g>
-      <g id="forearm" @click="selectForearm">
+      <g
+        id="forearm"
+        :class="{ focused: selectedPart === 'forearm' }"
+        @click="selectForearm"
+      >
         <path
           class="path"
           d="M68.872 171.686C65.7674 170.54 57.0157 188.637 55.2753 208.851C54.9082 213.134 51.6495 224.714 47.1173 231.965C51.6495 227.433 64.793 217.009 69.3252 196.614C71.3285 187.59 70.2317 172.593 68.872 171.686Z"
@@ -379,7 +390,11 @@
           stroke-linejoin="round"
         />
       </g>
-      <g id="abs" @click="selectAbs">
+      <g
+        id="abs"
+        :class="{ focused: selectedPart === 'abs' }"
+        @click="selectAbs"
+      >
         <path
           class="path"
           d="M133.683 151.291C132.323 148.119 125.978 144.946 120.539 151.291C116.914 155.37 116.46 165.341 116.46 168.967C123.259 163.075 127.791 162.169 133.683 161.715V151.291Z"
@@ -429,7 +444,11 @@
           stroke-linejoin="round"
         />
       </g>
-      <g id="back" @click="selectBack">
+      <g
+        id="back"
+        :class="{ focused: selectedPart === 'back' }"
+        @click="selectBack"
+      >
         <path
           class="path"
           d="M368.724 103.341C380.961 107.42 381.922 113.987 384.134 122.829C387.306 135.519 402.716 157.274 406.342 161.503V125.775C406.342 100.848 389.119 103.114 368.724 103.341Z"
@@ -473,7 +492,11 @@
           stroke-linejoin="round"
         />
       </g>
-      <g id="tricep" @click="selectTricep">
+      <g
+        id="tricep"
+        :class="{ focused: selectedPart === 'tricep' }"
+        @click="selectTricep"
+      >
         <path
           class="path"
           d="M359.66 135.065C352.408 136.425 345.61 135.519 343.797 137.332C342.251 138.877 336.582 148.032 339.265 155.007C341.531 160.899 357.394 141.864 359.66 135.065Z"
@@ -499,7 +522,11 @@
           stroke-linejoin="round"
         />
       </g>
-      <g id="glute" @click="selectGlute">
+      <g
+        id="glute"
+        :class="{ focused: selectedPart === 'glute' }"
+        @click="selectGlute"
+      >
         <path
           class="path"
           d="M391.385 208.488C393.23 209.327 393.651 213.927 395.011 217.553C399.752 230.193 405.435 231.603 405.888 238.401C406.251 243.835 389.119 255.17 375.976 258.343C377.335 247.012 378.391 232.056 367.818 227.977C369.177 216.646 386.4 206.222 391.385 208.488Z"
@@ -514,7 +541,11 @@
           @click="selectGlute"
         />
       </g>
-      <g id="thigh" @click="selectThigh">
+      <g
+        id="thigh"
+        :class="{ focused: selectedPart === 'thigh' }"
+        @click="selectThigh"
+      >
         <path
           class="path"
           d="M98.7847 214.742C98.7847 214.742 75.6703 271.848 95.6121 313.092C94.7057 275.474 100.598 236.044 100.598 221.087C99.7047 214.742 98.7847 214.742 98.7847 214.742Z"
@@ -576,7 +607,11 @@
           stroke-linejoin="round"
         />
       </g>
-      <g id="calf" @click="selectCalf">
+      <g
+        id="calf"
+        :class="{ focused: selectedPart === 'calf' }"
+        @click="selectCalf"
+      >
         <path
           class="path"
           d="M109.603 433.096C105.583 409.175 104.677 395.578 103.317 385.154C102.288 377.259 98.7847 353.429 105.583 335.3C94.7057 342.098 76.9121 396.285 109.603 433.096Z"
@@ -627,54 +662,62 @@
         />
       </g>
     </svg>
+    <button v-if="selectedPart">{{ selectedPart }} 관련 영상 보기</button>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "PartsUi",
-  data() {
-    return {
-      part: "",
-    };
-  },
   methods: {
     selectChest() {
-      this.part = "chest";
+      this.$store.dispatch("focusPart", "chest");
     },
     selectShoulder() {
-      this.part = "shoulder";
+      this.$store.dispatch("focusPart", "shoulder");
     },
     selectBicep() {
-      this.part = "bicep";
+      this.$store.dispatch("focusPart", "bicep");
     },
     selectForearm() {
-      this.part = "forearm";
+      this.$store.dispatch("focusPart", "forearm");
     },
     selectAbs() {
-      this.part = "abs";
+      this.$store.dispatch("focusPart", "abs");
     },
     selectBack() {
-      this.part = "back";
+      this.$store.dispatch("focusPart", "back");
     },
     selectTricep() {
-      this.part = "tricep";
+      this.$store.dispatch("focusPart", "tricep");
     },
     selectThigh() {
-      this.part = "thigh";
+      this.$store.dispatch("focusPart", "thigh");
     },
     selectCalf() {
-      this.part = "calf";
+      this.$store.dispatch("focusPart", "calf");
     },
     selectGlute() {
-      this.part = "glute";
+      this.$store.dispatch("focusPart", "glute");
     },
   },
-  components: {},
+  computed: {
+    ...mapState(["selectedPart"]),
+  },
+  created() {
+    this.$store.dispatch("clearFocus");
+  },
 };
 </script>
 
-<style>
+<style scoped>
+.focused path {
+  fill: green;
+  fill-opacity: 1;
+}
+
 .path {
   stroke: gray;
   stroke-dasharray: 320;
@@ -692,7 +735,6 @@ export default {
 }
 
 #thigh:hover {
-  box-shadow: 5px 5px green;
   transform: translate(0, -3px);
 }
 

@@ -182,7 +182,6 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
-    setPart:
   },
   modules: {},
 });
