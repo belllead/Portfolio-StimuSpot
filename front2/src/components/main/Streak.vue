@@ -1,6 +1,6 @@
 <template>
   <div class="main-streak">
-    <h2>스트릭</h2>
+    <br />
     <div class="streak-bar">
       <div
         class="streak-el"
