@@ -2,8 +2,18 @@
   <div>
     <fieldset>
       <div>나만의 부위별 운동 다이어리를 <br />가지기 위해 가입하세요.</div>
-      <label for="profileImg">프사</label>
-      <input type="file" id="profileImg" /><br />
+      <label
+        for="profileImg"
+        class="profileImg"
+        :style="`background-image : url(${profileImg})`"
+      ></label>
+      <input
+        type="file"
+        id="profileImg"
+        @change="uploadImg"
+        accept="image/*"
+        style="display: none"
+      /><br />
       <label for="id">아이디</label>
       <input type="text" id="id" v-model="id" /><br />
       <label for="password">비밀번호</label>
@@ -21,6 +31,7 @@
         <router-link :to="{ name: 'UserLogin' }">로그인하기</router-link>
       </button>
     </fieldset>
+    <div></div>
   </div>
 </template>
 
@@ -35,7 +46,25 @@ export default {
       email: "",
       age: 0,
       nickname: "",
+      profileImg: "",
     };
+  },
+  methods: {
+    uploadImg(e) {
+      let file = e.target.files;
+      let url = URL.createObjectURL(file[0]);
+      this.profileImg = url;
+    },
   },
 };
 </script>
+
+<style scoped>
+.profileImg {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+  background-size: cover;
+  display: inline-block;
+}
+</style>
