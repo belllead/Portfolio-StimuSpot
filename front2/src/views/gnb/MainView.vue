@@ -67,7 +67,7 @@ export default {
 }
 .main-streak {
   margin: auto;
-  height: 50px;
+  height: 150px;
   width: 1350px;
   border: solid black;
 }
