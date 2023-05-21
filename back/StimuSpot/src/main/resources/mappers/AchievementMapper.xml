@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.ssafy.pjt.model.dao.AchievementDao">
+
+	<!-- 업적 조회 -->
+	<select id="selectAll" resultType="Achievement">
+		SELECT *
+		FROM achievements;
+	</select>
+	
+	<!-- 사용자 정보로 조회 -->
+	<select id="selectByUser" parameterType="int" resultType="Achievement">
+		SELECT ua.achv_id, ac.achv_title, ac.achv_content, ua.achieved_date
+		FROM user_achieve AS ua
+		JOIN achievements AS ac ON ua.achv_id = ac.achv_id 
+		WHERE ua.user_num = #{id};
+	</select>
+	
+</mapper>

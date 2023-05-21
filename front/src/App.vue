@@ -1,29 +1,28 @@
 <template>
   <div id="app">
-    <header-nav />
     <router-view />
   </div>
 </template>
-<script>
-import HeaderNav from "@/components/common/HeaderNav.vue";
-export default {
-  name: "App",
-  components: {
-    HeaderNav,
-  },
-};
-</script>
+
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  list-style: none;
-}
-.text-center {
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  color: #2c3e50;
 }
-.container {
-  margin: 0px 30px;
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
