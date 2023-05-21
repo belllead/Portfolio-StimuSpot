@@ -20,26 +20,34 @@ VALUES
 CREATE TABLE friends (
 user_num      INT,
 friend_num    INT,
+friend_date   DATETIME,
 FOREIGN KEY (user_num) REFERENCES users(user_num),
 FOREIGN KEY (friend_num) REFERENCES users(user_num)
 );
 
 INSERT INTO friends
 VALUES
-(1,2);
+(1,2,"2023-05-21");
 
-CREATE TABLE user_achive(
+CREATE TABLE loginlog (
+user_num       INT,
+logdate        DATETIME,
+FOREIGN KEY (user_num) REFERENCES users(user_num)
+);
+
+CREATE TABLE user_achieve(
 user_num       INT,
 achv_id        INT,
+achieved_date      Date,
 FOREIGN KEY(user_num) REFERENCES users(user_num),
 FOREIGN KEY(achv_id) REFERENCES achievements(achv_id)
 );
 
-INSERT INTO user_achive
+INSERT INTO user_achieve
 VALUES
-(1,1),
-(1,2),
-(2,1);
+(1,1,"2023-04-21"),
+(1,2,"2023-05-21"),
+(2,1,"2023-05-21");
 
 
 CREATE TABLE achievements (
@@ -66,6 +74,7 @@ FOREIGN KEY(user_num) REFERENCES users(user_num)
 CREATE TABLE diaries (
 diary_id        INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 user_num         INT,
+diary_title     VARCHAR(30),
 diary_regdate   DATE,
 diary_rating    INT,
 diary_content   VARCHAR(100),
@@ -92,7 +101,8 @@ VALUES
 CREATE TABLE parts (
 part_id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 part_name        VARCHAR(20),
-part_content     VARCHAR(100)
+part_content     VARCHAR(100),
+part_icon        VARCHAR(50)
 );
 
 INSERT INTO parts
@@ -124,21 +134,26 @@ VALUES
 (1,6,'2023-05-12'),
 (1,7,'2023-05-13');
 
-CREATE TABLE diary_gallery (
-diary_id         INT,
-photo_id         INT,
-FOREIGN KEY(diary_id) REFERENCES diaries(diary_id),
-FOREIGN KEY(photo_id) REFERENCES gallery(photo_id)
-) ;
-
-CREATE TABLE gallery (
-photo_id        INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-photo_img       VARCHAR(30) 
+CREATE TABLE scraps (
+scrap_id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+user_num  INT,
+scrap_url VARCHAR(30),
+scrap_content  VARCHAR(100),
+scrap_title VARCHAR(30),
+scrap_regdate DATE,
+FOREIGN KEY(user_num) REFERENCES users(user_num)
 );
+
+CREATE TABLE comments (
+comment_id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+scrap_id INT,
+comment_content VARCHAR(100),
+comment_writer VARCHAR(30),
+FOREIGN KEY(scrap_id) REFERENCES scraps(scrap_id)
+);
+
 
 CREATE TABLE luck (
 luck_id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 luck_content    VARCHAR(45)
 );
-
-

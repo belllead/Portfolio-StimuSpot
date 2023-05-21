@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="com.ssafy.board.model.dao.DiaryDao">
+ <mapper namespace="com.ssafy.pjt.diary.model.dao.DiaryDao">
 
 	<!-- 전체 다이어리 조회 -->
 	<select id="selectAll" resultType="Diary">
