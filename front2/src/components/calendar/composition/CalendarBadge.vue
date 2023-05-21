@@ -1,12 +1,14 @@
 <template>
   <div class="badge">
-    <span :class="['badge__title', `badge__title--${type}`]">{{ `${dateString} ${name} ${type}` }}</span>
+    <span :class="['badge__title', `badge__title--${type}`]">{{
+      `${dateString} ${name} ${type}`
+    }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'calendarBadge',
+  name: "CalendarBadge",
   props: {
     id: Number,
     type: String,
@@ -15,7 +17,7 @@ export default {
   },
   computed: {
     dateString() {
-      return `${this.date.format('H:MM')}`;
+      return `${this.date.format("H:MM")}`;
     },
   },
 };
