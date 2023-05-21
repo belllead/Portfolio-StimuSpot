@@ -91,4 +91,7 @@ export default {
       commit("SET_YOUTUBE_NEXT_PREV_TOKEN", res.data.prevPageToken);
     });
   },
+  selectDate({ commit }, payload) {
+    commit("SELECT_DATE", payload);
+  },
 };

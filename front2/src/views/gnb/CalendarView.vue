@@ -4,8 +4,9 @@
     <h2>다이어리</h2>
     <div class="diary-body">
       <div class="diary-calendar">
-        <!-- <FullCalendar defaultView="dayGridMonth" :plugins="calendarPlugins" /> -->
-        <v-calendar></v-calendar>
+        <div class="calendar__inner">
+          <CalendarIndex :events="events" @add="add" />
+        </div>
         <!--      *********************************      -->
       </div>
       <div class="diary-diary">
@@ -16,7 +17,7 @@
             id="title"
             class="view"
             name="diary_title"
-            v-model="diary_title"
+            v-model="diary.diary_title"
             ref="diary_title"
           />
           <label for="regdate">날짜</label>
@@ -25,7 +26,7 @@
             id="regdate"
             class="view"
             name="diary_regdate"
-            v-model="diary_regdate"
+            v-model="diary.diary_regdate"
             ref="diary_regdate"
           /><br />
           <label for="rating">성취도</label>
@@ -66,55 +67,55 @@
                 name="starpoint"
                 id="starpoint_1"
                 class="star_radio"
-                v-model="diary_rating"
-                value="0.5"
+                v-model="diary.diary_rating"
+                value=0.5
               />
               <input
                 type="radio"
                 name="starpoint"
                 id="starpoint_2"
                 class="star_radio"
-                v-model="diary_rating"
-                value="1.0"
+                v-model="diary.diary_rating"
+                value=1
               />
               <input
                 type="radio"
                 name="starpoint"
                 id="starpoint_3"
                 class="star_radio"
-                v-model="diary_rating"
-                value="1.5"
+                v-model="diary.diary_rating"
+                value=1.5
               />
               <input
                 type="radio"
                 name="starpoint"
                 id="starpoint_4"
                 class="star_radio"
-                v-model="diary_rating"
-                value="2.0"
+                v-model="diary.diary_rating"
+                value=2
               />
               <input
                 type="radio"
                 name="starpoint"
                 id="starpoint_5"
                 class="star_radio"
-                v-model="diary_rating"
-                value="2.5"
+                v-model="diary.diary_rating"
+                value=2.5
               />
               <input
                 type="radio"
                 name="starpoint"
                 id="starpoint_6"
                 class="star_radio"
-                v-model="diary_rating"
-                value="3.0"
+                v-model="diary.diary_rating"
+                value=3
               />
               <input
                 type="radio"
                 name="starpoint"
                 id="starpoint_7"
                 class="star_radio"
-                v-model="diary_rating"
+                v-model="diary.diary_rating"
                 value="3.5"
               />
               <input
@@ -122,44 +123,57 @@
                 name="starpoint"
                 id="starpoint_8"
                 class="star_radio"
-                v-model="diary_rating"
-                value="4.0"
+                v-model="diary.diary_rating"
+                value=4
               />
               <input
                 type="radio"
                 name="starpoint"
                 id="starpoint_9"
                 class="star_radio"
-                v-model="diary_rating"
-                value="4.5"
+                v-model="diary.diary_rating"
+                value=4.5
               />
               <input
                 type="radio"
                 name="starpoint"
                 id="starpoint_10"
                 class="star_radio"
-                v-model="diary_rating"
-                value="5.0"
+                v-model="diary.diary_rating"
+                value=5
               />
               <span class="starpoint_bg"></span>
             </div>
           </div>
           <br />
           <label for="parts">자극 부위</label>
-          <div>
-            <input type="checkbox" id="check1" value="bicep" />
+          <div class ="parts">
+            <input type="checkbox" id="check1" value="bicep" v-model="DiaryParts" />
             <label for="check1">이두</label>
-            <input type="checkbox" id="check2" value="tricep" />
+            <input type="checkbox" id="check2" value="tricep" v-model="DiaryParts"/>
             <label for="check2">삼두</label>
-            <input type="checkbox" id="check3" value="abs" />
-            <label for="check3">복근</label>
+            <input type="checkbox" id="check3" value="forearm" v-model="DiaryParts"/>
+            <label for="check3">전완근</label>
+            <input type="checkbox" id="check4" value="shoulder" v-model="DiaryParts"/>
+            <label for="check4">어깨</label>
+            <input type="checkbox" id="check5" value="chest" v-model="DiaryParts"/>
+            <label for="check5">가슴</label>
+            <input type="checkbox" id="check6" value="abs" v-model="DiaryParts" />
+            <label for="check6">복근</label>
+            <input type="checkbox" id="check7" value="back" v-model="DiaryParts"/>
+            <label for="check7">등</label>
+            <input type="checkbox" id="check8" value="glute" v-model="DiaryParts"/>
+            <label for="check8">엉덩이</label>
+            <input type="checkbox" id="check9" value="thigh" v-model="DiaryParts"/>
+            <label for="check9">허벅지</label>
+            <input type="checkbox" id="check10" value="calf" v-model="DiaryParts"/>
+            <label for="check10">종아리</label>
           </div>
           <label for="content">내용</label>
           <textarea
             id="content"
-            class="textarea"
             name="diary_content"
-            v-model="diary_content"
+            v-model="diary.diary_content"
             ref="diary_content"
           ></textarea
           ><br />
@@ -172,39 +186,59 @@
 </template>
 
 <script>
-// import FullCalendar from "@fullcalendar/vue";
-// import dayGridPlugin from "@fullcalendar/daygrid";
-// import "@fullcalendar/core/main.css";
-// import "@fullcalendar/daygrid/main.css";
 import { mapState } from "vuex";
-// import { ref } from "vuex";
 import HeaderNav from "@/components/common/HeaderNav.vue";
+import CalendarIndex from '@/components/calendar/calendarIndex.vue'
 
 export default {
   name: "CalendarView",
   data() {
     return {
-      // calendarPlugins: [dayGridPlugin],
-      diary_title: "",
-      diary_regdate: "",
-      diary_rating: "",
-      diary_content: "",
-      diaryParts: [],
-      dateOpen: false,
-      start: "",
-      type: "month",
-      typeOptions: [
-        { text: "Day", value: "day" },
-        { text: "Week", value: "week" },
-        { text: "Month", value: "month" },
-      ],
+      Diary:{
+        diary_id: 0,
+        diary_title: "",
+        diary_regdate: "",
+        diary_rating: "",
+        diary_content: "",
+      },
+      DiaryParts: [],
+     events: [],
+    type: ['info', 'warning', 'error'],
     };
   },
-  components: { HeaderNav },
+  components: { HeaderNav,CalendarIndex },
   computed: {
     ...mapState(["diary"]),
+    ...mapState(["diaryParts"]),
+  },
+  ounted() {
+    const data = this.$moment().clone();
+    this.events = [
+      { id: 1, name: 'Event 1', type: this.random(), date: data },
+      { id: 2, name: 'Event 2', type: this.random(), date: data },
+      { id: 3, name: 'Event 3', type: this.random(), date: data },
+      { id: 4, name: 'Event 4', type: this.random(), date: data.clone().add(3, 'day') },
+      { id: 5, name: 'Event 5', type: this.random(), date: data.clone().add(3, 'day') },
+      { id: 6, name: 'Event 6', type: this.random(), date: data.clone().add(6, 'day') },
+      { id: 8, name: 'Event 7', type: this.random(), date: data.clone().add(16, 'day') },
+      { id: 9, name: 'Event 7', type: this.random(), date: data.clone().add(19, 'day') },
+      { id: 10, name: 'Event 7', type: this.random(), date: data.clone().add(35, 'day') },
+    ];
+  },
+  created() {
+    this.Diary = this.diary;
+    this.DiaryParts = this.diaryParts;
   },
   methods: {
+    random() {
+      return this.type[Math.floor(Math.random() * this.type.length)];
+    },
+    add() {
+      const data = this.$moment().clone();
+      const maxId = Math.max(...this.events.map(item => item.id)) + 1;
+      this.events.push({ id: maxId, name: 'Event ' + maxId, type: this.random(), date: data.clone().add(maxId - 10, 'day') });
+
+    },
     registDiary() {},
     modifyDiary() {},
   },
@@ -214,10 +248,39 @@ export default {
 <style>
 .diary-body {
   display: inline-flex;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0 0 0;
+  align-items: center;
+  /* background-color: #f5f5f5; */
 }
+
+.diary-calendar{
+  width: 1000px;
+}
+
+.calendar__inner {
+  width: 900px;
+  padding: 20px;
+  border: solid 2px black;
+}
+
+.diary-diary{
+  width:500px;
+  height: 620px;
+  border: solid 2px black;
+
+}
+
+.parts {
+  border: solid 1px black;
+}
+
 label {
   display: inline-block;
-  width: 100px;
+  width: 95px;
 }
 
 textarea {
@@ -225,7 +288,7 @@ textarea {
   height: 200px;
   padding: 10px;
   box-sizing: border-box;
-  border: solid 2px #1e90ff;
+  border: solid 1px black;
   border-radius: 5px;
   font-size: 16px;
   resize: both;

@@ -17,4 +17,7 @@ export default {
   SET_YOUTUBE_NEXT_PREV_TOKEN(state, payload) {
     state.prevPageToken = payload;
   },
+  SELECT_DATE(state, date){
+    state.selectedDate = date;
+  },
 };
