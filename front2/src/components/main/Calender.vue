@@ -110,7 +110,6 @@ export default {
   computed: {
     ...mapState(["diary"]),
     ...mapState(["diaryParts"]),
-
     selectedDates() {
       return this.$store.state.selectedDates;
     },
@@ -135,7 +134,9 @@ export default {
       dd = dd.toString();
 
       var s1 = yyyy + "-" + mm + "-" + dd;
-      alert(s1);
+
+      this.$store.dispatch("selectDate", `${s1}`);
+
       this.modalShow = true;
       // this.$store.dispatch("getDiary");
     },
