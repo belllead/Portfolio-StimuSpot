@@ -95,6 +95,11 @@ const routes = [
         name: "BoardTricep",
         component: () => import("@/components/board/tricep"),
       },
+      {
+        path: "detail/:id",
+        name: "ScrapDetail",
+        compotnent: () => import("@/components/board/ScrapDetail")
+      },
     ],
   },
   {

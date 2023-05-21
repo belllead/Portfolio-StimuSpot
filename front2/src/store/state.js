@@ -25,6 +25,7 @@ export default {
   },
   diaryParts: ["abs", "thigh", "back"],
   selectedDates: ["2023-05-10", "2023-05-19", "2023-05-26", "2023-05-31"],
+  scraps:[],
   youtubeVideos: [],
   nextPageToken: "",
   prevPageToken: "",
