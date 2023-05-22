@@ -1,31 +1,41 @@
 <template>
-  <div class="container">
-    <h2>회원 가입</h2>
-    <fieldset class="text-center">
-      <label for="id">아이디</label>
-      <input type="text" id="id" v-model="id" class="view" /><br />
-      <label for="password">비밀번호</label>
+  <div>
+    <fieldset>
+      <div>나만의 부위별 운동 다이어리를 <br />가지기 위해 가입하세요.</div>
+      <label
+        for="profileImg"
+        class="profileImg"
+        :style="`background-image : url(${profileImg})`"
+      ></label>
       <input
-        type="password"
-        id="password"
-        v-model="password"
-        class="view"
+        type="file"
+        id="profileImg"
+        @change="uploadImg"
+        accept="image/*"
+        style="display: none"
       /><br />
+      <label for="id">아이디</label>
+      <input type="text" id="id" v-model="id" /><br />
+      <label for="password">비밀번호</label>
+      <input type="password" id="password" v-model="password" /><br />
       <label for="name">이름</label>
-      <input type="text" id="name" v-model="name" class="view" /><br />
-      <label for="nickname">닉네임</label>
-      <input type="text" id="nickname" v-model="nickname" class="view" /><br />
+      <input type="text" id="name" v-model="name" /><br />
       <label for="email">이메일</label>
-      <input type="email" id="email" v-model="email" class="view" /><br />
+      <input type="email" id="email" v-model="email" /><br />
       <label for="age">나이</label>
-      <input type="number" id="age" v-model="age" class="view" /><br />
-      <button class="btn" @click="regist">등록</button>
-      <button class="btn" @click="getInfoFromAPI">랜덤</button>
+      <input type="number" id="age" v-model="age" /><br />
+      <label for="nickname">닉네임</label>
+      <input type="text" id="nickname" v-model="nickname" /><br />
+      <button>가입하기</button>
+      <button>
+        <router-link :to="{ name: 'UserLogin' }">로그인하기</router-link>
+      </button>
     </fieldset>
+    <div></div>
   </div>
 </template>
+
 <script>
-import { mapState } from "vuex";
 export default {
   name: "UserList",
   data() {
@@ -33,47 +43,28 @@ export default {
       id: "",
       password: "",
       name: "",
-      nickname: "",
       email: "",
       age: 0,
-      img: "",
+      nickname: "",
+      profileImg: "",
     };
   },
   methods: {
-    async getInfoFromAPI() {
-      await this.$store.dispatch("setRandomUser");
-      this.id = this.randomUser.id;
-      this.password = this.randomUser.password;
-      this.name = this.randomUser.name;
-      this.email = this.randomUser.email;
-      this.age = this.randomUser.age;
+    uploadImg(e) {
+      let file = e.target.files;
+      let url = URL.createObjectURL(file[0]);
+      this.profileImg = url;
     },
-    regist() {
-      if (
-        this.id === "" ||
-        this.password === "" ||
-        this.name === "" ||
-        this.email === ""
-      ) {
-        alert("모든 내용을 입력해주세요");
-        return;
-      }
-
-      let user = {
-        id: this.id,
-        password: this.password,
-        name: this.name,
-        nickname: this.nickname,
-        email: this.email,
-        age: this.age,
-        img: "#",
-      };
-
-      this.$store.distpatch("createUser", user);
-    },
-  },
-  computed: {
-    ...mapState(["randomUser"]),
   },
 };
 </script>
+
+<style scoped>
+.profileImg {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+  background-size: cover;
+  display: inline-block;
+}
+</style>

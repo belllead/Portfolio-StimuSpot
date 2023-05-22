@@ -1,0 +1,33 @@
+package com.ssafy.pjt.api.user.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ssafy.pjt.model.dao.UserDao;
+import com.ssafy.pjt.model.dto.UserDto;
+
+@Service
+public class UserServiceImpl implements UserService {
+	
+	private UserDao userDao;
+	
+	@Autowired
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+	
+	@Override
+	public boolean signup(UserDto user) {
+		return userDao.insertUser(user) > 0;
+	}
+
+	@Override
+	public UserDto login(String id, String password) {
+		UserDto temp = userDao.selectById(id);
+		if(temp != null && temp.getUserPw().equals(password)) {
+//			userDao.insertLog(temp.getUserNum());
+			return temp;
+		}
+		return null;
+	}
+}

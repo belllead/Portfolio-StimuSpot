@@ -1,41 +1,43 @@
 <template>
-  <div class="container">
+  <div>
     <h2>로그인</h2>
-    <fieldset class="text-center">
-      <label for="id">아이디</label>
-      <input type="text" id="id" v-model="id" class="view" /><br />
-      <label for="password">비밀번호</label>
+    <fieldset>
+      <input
+        type="text"
+        id="id"
+        v-model="user.id"
+        placeholder="아이디 또는 이메일"
+      /><br />
       <input
         type="password"
         id="password"
-        v-model="password"
-        class="view"
+        v-model="user.password"
+        placeholder="비밀번호"
       /><br />
-      <button class="btn" @click="login">로그인</button>
+      <button @click="login">로그인</button>
       <h3>계정이 없으신가요?</h3>
-      <router-link to="/regist">회원가입</router-link>
+      <router-link :to="{ name: 'UserRegist' }">가입하기</router-link>
     </fieldset>
   </div>
 </template>
+
 <script>
 export default {
-  name: "LoginForm",
+  name: "UserLogin",
   data() {
     return {
-      id: "",
-      password: "",
+      user: {
+        id: "",
+        password: "",
+      },
     };
   },
-  methods: {
-    login() {
-      let user = {
-        id: this.id,
-        password: this.password,
-      };
-
-      this.$store.dispatch("setLoginUser", user);
+  methods:{
+    login(){
+      this.$store.dispatch('userLogin',this.user);
     },
   },
 };
 </script>
+
 <style></style>
