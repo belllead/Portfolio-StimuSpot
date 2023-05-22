@@ -3,6 +3,7 @@ package com.ssafy.pjt.model.dto;
 public class PartDto {
 	int partId;
 	String partName;
+	String lastWorkout;
 	String partContent;
 	String partIcon;
 
@@ -41,4 +42,11 @@ public class PartDto {
 		this.partIcon = partIcon;
 	}
 
+	public String getLastWorkout() {
+		return lastWorkout;
+	}
+
+	public void setLastWorkout(String lastWorkout) {
+		this.lastWorkout = lastWorkout;
+	}
 }
