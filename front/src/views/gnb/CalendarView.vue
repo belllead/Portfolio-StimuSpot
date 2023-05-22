@@ -15,7 +15,7 @@
 
 <script>
 import HeaderNav from "@/components/common/HeaderNav.vue";
-import CalendarIndex from "@/components/calendar/CalendarIndex.vue";
+import CalendarIndex from "@/components/calendar/calendarIndex.vue";
 import DiaryDetail from "@/components/calendar/diary/DiaryDetail.vue";
 
 export default {

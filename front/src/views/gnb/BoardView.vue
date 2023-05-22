@@ -2,6 +2,10 @@
   <div>
     <header-nav></header-nav>
     <h2>게시판</h2>
+    <hr />
+    <scraps-my></scraps-my>
+    <hr />
+    <h2>영상 검색</h2>
     <router-link :to="{ name: 'BoardAbs' }">복근</router-link> |
     <router-link :to="{ name: 'BoardBack' }">등</router-link> |
     <router-link :to="{ name: 'BoardBicep' }">이두</router-link> |
@@ -17,10 +21,11 @@
 </template>
 
 <script>
+import ScrapsMy from "@/components/board/include/ScrapsMy.vue";
 import HeaderNav from "@/components/common/HeaderNav.vue";
 export default {
   name: "BoardView",
-  components: { HeaderNav },
+  components: { HeaderNav, ScrapsMy },
 };
 </script>
 

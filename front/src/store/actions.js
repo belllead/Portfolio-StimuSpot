@@ -94,4 +94,8 @@ export default {
   selectDate({ commit }, payload) {
     commit("SELECT_DATE", payload);
   },
+  setScrap() {},
+  setScraps() {},
+  updateScrap() {},
+  deleteScrap() {},
 };
