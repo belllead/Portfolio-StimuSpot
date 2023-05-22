@@ -6,25 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.pjt.model.dao.AchievementDao;
-import com.ssafy.pjt.model.dto.Achievement;
+import com.ssafy.pjt.model.dto.AchievementDto;
 
 @Service
 public class AchievementServiceImpl implements AchievementService{
 	
+	@Autowired
 	private AchievementDao achievementDao;
 
-	@Autowired
-	public void setAchievementDao(AchievementDao achievementDao) {
-		this.achievementDao = achievementDao;
-	}
-
 	@Override
-	public List<Achievement> getAchievementList() {
+	public List<AchievementDto> getAchievementList() {
 		return achievementDao.selectAll();
 	}
 
 	@Override
-	public List<Achievement> getAchievementByUser(int id) {
-		return achievementDao.selectByUser(id);
+	public List<AchievementDto> getAchievementByUser(int userNum) {
+		return achievementDao.selectByUser(userNum);
 	}
 }
