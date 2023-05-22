@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.pjt.model.dao.ScrapDao;
-import com.ssafy.pjt.model.dto.Scrap;
+import com.ssafy.pjt.model.dto.ScrapDto;
 
 @Service
 public class ScrapServiceImpl implements ScrapService {
@@ -19,17 +19,17 @@ public class ScrapServiceImpl implements ScrapService {
 	}
 	
 	@Override
-	public List<Scrap> getScrapList() {
+	public List<ScrapDto> getScrapList() {
 		return scrapDao.selectAll();
 	}
 
 	@Override
-	public Scrap readScrapById(int id) {
+	public ScrapDto readScrapById(int id) {
 		return scrapDao.selectById(id);
 	}
 
 	@Override
-	public boolean writeScrap(Scrap scrap) {
+	public boolean writeScrap(ScrapDto scrap) {
 		return scrapDao.insertScrap(scrap) > 0;
 	}
 
@@ -39,7 +39,7 @@ public class ScrapServiceImpl implements ScrapService {
 	}
 
 	@Override
-	public boolean modifyScrap(Scrap scrap) {
+	public boolean modifyScrap(ScrapDto scrap) {
 		return scrapDao.updateScrap(scrap) > 0;
 	}
 }

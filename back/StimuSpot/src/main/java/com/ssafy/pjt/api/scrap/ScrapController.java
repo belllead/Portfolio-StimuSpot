@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.pjt.api.scrap.service.ScrapService;
-import com.ssafy.pjt.model.dto.Scrap;
+import com.ssafy.pjt.model.dto.ScrapDto;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,21 +36,21 @@ public class ScrapController {
 	@ApiOperation(value= "스크랩 리스트 조회", response = List.class)
 	@GetMapping("/scrap")
 	public ResponseEntity<?> getScrapList(){
-		List<Scrap> list = service.getScrapList();
+		List<ScrapDto> list = service.getScrapList();
 		try {
 			if(list == null || list.isEmpty() ) return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);
-			else return new ResponseEntity<List<Scrap>>(list,HttpStatus.OK);
+			else return new ResponseEntity<List<ScrapDto>>(list,HttpStatus.OK);
 		}catch(Exception e) {
 			return exceptionHandling(e);
 		}
 	}
 	
-	@ApiOperation(value= "id로 스크랩 조회", response = Scrap.class)
+	@ApiOperation(value= "id로 스크랩 조회", response = ScrapDto.class)
 	@GetMapping("/scrap/{id}")
 	public ResponseEntity<?> getScrapById(@PathVariable int id){
-		Scrap scrap = service.readScrapById(id);
+		ScrapDto scrap = service.readScrapById(id);
 		try {
-			if(scrap != null) return new ResponseEntity<Scrap>(scrap,HttpStatus.OK);
+			if(scrap != null) return new ResponseEntity<ScrapDto>(scrap,HttpStatus.OK);
 			else return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);
 		}catch(Exception e) {
 			return exceptionHandling(e);
@@ -60,7 +60,7 @@ public class ScrapController {
 	
 	@ApiOperation(value= "스크랩 등록", response = String.class)
 	@PostMapping("/scrap")
-	public ResponseEntity<?> createScrap(@RequestBody Scrap scrap){
+	public ResponseEntity<?> createScrap(@RequestBody ScrapDto scrap){
 		try {
 			if(service.writeScrap(scrap)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
 			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
@@ -71,7 +71,7 @@ public class ScrapController {
 	
 	@ApiOperation(value= "스크랩 수정", response = String.class)
 	@PutMapping("/scrap")
-	public ResponseEntity<?> modifyScrap(@RequestBody Scrap scrap){
+	public ResponseEntity<?> modifyScrap(@RequestBody ScrapDto scrap){
 		try {
 			if(service.modifyScrap(scrap)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
 			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
