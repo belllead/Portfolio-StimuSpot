@@ -26,7 +26,6 @@
           v-bind="badge"
         />
       </CalendarCell>
-      <div>test</div>
     </div>
   </div>
 </template>
