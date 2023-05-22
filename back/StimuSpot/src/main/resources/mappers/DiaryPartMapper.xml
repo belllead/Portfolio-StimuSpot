@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.pjt.model.dao.DiaryPartDao">
+
+	<insert id="insertDiaryPart" parameterType="int">
+		INSERT INTO diary_part
+		VALUES (#{diaryId}, #{partId})
+	</insert>
+
+	<delete id="deleteDiaryPart">
+		DELETE FROM diary_part
+		WHERE diary_id = #{diaryId}
+	</delete>
+
+</mapper>

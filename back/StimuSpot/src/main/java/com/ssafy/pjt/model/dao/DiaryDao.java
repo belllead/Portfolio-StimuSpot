@@ -2,19 +2,18 @@ package com.ssafy.pjt.model.dao;
 
 import java.util.List;
 
-import com.ssafy.pjt.model.dto.Diary;
+import com.ssafy.pjt.model.dto.DiaryDto;
+import com.ssafy.pjt.model.dto.DiaryQueryDto;
 
 public interface DiaryDao {
 
-	public List<Diary> selectAll();
+	public List<DiaryDto> selectMany(DiaryQueryDto diaryList);
 
-	public Diary selectOneById(int id);
-	
-	public Diary selectOneByDate(String date);
+	public DiaryDto selectOne(DiaryQueryDto diaryOne);
 
-	public int insertDiary(Diary diary);
+	public int insertDiary(DiaryDto diary);
 
 	public int deleteDiary(int id);
 
-	public int updateDiary(int id);
+	public int updateDiary(DiaryDto diary);
 }
