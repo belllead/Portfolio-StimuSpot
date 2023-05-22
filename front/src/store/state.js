@@ -14,6 +14,7 @@ export default {
     },
   ],
   achievement: {},
+  loginUser: {},
   diaries: [],
   diary: {
     diary_id: 1,
@@ -25,6 +26,112 @@ export default {
   },
   diaryParts: ["abs", "thigh", "back"],
   selectedDates: ["2023-05-10", "2023-05-19", "2023-05-26", "2023-05-31"],
+  scrap: {
+    scrap_id: 1,
+    scrap_title: "첫번째 스크랩입니다",
+    scrap_url: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+    scrap_vtitle: "영상 제목은 이거죠",
+    scrap_thumbnail:
+      "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+    scrap_content: "꼭 해야 됨",
+  },
+  scraps: [
+    {
+      scrap_id: 1,
+      scrap_title: "첫번째 스크랩입니다",
+      scrap_url: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrap_vtitle: "영상 제목은 이거죠",
+      scrap_thumbnail:
+        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+      scrap_content: "꼭 해야 됨",
+    },
+    {
+      scrap_id: 2,
+      scrap_title: "두번째 스크랩입니다",
+      scrap_url: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrap_vtitle: "영상 제목은 이거죠",
+      scrap_thumbnail:
+        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+      scrap_content: "꼭 해야 됨",
+    },
+    {
+      scrap_id: 3,
+      scrap_title: "세번째 스크랩입니다",
+      scrap_url: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrap_vtitle: "영상 제목은 이거죠",
+      scrap_thumbnail:
+        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+      scrap_content: "꼭 해야 됨",
+    },
+    {
+      scrap_id: 4,
+      scrap_title: "네번째 스크랩입니다",
+      scrap_url: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrap_vtitle: "영상 제목은 이거죠",
+      scrap_thumbnail:
+        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+      scrap_content: "꼭 해야 됨",
+    },
+    {
+      scrap_id: 5,
+      scrap_title: "다섯번째 스크랩입니다",
+      scrap_url: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrap_vtitle: "영상 제목은 이거죠",
+      scrap_thumbnail:
+        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+      scrap_content: "꼭 해야 됨",
+    },
+    {
+      scrap_id: 6,
+      scrap_title: "여섯번째 스크랩입니다",
+      scrap_url: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrap_vtitle: "영상 제목은 이거죠",
+      scrap_thumbnail:
+        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+      scrap_content: "꼭 해야 됨",
+    },
+    {
+      scrap_id: 7,
+      scrap_title: "일곱번째 스크랩입니다",
+      scrap_url: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrap_vtitle: "영상 제목은 이거죠",
+      scrap_thumbnail:
+        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+      scrap_content: "꼭 해야 됨",
+    },
+    {
+      scrap_id: 8,
+      scrap_title: "여덟번째 스크랩입니다",
+      scrap_url: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrap_vtitle: "영상 제목은 이거죠",
+      scrap_thumbnail:
+        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+      scrap_content: "꼭 해야 됨",
+    },
+    {
+      scrap_id: 9,
+      scrap_title: "아홉번째 스크랩입니다",
+      scrap_url: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrap_vtitle: "영상 제목은 이거죠",
+      scrap_thumbnail:
+        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+      scrap_content: "꼭 해야 됨",
+    },
+  ],
+  comments: [
+    {
+      comment_id: 1,
+      scrap_id: 1,
+      comment_writer: "송윤제",
+      comment_content: "나도 해야지",
+    },
+    {
+      comment_id: 2,
+      scrap_id: 1,
+      comment_writer: "북극곰",
+      comment_content: "콜라 좋아",
+    },
+  ],
   youtubeVideos: [],
   nextPageToken: "",
   prevPageToken: "",
