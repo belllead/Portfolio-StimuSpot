@@ -17,14 +17,7 @@ public class SwaggerConfig {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.ssafy.pjt.achievement.controller")
-						.or(RequestHandlerSelectors.basePackage("com.ssafy.pjt.comment.controller"))
-						.or(RequestHandlerSelectors.basePackage("com.ssafy.pjt.diary.controller"))
-						.or(RequestHandlerSelectors.basePackage("com.ssafy.pjt.part.controller"))
-						.or(RequestHandlerSelectors.basePackage("com.ssafy.pjt.scrap.controller"))
-						.or(RequestHandlerSelectors.basePackage("com.ssafy.pjt.streak.controller"))
-						.or(RequestHandlerSelectors.basePackage("com.ssafy.pjt.todayluck.controller"))
-						.or(RequestHandlerSelectors.basePackage("com.ssafy.pjt.user.controller")))
+				.apis(RequestHandlerSelectors.basePackage("com.ssafy.pjt.api"))
 				.paths(PathSelectors.ant("/*api/**"))
 				.build()
 				.apiInfo(apiInfo());
