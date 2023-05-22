@@ -6,46 +6,54 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.pjt.model.dao.DiaryDao;
-import com.ssafy.pjt.model.dto.Diary;
+import com.ssafy.pjt.model.dao.DiaryPartDao;
+import com.ssafy.pjt.model.dto.DiaryDto;
+import com.ssafy.pjt.model.dto.DiaryQueryDto;
 
 @Service
 public class DiaryServiceImpl implements DiaryService{
 
-	private DiaryDao diaryDao;
-
 	@Autowired
-	public void setDiaryDao(DiaryDao diaryDao) {
-		this.diaryDao = diaryDao;
-	}
+	DiaryDao diaryDao;
 	
+	@Autowired
+	DiaryPartDao diaryPartDao;
+
 	@Override
-	public List<Diary> getDiaryList() {
-		return diaryDao.selectAll();
+	public List<DiaryDto> getDiaryList(DiaryQueryDto diaryList) {
+		return diaryDao.selectMany(diaryList);
 	}
 
 	@Override
-	public Diary readDiaryById(int id) {
-		return diaryDao.selectOneById(id);
+	public DiaryDto readDiary(DiaryQueryDto diaryOne) {
+		return diaryDao.selectOne(diaryOne);
 	}
 
 	@Override
-	public Diary readDiaryByDate(String date) {
-		return diaryDao.selectOneByDate(date);
+	public boolean writeDiary(DiaryDto diary) {
+		int result = diaryDao.insertDiary(diary);
+		
+		for (int i=0; i<diary.getPartIds().size(); i++)
+			diaryPartDao.insertDiaryPart(diary.getDiaryId(), diary.getPartIds().get(i));
+		
+		return result > 0;
 	}
 
 	@Override
-	public boolean writeDiary(Diary diary) {
-		return diaryDao.insertDiary(diary) > 0;
+	public boolean removeDiary(int diaryId) {
+		int result = diaryPartDao.deleteDiaryPart(diaryId);
+		result = Math.min(result, diaryDao.deleteDiary(diaryId));
+		return result > 0;
 	}
 
 	@Override
-	public boolean removeDiary(int id) {
-		return diaryDao.deleteDiary(id) > 0;
-	}
-
-	@Override
-	public boolean modifyDiary(int id) {
-		return diaryDao.updateDiary(id) > 0;
+	public boolean modifyDiary(DiaryDto diary) {
+		int result = diaryPartDao.deleteDiaryPart(diary.getDiaryId());
+		
+		for (int i=0; i<diary.getPartIds().size(); i++)
+			result = Math.min(result, diaryPartDao.insertDiaryPart(diary.getDiaryId(), diary.getPartIds().get(i)));
+		
+		return diaryDao.updateDiary(diary) > 0;
 	}
 
 }
