@@ -1,16 +1,24 @@
 <template>
-  <div>
-    <div class="main-calendar">
-      <h4>다이어리</h4>
-      <div class="">
-        <v-date-picker
-          v-model="date"
-          @input="selectDate"
-          :attributes="attributes"
-        />
-      </div>
-      <br />
+  <div class="container">
+    <!-- calendar -->
+    <v-date-picker
+      v-model="date"
+      @input="selectDate"
+      :attributes="attributes"
+      color="red"
+      class="main-calendar"
+    />
+    <br />
+
+    <div class="btns">
+      <button-basic-1 class="basic-btn" />
+      <!-- <div class="arrow-btns">
+        <button-arrow-left class="left-btn" />
+        <button-arrow-right class="right-btn" />
+      </div> -->
     </div>
+
+    <!-- modal -->
     <div class="modal" v-if="modalShow == true">
       <label for="title">제목</label>
       <div class="view">{{ diary.diary_title }}</div>
@@ -77,10 +85,13 @@
 <script>
 import { mapState } from "vuex";
 import { ref } from "vue";
+import ButtonBasic1 from "../ui-element/ButtonBasic1.vue";
+// import ButtonArrowLeft from "../ui-element/ButtonArrowLeft.vue";
+// import ButtonArrowRight from "../ui-element/ButtonArrowRight.vue";
 
 export default {
   name: "CalenderUi",
-  components: {},
+  components: { ButtonBasic1 },
   data() {
     const date = new Date();
     const year = date.getFullYear();
@@ -89,7 +100,7 @@ export default {
       {
         key: "part",
         highlight: {
-          color: "purple",
+          color: "orange",
           fillMode: "solid",
           contentClass: "italic",
         },
@@ -148,6 +159,39 @@ export default {
 </script>
 
 <style>
+.main-calendar {
+  width: 270px;
+  height: 330px;
+  border: none;
+  margin-top: 120px;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 80px 0;
+}
+
+.arrow-btns {
+  display: flex;
+}
+.basic-btn {
+  width: 80px;
+  height: 40px;
+  color: #a0a0a0;
+}
+
+.left-btn {
+  width: 40px;
+  height: 40px;
+  color: #a0a0a0;
+}
+
+.right-btn {
+  width: 40px;
+  height: 40px;
+  color: #a0a0a0;
+}
 .modal {
   position: absolute;
   top: 150px;

@@ -1,28 +1,23 @@
 <template>
   <div id="app">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap"
+      rel="stylesheet"
+    />
     <router-view />
   </div>
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Noto Sans KR", sans-serif;
   text-align: center;
-  color: #2c3e50;
+  font-weight: 400;
+  font-size: 16px;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+body {
+  margin: 0px;
 }
 </style>
