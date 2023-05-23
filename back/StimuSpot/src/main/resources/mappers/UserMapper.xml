@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.pjt.model.dao.UserDao">
+
+	<resultMap type="com.ssafy.pjt.model.dto.UserDto" id="user">
+		<result column="user_num" property="userNum" />
+		<result column="user_id" property="userId" />
+		<result column="user_pw" property="userPw" />
+		<result column="user_nickname" property="userNickname" />
+		<result column="user_email" property="userEmail" />
+		<result column="user_age" property="userAge" />
+		<result column="user_selfie" property="userSelfie" />
+	</resultMap>
+
+	<!-- id로 사용자 조회 -->
+	<select id="selectById" parameterType="String" resultMap="user">
+		SELECT *
+		FROM users
+		WHERE user_id = #{userId};
+	</select>
+
+	<!-- 사용자 등록 -->
+	<insert id="insertUser" parameterType="UserDto"
+		keyProperty="userNum" useGeneratedKeys="true">
+		INSERT INTO users (user_id,
+		user_pw, user_nickname, user_email, user_age, user_selfie)
+		VALUES (#{userId}, #{userPw}, #{userNickname}, #{userEmail},
+		#{userAge}, #{userSelfie});
+	</insert>
+	
+	<!-- 로그인 기록 -->
+	<insert id="insertLog" parameterType="int">
+		INSERT INTO loginlog
+		VALUES (#{userNum}, NOW());
+	</insert>
+
+</mapper>

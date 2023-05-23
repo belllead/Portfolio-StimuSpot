@@ -7,18 +7,18 @@
           type="text"
           id="title"
           class="view"
-          name="diary_title"
-          v-model="diary.diary_title"
-          ref="diary_title"
+          name="diaryTitle"
+          v-model="diary.diaryTitle"
+          ref="diaryTitle"
         />
         <label for="regdate">날짜</label>
         <input
           type="text"
           id="regdate"
           class="view"
-          name="diary_regdate"
-          v-model="diary.diary_regdate"
-          ref="diary_regdate"
+          name="diaryRegdate"
+          v-model="diary.diaryRegdate"
+          ref="diaryRegdate"
         /><br />
         <label for="rating">성취도</label>
         <div class="starpoint_wrap" id="rating">
@@ -58,7 +58,7 @@
               name="starpoint"
               id="starpoint_1"
               class="star_radio"
-              v-model="diary.diary_rating"
+              v-model="diary.diaryRating"
               value="0.5"
             />
             <input
@@ -66,7 +66,7 @@
               name="starpoint"
               id="starpoint_2"
               class="star_radio"
-              v-model="diary.diary_rating"
+              v-model="diary.diaryRating"
               value="1"
             />
             <input
@@ -74,7 +74,7 @@
               name="starpoint"
               id="starpoint_3"
               class="star_radio"
-              v-model="diary.diary_rating"
+              v-model="diary.diaryRating"
               value="1.5"
             />
             <input
@@ -82,7 +82,7 @@
               name="starpoint"
               id="starpoint_4"
               class="star_radio"
-              v-model="diary.diary_rating"
+              v-model="diary.diaryRating"
               value="2"
             />
             <input
@@ -90,7 +90,7 @@
               name="starpoint"
               id="starpoint_5"
               class="star_radio"
-              v-model="diary.diary_rating"
+              v-model="diary.diaryRating"
               value="2.5"
             />
             <input
@@ -98,7 +98,7 @@
               name="starpoint"
               id="starpoint_6"
               class="star_radio"
-              v-model="diary.diary_rating"
+              v-model="diary.diaryRating"
               value="3"
             />
             <input
@@ -106,7 +106,7 @@
               name="starpoint"
               id="starpoint_7"
               class="star_radio"
-              v-model="diary.diary_rating"
+              v-model="diary.diaryRating"
               value="3.5"
             />
             <input
@@ -114,7 +114,7 @@
               name="starpoint"
               id="starpoint_8"
               class="star_radio"
-              v-model="diary.diary_rating"
+              v-model="diary.diaryRating"
               value="4"
             />
             <input
@@ -122,7 +122,7 @@
               name="starpoint"
               id="starpoint_9"
               class="star_radio"
-              v-model="diary.diary_rating"
+              v-model="diary.diaryRating"
               value="4.5"
             />
             <input
@@ -130,7 +130,7 @@
               name="starpoint"
               id="starpoint_10"
               class="star_radio"
-              v-model="diary.diary_rating"
+              v-model="diary.diaryRating"
               value="5"
             />
             <span class="starpoint_bg"></span>
@@ -209,7 +209,7 @@
         <textarea
           id="content"
           name="diary_content"
-          v-model="diary.diary_content"
+          v-model="diary.diaryContent"
           ref="diary_content"
         ></textarea
         ><br />
@@ -227,11 +227,11 @@ export default {
   data() {
     return {
       Diary: {
-        diary_id: 0,
-        diary_title: "",
-        diary_regdate: "",
-        diary_rating: "",
-        diary_content: "",
+        diaryId: 0,
+        diaryTitle: "",
+        diaryRegdate: "",
+        diaryRating: "",
+        diaryContent: "",
       },
       DiaryParts: [],
     };

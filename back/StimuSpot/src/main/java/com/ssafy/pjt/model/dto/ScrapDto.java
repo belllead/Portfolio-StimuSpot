@@ -13,6 +13,19 @@ public class ScrapDto {
 	public ScrapDto() {
 	}
 
+	public ScrapDto(int scrapId, int userNum, String scrapTitle, String scrapUrl, String scrapVtitle,
+			String scrapThumbnail, String scrapContent, String scrapRegdate) {
+		super();
+		this.scrapId = scrapId;
+		this.userNum = userNum;
+		this.scrapTitle = scrapTitle;
+		this.scrapUrl = scrapUrl;
+		this.scrapVtitle = scrapVtitle;
+		this.scrapThumbnail = scrapThumbnail;
+		this.scrapContent = scrapContent;
+		this.scrapRegdate = scrapRegdate;
+	}
+
 	public int getScrapId() {
 		return scrapId;
 	}

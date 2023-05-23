@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.pjt.api.scrap.service.ScrapService;
 import com.ssafy.pjt.model.dto.ScrapDto;
+import com.ssafy.pjt.util.ErrorHandler;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +26,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags = "스크랩 컨트롤러")
 @RequestMapping("/scrap-api")
 @CrossOrigin("*")
-public class ScrapController {
+public class ScrapRestController {
 	
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
@@ -34,65 +35,60 @@ public class ScrapController {
 	ScrapService service;
 	
 	@ApiOperation(value= "스크랩 리스트 조회", response = List.class)
-	@GetMapping("/scrap")
+	@GetMapping("/")
 	public ResponseEntity<?> getScrapList(){
 		List<ScrapDto> list = service.getScrapList();
 		try {
 			if(list == null || list.isEmpty() ) return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);
 			else return new ResponseEntity<List<ScrapDto>>(list,HttpStatus.OK);
 		}catch(Exception e) {
-			return exceptionHandling(e);
+			return ErrorHandler.exceptionHandling(e);
 		}
 	}
 	
 	@ApiOperation(value= "id로 스크랩 조회", response = ScrapDto.class)
-	@GetMapping("/scrap/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> getScrapById(@PathVariable int id){
 		ScrapDto scrap = service.readScrapById(id);
 		try {
 			if(scrap != null) return new ResponseEntity<ScrapDto>(scrap,HttpStatus.OK);
 			else return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);
 		}catch(Exception e) {
-			return exceptionHandling(e);
+			return ErrorHandler.exceptionHandling(e);
 		}
 	}
 	
 	
 	@ApiOperation(value= "스크랩 등록", response = String.class)
-	@PostMapping("/scrap")
+	@PostMapping("/")
 	public ResponseEntity<?> createScrap(@RequestBody ScrapDto scrap){
 		try {
 			if(service.writeScrap(scrap)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
 			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
 		}catch(Exception e) {
-			return exceptionHandling(e);
+			return ErrorHandler.exceptionHandling(e);
 		}
 	}
 	
 	@ApiOperation(value= "스크랩 수정", response = String.class)
-	@PutMapping("/scrap")
+	@PutMapping("/")
 	public ResponseEntity<?> modifyScrap(@RequestBody ScrapDto scrap){
 		try {
 			if(service.modifyScrap(scrap)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
 			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
 		}catch(Exception e) {
-			return exceptionHandling(e);
+			return ErrorHandler.exceptionHandling(e);
 		}
 	}
 	
 	@ApiOperation(value= "스크랩 삭제", response = String.class)
-	@DeleteMapping("/scrap/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteScrap(@PathVariable int id){
 		try {
 			if(service.removeScrap(id)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
 			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
 		}catch(Exception e) {
-			return exceptionHandling(e);
+			return ErrorHandler.exceptionHandling(e);
 		}
-	}
-	
-	private ResponseEntity<String> exceptionHandling(Exception e){
-		e.printStackTrace();
-		return new ResponseEntity<String>("Sorry: "+e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

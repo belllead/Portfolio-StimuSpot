@@ -5,16 +5,16 @@
       <input
         type="text"
         id="id"
-        v-model="id"
+        v-model="user.userId"
         placeholder="아이디 또는 이메일"
       /><br />
       <input
         type="password"
         id="password"
-        v-model="password"
+        v-model="user.userPw"
         placeholder="비밀번호"
       /><br />
-      <button>로그인</button>
+      <button @click="login">로그인</button>
       <h3>계정이 없으신가요?</h3>
       <router-link :to="{ name: 'UserRegist' }">가입하기</router-link>
     </fieldset>
@@ -23,12 +23,19 @@
 
 <script>
 export default {
-  name: "LoginForm",
+  name: "UserLogin",
   data() {
     return {
-      id: "",
-      password: "",
+      user: {
+        userId: "",
+        userPw: "",
+      },
     };
+  },
+  methods: {
+    login() {
+      this.$store.dispatch("userLogin", this.user);
+    },
   },
 };
 </script>

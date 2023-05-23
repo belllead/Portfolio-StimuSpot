@@ -41,6 +41,9 @@ export default {
         maxResults: 10,
         videoEmbeddable: true,
       },
+      // headers:{
+      //   "access-token": sessionStorage.getItem("access-token"),
+      // },
     }).then((res) => {
       commit("SET_YOUTUBE_VIDEOS", res.data.items);
       commit("SET_YOUTUBE_NEXT_PAGE_TOKEN", res.data.nextPageToken);
@@ -98,4 +101,21 @@ export default {
   setScraps() {},
   updateScrap() {},
   deleteScrap() {},
+  userLogin({ commit }, user) {
+    const API_URL = `http://localhost:9999/user-api/login`;
+    axios({
+      url: API_URL,
+      method: "POST",
+      data: user,
+    })
+      .then((res) => {
+        console.log(res);
+        sessionStorage.setItem("access-token", res.data["access-token"]);
+        // commit("USER_LOGIN");
+        commit;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
