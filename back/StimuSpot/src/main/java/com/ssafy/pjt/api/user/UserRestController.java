@@ -98,7 +98,7 @@ public class UserRestController {
 	}
 	
 	@ApiOperation(value= "사용자 정보 수정", response = String.class)
-	@PutMapping
+	@PutMapping("/")
 	public ResponseEntity<?> updateUserInfo(UserDto user){
 		try {
 			if(service.modifyUser(user)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
@@ -109,7 +109,7 @@ public class UserRestController {
 	}
 	
 	@ApiOperation(value= "접속 기록 조회", response = UserDto.class)
-	@GetMapping
+	@GetMapping("/log")
 	public ResponseEntity<?> getLoginLog(@RequestParam(required = true) int userNum){
 		String log = service.getLog(userNum);
 		try {
