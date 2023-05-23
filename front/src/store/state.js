@@ -1,4 +1,5 @@
 export default {
+  parts: [],
   selectedPart: null,
   selectedDate: null,
   achievements: [
@@ -14,7 +15,7 @@ export default {
     },
   ],
   achievement: {},
-  loginUser: {},
+  loginUser: 0,
   diaries: [],
   diary: {
     diaryId: 1,
@@ -48,10 +49,10 @@ export default {
     {
       scrapId: 2,
       scrapTitle: "두번째 스크랩입니다",
-      scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrapUrl: "https://www.youtube.com/watch?v=8VVRietOeXo",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
-        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+        "https://i.ytimg.com/vi/8VVRietOeXo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCPK4mSLjZtz5BDUQXImHvDOCaNnw",
       scrapContent: "꼭 해야 됨",
     },
     {
@@ -60,7 +61,7 @@ export default {
       scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
-        "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+        "https://i.ytimg.com/vi/VX9jXFe08GI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCJVBp5BXKySzvSjEgTbJAW5FI-yQ",
       scrapContent: "꼭 해야 됨",
     },
     {

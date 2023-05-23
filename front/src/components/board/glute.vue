@@ -1,4 +1,8 @@
-<template><div>glute</div></template>
+<template>
+  <div>
+    <h2>glute</h2>
+  </div>
+</template>
 
 <script>
 export default {
