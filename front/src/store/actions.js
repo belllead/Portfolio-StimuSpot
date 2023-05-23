@@ -1,3 +1,4 @@
+import { dateFormat } from "@/util/dateFormat";
 import axios from "axios";
 
 export default {
@@ -96,6 +97,18 @@ export default {
   },
   selectDate({ commit }, payload) {
     commit("SELECT_DATE", payload);
+  },
+  setMonthlyDiaryDates({ commit }) {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const startDate = new Date(year, month, 1);
+    const lastDate = new Date(year, month + 1, 0);
+
+    console.log(dateFormat(startDate));
+    console.log(dateFormat(lastDate));
+    commit;
+    // const API_URL =
   },
   setScrap() {},
   setScraps() {},

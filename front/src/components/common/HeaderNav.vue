@@ -3,13 +3,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Exo&family=Noto+Sans+KR:wght@100;400&display=swap"
+
+      href="https://fonts.googleapis.com/css2?family=Exo&family=Noto+Sans+KR:wght@100;400;600;800&display=swap"
       rel="stylesheet"
     />
     <header>
-      <!-- <logo-static-stroke class="logo" /> -->
-      <router-link to="/" class="nav-btn">Home</router-link>
-      <router-link to="/user" class="nav-btn">User</router-link>
+      <logo-static-stroke class="logo" />
+      <!-- <router-link to="/" class="nav-btn">Home</router-link>
+    <router-link to="/user" class="nav-btn">User</router-link> -->
+
       <router-link to="/main" class="nav-btn">Dashboard</router-link>
       <router-link to="/calendar" class="nav-btn">Diary</router-link>
       <router-link to="/board" class="nav-btn">Board</router-link>
@@ -24,11 +26,12 @@
 </template>
 
 <script>
-// import LogoStaticStroke from "../ui-element/LogoStaticStroke.vue";
+import LogoStaticStroke from "../ui-element/LogoStaticStroke.vue";
 
 export default {
   name: "HeaderNav",
-  // components: { LogoStaticStroke },
+  components: { LogoStaticStroke },
+
 };
 </script>
 

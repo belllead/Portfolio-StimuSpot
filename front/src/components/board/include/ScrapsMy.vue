@@ -66,14 +66,14 @@
 </template>
 
 <script>
-import carousel from "vue-owl-carousel2";
+// import carousel from "vue-owl-carousel2";
 import CommentsMy from "@/components/board/include/CommentsMy.vue";
 import { mapState, mapGetters } from "vuex";
 export default {
   name: "ScrapsMy",
   components: {
     CommentsMy,
-    carousel,
+    // carousel,
   },
   data() {
     return {
