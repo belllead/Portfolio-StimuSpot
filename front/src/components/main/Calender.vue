@@ -5,7 +5,7 @@
       v-model="date"
       @input="selectDate"
       :attributes="attributes"
-      color="red"
+      color="yellow"
       class="main-calendar"
     />
     <br />
@@ -100,7 +100,7 @@ export default {
       {
         key: "part",
         highlight: {
-          color: "orange",
+          color: "red",
           fillMode: "solid",
           contentClass: "italic",
         },
@@ -119,13 +119,11 @@ export default {
     };
   },
   computed: {
-    ...mapState(["diary"]),
-    ...mapState(["diaryParts"]),
-    selectedDates() {
-      return this.$store.state.selectedDates;
-    },
+    ...mapState(["diary", "diaryParts", "selectedDates"]),
   },
   created() {
+    this.$store.dispatch("setMonthlyDiaryDates");
+
     this.attributes[0].dates = this.selectedDates;
   },
   methods: {

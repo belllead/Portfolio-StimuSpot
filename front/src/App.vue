@@ -19,5 +19,6 @@
 
 body {
   margin: 0px;
+  background-color: #eff5f5;
 }
 </style>
