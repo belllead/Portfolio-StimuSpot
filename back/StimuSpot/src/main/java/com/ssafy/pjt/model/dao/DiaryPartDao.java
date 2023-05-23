@@ -5,4 +5,5 @@ public interface DiaryPartDao {
 	int insertDiaryPart(int diaryId, int partId);
 	
 	int deleteDiaryPart(int diaryId);
+	
 }
