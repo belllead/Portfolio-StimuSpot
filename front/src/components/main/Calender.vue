@@ -21,47 +21,32 @@
     <!-- modal -->
     <div class="modal" v-if="modalShow == true">
       <label for="title">제목</label>
-      <div class="view">{{ diary.diary_title }}</div>
+      <div class="view">{{ diary.diaryTitle }}</div>
       <br />
       <label for="regdate">날짜</label>
-      <div class="view">{{ diary.diary_regdate }}</div>
+      <div class="view">{{ diary.diaryTitle }}</div>
       <br />
       <label for="rating">성취도</label>
       <br />
       <div id="rating" class="main-calendar-rating-box">
         <div>
-          <div
-            v-if="diary.diary_rating > 0"
-            class="main-rating-container"
-          ></div>
+          <div v-if="diary.diaryRating > 0" class="main-rating-container"></div>
           <div v-else class="main-rating-container-grey"></div>
         </div>
         <div>
-          <div
-            v-if="diary.diary_rating > 1"
-            class="main-rating-container"
-          ></div>
+          <div v-if="diary.diaryRating > 1" class="main-rating-container"></div>
           <div v-else class="main-rating-container-grey"></div>
         </div>
         <div>
-          <div
-            v-if="diary.diary_rating > 2"
-            class="main-rating-container"
-          ></div>
+          <div v-if="diary.diaryRating > 2" class="main-rating-container"></div>
           <div v-else class="main-rating-container-grey"></div>
         </div>
         <div>
-          <div
-            v-if="diary.diary_rating > 3"
-            class="main-rating-container"
-          ></div>
+          <div v-if="diary.diaryRating > 3" class="main-rating-container"></div>
           <div v-else class="main-rating-container-grey"></div>
         </div>
         <div>
-          <div
-            v-if="diary.diary_rating > 4"
-            class="main-rating-container"
-          ></div>
+          <div v-if="diary.diaryRating > 4" class="main-rating-container"></div>
           <div v-else class="main-rating-container-grey"></div>
         </div>
       </div>
@@ -71,7 +56,7 @@
       <br />
       <hr />
       <label for="content">내용</label>
-      <div class="view">{{ diary.diary_content }}</div>
+      <div class="view">{{ diary.diaryContent }}</div>
       <br />
       <br />
       <br />

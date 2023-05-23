@@ -8,7 +8,7 @@
         <div>
           <div v-if="achievements[0] != null">
             <div class="main-achieve-container"></div>
-            <h4>*{{ achievements[0].achv_title }}*</h4>
+            <h4>*{{ achievements[0].achvTitle }}*</h4>
           </div>
           <div v-else>
             <div class="main-achieve-container-grey"></div>
@@ -18,7 +18,7 @@
         <div>
           <div v-if="achievements[1] != null">
             <div class="main-achieve-container"></div>
-            <h4>*{{ achievements[1].achv_title }}*</h4>
+            <h4>*{{ achievements[1].achvTitle }}*</h4>
           </div>
           <div v-else>
             <div class="main-achieve-container-grey"></div>
@@ -28,7 +28,7 @@
         <div>
           <div v-if="achievements[2] != null">
             <div class="main-achieve-container"></div>
-            <h4>*{{ achievements[2].achv_title }}*</h4>
+            <h4>*{{ achievements[2].achvTitle }}*</h4>
           </div>
           <div v-else>
             <div class="main-achieve-container-grey"></div>

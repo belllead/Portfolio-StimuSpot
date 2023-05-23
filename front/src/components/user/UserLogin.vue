@@ -5,14 +5,14 @@
       <input
         type="text"
         id="id"
-        v-model="id"
+        v-model="user.userId"
         placeholder="아이디"
         class="input-window"
       />
       <input
         type="password"
         id="password"
-        v-model="password"
+        v-model="user.userPw"
         placeholder="패스워드"
         class="input-window"
       />
@@ -20,7 +20,7 @@
         <input type="checkbox" id="keep-logged-in" />
         <label for="keepLoggendIn" class="checkbox-text">로그인 유지하기</label>
       </div>
-      <button class="btn">로그인</button>
+      <button class="btn" @click="login">로그인</button>
       <div class="regist">
         <h3>계정이 없으신가요?</h3>
         <router-link :to="{ name: 'UserRegist' }" class="text-btn"
@@ -33,12 +33,19 @@
 
 <script>
 export default {
-  name: "LoginForm",
+  name: "UserLogin",
   data() {
     return {
-      id: "",
-      password: "",
+      user: {
+        userId: "",
+        userPw: "",
+      },
     };
+  },
+  methods: {
+    login() {
+      this.$store.dispatch("userLogin", this.user);
+    },
   },
 };
 </script>

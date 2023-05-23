@@ -39,9 +39,12 @@ export default {
         part: "snippet",
         q: "복근운동",
         type: "video",
-        maxResults: 10,
+        maxResults: 20,
         videoEmbeddable: true,
       },
+      // headers:{
+      //   "access-token": sessionStorage.getItem("access-token"),
+      // },
     }).then((res) => {
       commit("SET_YOUTUBE_VIDEOS", res.data.items);
       commit("SET_YOUTUBE_NEXT_PAGE_TOKEN", res.data.nextPageToken);
@@ -59,7 +62,7 @@ export default {
         part: "snippet",
         q: "복근운동",
         type: "video",
-        maxResults: 10,
+        maxResults: 20,
         videoEmbeddable: true,
         pageToken: state.nextPageToken,
       },
@@ -82,7 +85,7 @@ export default {
         part: "snippet",
         q: "복근운동",
         type: "video",
-        maxResults: 10,
+        maxResults: 20,
         videoEmbeddable: true,
         pageToken: state.prevPageToken,
       },
@@ -111,4 +114,40 @@ export default {
   setScraps() {},
   updateScrap() {},
   deleteScrap() {},
+  userLogin({ commit }, user) {
+    const API_URL = `http://localhost:9999/user-api/login`;
+    axios({
+      url: API_URL,
+      method: "POST",
+      data: user,
+    })
+      .then((res) => {
+        console.log(res);
+        sessionStorage.setItem("access-token", res.data["access-token"]);
+        commit("USER_LOGIN", res.data["userNum"]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  setParts({ commit, state }) {
+    axios({
+      method: "GET",
+      url: `http://localhost:9999/part-api`,
+      params: {
+        userNum: state.loginUser,
+      },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => {
+        commit("SET_PARTS", res.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };

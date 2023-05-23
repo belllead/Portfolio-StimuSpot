@@ -44,6 +44,7 @@
 		scrap_id = #{id};
 	</delete>
 
+	<!-- 스크랩 수정 -->
 	<update id="updateScrap" parameterType="ScrapDto">
 		UPDATE scraps
 		SET
@@ -51,7 +52,5 @@
 		WHERE
 		scrap_id = #{scrapId};
 	</update>
-
-
 
 </mapper>

@@ -21,4 +21,8 @@ body {
   margin: 0px;
   background-color: #eff5f5;
 }
+
+body {
+  margin: 0%;
+}
 </style>
