@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +41,7 @@ public class UserRestController {
 	
 	@ApiOperation(value= "로그인", response = Map.class)
 	@PostMapping("/login")
-	public ResponseEntity<?> login(UserDto user, HttpSession session){
+	public ResponseEntity<?> login(@RequestBody UserDto user, HttpSession session){
 		UserDto temp = service.login(user.getUserId(), user.getUserPw());
 		
 		Map<String, Object> result = new HashMap<String,Object>();
@@ -60,13 +61,6 @@ public class UserRestController {
 		}
 		return new ResponseEntity<Map<String, Object>>(result,status);
 	}
-	
-//	@PostMapping("/login")
-//	public ResponseEntity<?> login(UserDto user) throws Exception {
-//		Map<String, Object> result = new HashMap<String,Object>();
-//		result.put("access-token", jwtUtil.createToken("id",user.getUserId()));
-//		return new ResponseEntity<Map<String,Object>>(result, HttpStatus.ACCEPTED);
-//	}
 	
 	@ApiOperation(value= "회원가입", response = String.class)
 	@PostMapping("/regist")

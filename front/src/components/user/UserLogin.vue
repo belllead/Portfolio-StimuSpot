@@ -5,13 +5,13 @@
       <input
         type="text"
         id="id"
-        v-model="user.id"
+        v-model="user.userId"
         placeholder="아이디 또는 이메일"
       /><br />
       <input
         type="password"
         id="password"
-        v-model="user.password"
+        v-model="user.userPw"
         placeholder="비밀번호"
       /><br />
       <button @click="login">로그인</button>
@@ -27,14 +27,14 @@ export default {
   data() {
     return {
       user: {
-        id: "",
-        password: "",
+        userId: "",
+        userPw: "",
       },
     };
   },
-  methods:{
-    login(){
-      this.$store.dispatch('userLogin',this.user);
+  methods: {
+    login() {
+      this.$store.dispatch("userLogin", this.user);
     },
   },
 };

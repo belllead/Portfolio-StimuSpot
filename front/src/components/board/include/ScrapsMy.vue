@@ -7,17 +7,17 @@
           <div
             v-for="(scrap, index) in scraps"
             :key="index"
-            @click="getDetail(scrap.scrap_id)"
+            @click="getDetail(scrap.scrapId)"
           >
             <div>
               <div>
-                {{ scrap.scrap_title }}
+                {{ scrap.scrapTitle }}
               </div>
             </div>
             <div>
               <img
                 class="scrap_img"
-                :src="scrap.scrap_thumbnail"
+                :src="scrap.scrapThumbnail"
                 alt="Thumbnail"
                 style="max-width: 100%"
               />
@@ -34,17 +34,17 @@
           class="view"
           id="title"
           type="text"
-          v-model="Scrap.scrap_title"
+          v-model="Scrap.scrapTitle"
         /><br />
         <label for="vtitle">영상 제목</label>
         <input
           class="view"
           id="vtitle"
           type="text"
-          v-model="Scrap.scrap_vtitle"
+          v-model="Scrap.scrapVtitle"
         /><br />
-        <a :href="Scrap.scrap_url"
-          ><img :src="Scrap.scrap_thumbnail" alt="thumbnail" /></a
+        <a :href="Scrap.scrapUrl"
+          ><img :src="Scrap.scrapThumbnail" alt="thumbnail" /></a
         ><br />
         <label for="content">내용</label>
         <textarea
@@ -52,11 +52,11 @@
           id="content"
           cols="100"
           rows="20"
-          v-model="Scrap.scrap_content"
+          v-model="Scrap.scrapContent"
         ></textarea
         ><br />
         <hr />
-        <comments-my :id="Scrap.scrap_id"></comments-my>
+        <comments-my :id="Scrap.scrapId"></comments-my>
         <button @click="updateScrap">수정</button>
         <button @click="deleteScrap">삭제</button>
         <button @click="modalClose">닫기</button>
@@ -87,12 +87,12 @@ export default {
       modalview: false,
       myVideos: [{}],
       Scrap: {
-        scrap_id: 0,
-        scrap_title: "",
-        scrap_url: "",
-        scrap_vtitle: "",
-        scrap_thumbnail: "",
-        scrap_content: "",
+        scrapId: 0,
+        scrapTitle: "",
+        scrapUrl: "",
+        scrapVtitle: "",
+        scrapThumbnail: "",
+        scrapContent: "",
       },
     };
   },

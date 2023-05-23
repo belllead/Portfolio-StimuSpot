@@ -101,21 +101,21 @@ export default {
   setScraps() {},
   updateScrap() {},
   deleteScrap() {},
-  userLogin({commit},user){
-    const API_URL=`http://localhost:9999/user-api/login`;
+  userLogin({ commit }, user) {
+    const API_URL = `http://localhost:9999/user-api/login`;
     axios({
-      url:API_URL,
+      url: API_URL,
       method: "POST",
-      params: user,
+      data: user,
     })
-    .then((res)=>{
-      console.log(res);
-      sessionStorage.setItem("access-token", res.data["access-token"]);
-      // commit("USER_LOGIN");
-      commit;
-    })
-    .catch((err)=>{
-      console.log(err);
-    });
+      .then((res) => {
+        console.log(res);
+        sessionStorage.setItem("access-token", res.data["access-token"]);
+        // commit("USER_LOGIN");
+        commit;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };

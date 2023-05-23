@@ -22,9 +22,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto login(String id, String password) {
-		UserDto temp = userDao.selectById(id);
-		if(temp != null && temp.getUserPw().equals(password)) {
+	public UserDto login(String userId, String userPw) {
+		UserDto temp = userDao.selectById(userId);
+		if(temp != null && temp.getUserPw().equals(userPw)) {
 //			userDao.insertLog(temp.getUserNum());
 			return temp;
 		}

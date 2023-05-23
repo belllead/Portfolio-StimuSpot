@@ -5,10 +5,8 @@
         <tbody>
           <tr v-for="(comment, index) in comments" :key="index">
             <td>{{ index + 1 }}</td>
-            <td>
-              {{ comment.comment_content }} by {{ comment.comment_writer }}
-            </td>
-            <button @click="deleteComment(comment.comment_id)">삭제</button>
+            <td>{{ comment.commentContent }} by {{ comment.commentWriter }}</td>
+            <button @click="deleteComment(comment.commentId)">삭제</button>
           </tr>
         </tbody>
       </table>
@@ -35,9 +33,9 @@ export default {
   methods: {
     registComment() {
       let comment = {
-        scrap_id: this.id,
-        comment_writer: this.loginUser.user_nickname,
-        comment_content: this.content,
+        scrapId: this.id,
+        commentWriter: this.loginUser.user_nickname,
+        commentContent: this.content,
       };
       console.log("create comment with comment=", comment);
       //   this.$store.dispatch("createComment", comment);

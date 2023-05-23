@@ -6,5 +6,5 @@ public interface UserService {
 	
 	public boolean signup(UserDto user);
 	
-	public UserDto login(String id, String password);
+	public UserDto login(String userId, String userPw);
 }

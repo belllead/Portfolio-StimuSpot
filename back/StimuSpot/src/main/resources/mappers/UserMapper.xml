@@ -18,13 +18,13 @@
 	<select id="selectById" parameterType="String" resultMap="user">
 		SELECT *
 		FROM users
-		WHERE user_id = #{id};
+		WHERE user_id = #{userId};
 	</select>
 
 	<!-- 사용자 등록 -->
 	<insert id="insertUser" parameterType="UserDto"
 		keyProperty="userNum" useGeneratedKeys="true">
-		INSERT INTO scraps (user_id,
+		INSERT INTO users (user_id,
 		user_pw, user_nickname, user_email, user_age, user_selfie)
 		VALUES (#{userId}, #{userPw}, #{userNickname}, #{userEmail},
 		#{userAge}, #{userSelfie});
@@ -33,7 +33,7 @@
 	<!-- 로그인 기록 -->
 	<insert id="insertLog" parameterType="int">
 		INSERT INTO loginlog
-		VALUES (#{num}, NOW());
+		VALUES (#{userNum}, NOW());
 	</insert>
 
 </mapper>
