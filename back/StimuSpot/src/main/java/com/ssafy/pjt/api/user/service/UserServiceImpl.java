@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto login(String userId, String userPw) {
 		UserDto temp = userDao.selectById(userId);
 		if(temp != null && temp.getUserPw().equals(userPw)) {
-			userDao.insertLog(temp.getUserNum());
+//			userDao.insertLog(temp.getUserNum());
 			return temp;
 		}
 		return null;
