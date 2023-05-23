@@ -8,6 +8,7 @@
 		<result column="user_num" property="userNum" />
 		<result column="user_id" property="userId" />
 		<result column="user_pw" property="userPw" />
+		<result column="user_name" property="userName" />
 		<result column="user_nickname" property="userNickname" />
 		<result column="user_email" property="userEmail" />
 		<result column="user_age" property="userAge" />
@@ -21,19 +22,45 @@
 		WHERE user_id = #{userId};
 	</select>
 
+	<!-- num으로 사용자 조회 -->
+	<select id="selectByNum" parameterType="int" resultMap="user">
+		SELECT *
+		FROM users
+		WHERE user_num = #{userNum};
+	</select>
+	
 	<!-- 사용자 등록 -->
 	<insert id="insertUser" parameterType="UserDto"
 		keyProperty="userNum" useGeneratedKeys="true">
 		INSERT INTO users (user_id,
-		user_pw, user_nickname, user_email, user_age, user_selfie)
-		VALUES (#{userId}, #{userPw}, #{userNickname}, #{userEmail},
+		user_pw, user_name, user_nickname, user_email, user_age, user_selfie)
+		VALUES (#{userId}, #{userPw}, #{userName}, #{userNickname}, #{userEmail},
 		#{userAge}, #{userSelfie});
 	</insert>
 	
-	<!-- 로그인 기록 -->
+	<!-- 사용자 정보 수정 -->
+	<update id="modifyUser" parameterType="UserDto">
+		UPDATE users
+		SET
+		user_pw = #{userPw}, user_name = #{userName}, user_nickname = #{userNickname}, 
+		user_email = #{userEmail}, user_age = #{userAge}, user_selfie = #{userSelfie}
+		WHERE
+		user_num = #{userNum};
+	</update>
+	
+	<!-- 로그인 기록 등록 -->
 	<insert id="insertLog" parameterType="int">
 		INSERT INTO loginlog
 		VALUES (#{userNum}, NOW());
 	</insert>
+	
+	<!-- 마지막 로그인 기록 조회 -->
+	<select id="getLog" parameterType="int" resultType="String">
+		SELECT logdate
+		FROM loginlog
+		WHERE user_num = #{userNum""
+		ORDER BY logdate DESC
+		LIMIT 1;	
+	</select>
 
 </mapper>

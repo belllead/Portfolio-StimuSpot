@@ -1,4 +1,8 @@
-<template><div>forearm</div></template>
+<template>
+  <div>
+    <h2>forearm</h2>
+  </div>
+</template>
 
 <script>
 export default {

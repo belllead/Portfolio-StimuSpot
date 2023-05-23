@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>abs</h2>
+    <h2>back</h2>
     <div v-for="video in videos" :key="video.id.videoId">
       <img :src="`${video.snippet.thumbnails.high.url}`" alt="" />
       <br />

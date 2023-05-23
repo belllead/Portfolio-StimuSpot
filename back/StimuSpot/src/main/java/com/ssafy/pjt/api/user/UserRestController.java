@@ -11,9 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.pjt.api.user.service.UserService;
@@ -51,6 +54,7 @@ public class UserRestController {
 			if(temp != null) {
 				result.put("access-token", jwtUtil.createToken("id",temp.getUserId()));
 				result.put("message", SUCCESS);
+				result.put("userNum",temp.getUserNum());
 				status = HttpStatus.ACCEPTED;
 			}else {
 				result.put("message", FAIL);
@@ -79,4 +83,40 @@ public class UserRestController {
 		session.invalidate();
 		return new ResponseEntity<Void>(HttpStatus.OK);	
 	}	
+	
+	@ApiOperation(value= "num으로 유저 정보 조회", response = UserDto.class)
+	@GetMapping("/")
+	public ResponseEntity<?> getUserInfo(@RequestParam(required = true) int userNum){
+		UserDto user = service.searchByNum(userNum);
+		try {
+			if(user != null ) return new ResponseEntity<UserDto>(user,HttpStatus.OK);
+			
+			else return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);
+		}catch(Exception e) {
+			return ErrorHandler.exceptionHandling(e);
+		}
+	}
+	
+	@ApiOperation(value= "사용자 정보 수정", response = String.class)
+	@PutMapping("/")
+	public ResponseEntity<?> updateUserInfo(UserDto user){
+		try {
+			if(service.modifyUser(user)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
+			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
+		}catch(Exception e) {
+			return ErrorHandler.exceptionHandling(e);
+		}
+	}
+	
+	@ApiOperation(value= "접속 기록 조회", response = UserDto.class)
+	@GetMapping("/log")
+	public ResponseEntity<?> getLoginLog(@RequestParam(required = true) int userNum){
+		String log = service.getLog(userNum);
+		try {
+			if(log != null) return new ResponseEntity<String>(log,HttpStatus.OK);
+			else return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);			
+		}catch(Exception e) {
+			return ErrorHandler.exceptionHandling(e);
+		}
+	}
 }

@@ -17,7 +17,13 @@ export default {
   SET_YOUTUBE_NEXT_PREV_TOKEN(state, payload) {
     state.prevPageToken = payload;
   },
-  SELECT_DATE(state, date){
+  SELECT_DATE(state, date) {
     state.selectedDate = date;
+  },
+  USER_LOGIN(state, userNum) {
+    state.loginUser = userNum;
+  },
+  SET_PARTS(state, payload) {
+    state.parts = payload;
   },
 };

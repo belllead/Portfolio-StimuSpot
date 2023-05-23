@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>abs</h2>
     <videos-youtube :body-part="'abs'"></videos-youtube>
   </div>
 </template>

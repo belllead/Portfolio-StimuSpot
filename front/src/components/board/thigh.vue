@@ -1,4 +1,8 @@
-<template><div>thigh</div></template>
+<template>
+  <div>
+    <h2>thigh</h2>
+  </div>
+</template>
 
 <script>
 export default {

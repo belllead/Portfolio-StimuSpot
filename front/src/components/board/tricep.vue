@@ -1,4 +1,8 @@
-<template><div>tricep</div></template>
+<template>
+  <div>
+    <h2>tricep</h2>
+  </div>
+</template>
 
 <script>
 export default {
