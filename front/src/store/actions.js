@@ -132,7 +132,7 @@ export default {
       });
   },
 
-  setParts({ commit, state }) {
+  setParts({ commit}) {
     axios({
       method: "GET",
       url: `http://localhost:9999/part-api`,
@@ -144,8 +144,44 @@ export default {
       },
     })
       .then((res) => {
-        console.log(state.loginUser);
         commit("SET_PARTS", res.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  setAchieves({ commit}) {
+    axios({
+      method: "GET",
+      url: `http://localhost:9999/achievement-api`,
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => {
+        commit("SET_ACHIEVES", res.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  setUserAchieves({ commit}) {
+    axios({
+      method: "GET",
+      url: `http://localhost:9999/achievement-api/achieved`,
+      params: {
+        userNum: sessionStorage.getItem("userNum"),
+      },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => {
+        commit("SET_USERACHIEVES", res.data);
         console.log(res);
       })
       .catch((err) => {

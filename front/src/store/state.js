@@ -2,19 +2,8 @@ export default {
   parts: [],
   selectedPart: null,
   selectedDate: null,
-  achievements: [
-    {
-      achvId: 1,
-      achvTitle: "시작이 반이다",
-      achvContent: "첫 다이어리 작성 완료",
-    },
-    {
-      achvId: 2,
-      achvTitle: "남자는 하체",
-      achvContent: "하체 운동 30일 연속",
-    },
-  ],
-  achievement: {},
+  achievements:[],
+  userAchievements:[],
   loginUser: 0,
   diaries: [],
   diary: {

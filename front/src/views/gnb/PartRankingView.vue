@@ -74,7 +74,6 @@ export default {
 
 <style scoped>
 .rankingcontainer {
-  align-items: center;
   border: solid black;
   position: absolute;
   width: 1470px;
