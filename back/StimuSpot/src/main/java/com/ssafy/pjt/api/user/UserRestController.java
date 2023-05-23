@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -87,9 +89,32 @@ public class UserRestController {
 	public ResponseEntity<?> getUserInfo(@RequestParam(required = true) int userNum){
 		UserDto user = service.searchByNum(userNum);
 		try {
-			if(user != null) return new ResponseEntity<UserDto>(user,HttpStatus.OK);
+			if(user != null ) return new ResponseEntity<UserDto>(user,HttpStatus.OK);
 			
-			else new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);
+			else return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);
+		}catch(Exception e) {
+			return ErrorHandler.exceptionHandling(e);
+		}
+	}
+	
+	@ApiOperation(value= "사용자 정보 수정", response = String.class)
+	@PutMapping
+	public ResponseEntity<?> updateUserInfo(UserDto user){
+		try {
+			if(service.modifyUser(user)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
+			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
+		}catch(Exception e) {
+			return ErrorHandler.exceptionHandling(e);
+		}
+	}
+	
+	@ApiOperation(value= "접속 기록 조회", response = UserDto.class)
+	@GetMapping
+	public ResponseEntity<?> getLoginLog(@RequestParam(required = true) int userNum){
+		String log = service.getLog(userNum);
+		try {
+			if(log != null) return new ResponseEntity<String>(log,HttpStatus.OK);
+			else return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);			
 		}catch(Exception e) {
 			return ErrorHandler.exceptionHandling(e);
 		}
