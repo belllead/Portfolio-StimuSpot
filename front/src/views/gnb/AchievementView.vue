@@ -3,21 +3,45 @@
     <header-nav></header-nav>
     <!-- <h2>업적</h2> -->
     <div class="achvcontainer">
-      <div  class="achvbox">
-        <div class="achv" v-for="(achievement, index) in achievements" :key="index">
-          <div class="achvtitle">
-            {{achievement.achvTitle}}
-          </div>
-          <div class="achvimage">
-            <div v-if="hasUserAchievement(achievement.achvTitle)">
-              <img src="@/assets/medal.png" alt="">
+      <div class="achvbox">
+        <div
+          class="achv"
+          v-for="(achievement, index) in achievements"
+          :key="index"
+        >
+          <div v-if="hasUserAchievement(achievement.achvTitle) != null">
+            <div
+              class="achvtitle"
+              style="background-color: rgba(255, 204, 91, 0.7)"
+            >
+              <p>{{ achievement.achvTitle }}</p>
             </div>
-            <div v-else>
-              <img src="@/assets/medal_grey.png" alt="">
+            <div
+              class="achvimage"
+              v-if="hasUserAchievement(achievement.achvTitle) != null"
+            >
+              <img src="@/assets/achv_icon.png.png" alt="" />
+              <p>
+                "{{ hasUserAchievement(achievement.achvTitle).achievedDate }}"에
+                달성!
+              </p>
+            </div>
+            <div
+              class="achvcontent"
+              style="background-color: rgba(255, 204, 91, 0.7)"
+            >
+              {{ achievement.achvContent }}
             </div>
           </div>
-          <div class="achvcontent">
-            <div>
+          <div v-else>
+            <div class="achvtitle">
+              <p>{{ achievement.achvTitle }}</p>
+            </div>
+            <div class="achvimage">
+              <img src="@/assets/achv_icon_grey.png" alt="" />
+              <p>업적을 달성해보세요</p>
+            </div>
+            <div class="achvcontent">
               {{ achievement.achvContent }}
             </div>
           </div>
@@ -40,11 +64,11 @@ export default {
   },
   created() {
     this.$store.dispatch("setAchieves");
-    this.$store.dispatch("setUserAchieves")
+    this.$store.dispatch("setUserAchieves");
   },
-  methods:{
+  methods: {
     hasUserAchievement(title) {
-      return this.userAchievements.some(
+      return this.userAchievements.find(
         (achievement) => achievement.achvTitle === title
       );
     },
@@ -54,58 +78,63 @@ export default {
 
 <style scoped>
 .achvcontainer {
-  border: solid black;
   position: absolute;
   width: 1470px;
   height: 880px;
   top: calc(50% - 880px / 2 - 12px);
   left: 320px;
+  /* border: solid black;
   background: #ffffff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
-  border-radius: 8px;
+  border-radius: 8px; */
 }
 
-.achvbox{
-  display : flex;
+.achvbox {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   height: 850px;
   overflow-y: scroll;
 }
-
-.achv{
-  width: 430px;
-  height: 430px;
-  border: solid black;
+.achvbox::-webkit-scrollbar {
+  display: none;
+}
+.achv {
+  width: 450px;
+  height: 400px;
+  background: #ffffff;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
-  margin: 10px; 
+  margin: 10px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-.achvtitle{
-  background: #D9D9D9;
+.achvtitle {
+  background: #d9d9d9;
   border-radius: 8px;
   margin: auto;
-  width:200px; 
-  margin-top: 5px;
-  margin-bottom: 5px;
+  width: 200px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
-.achvimage{
-  background: #D9D9D9; 
+.achvimage {
+  /* background: #d9d9d9; */
   border-radius: 8px;
   margin: auto;
   width: 300px;
   width: 300px;
 }
 
-.achvcontent{
-  background: #D9D9D9; 
+.achvcontent {
+  background: #d9d9d9;
   border-radius: 8px;
   margin: auto;
   width: 400px;
   height: 60px;
-  margin-top: 5px;
+  margin-top: 15px;
   line-height: 20px;
   display: flex;
   align-items: center;
@@ -113,7 +142,11 @@ export default {
 }
 
 img {
-  width: 300x;
-  height: 300px;
+  width: 200x;
+  height: 200px;
+}
+
+p {
+  margin: 0;
 }
 </style>

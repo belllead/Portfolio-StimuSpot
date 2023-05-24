@@ -45,6 +45,7 @@ export default {
   methods: {
     login() {
       this.$store.dispatch("userLogin", this.user);
+      this.$router.push({ path: "/main" });
     },
   },
 };

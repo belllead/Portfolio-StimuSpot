@@ -1,6 +1,6 @@
 <template>
   <div>
-    <videos-youtube :body-part="'abs'"></videos-youtube>
+    <videos-youtube :body-part="'복근운동'"></videos-youtube>
   </div>
 </template>
 

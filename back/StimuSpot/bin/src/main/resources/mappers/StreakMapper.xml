@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.pjt.model.dao.StreakDao">
+	<resultMap type="com.ssafy.pjt.model.dto.StreakDto"
+		id="streak">
+		<result column="streak_id" property="streakId" />
+		<result column="user_num" property="userNum" />
+		<result column="streak_start_date" property="streakStartDate" />
+		<result column="streak_passed" property="streakPassed" />
+	</resultMap>
+
+	<!-- 최근 스트릭 30개 가져오기 -->
+	<select id="select20Streak" resultMap="streak">
+		SELECT *
+		FROM streak
+		ORDER BY streak_start_date DESC
+		LIMIT 20
+	</select>
+	
+	<!-- 경과일이 가장 긴 스트릭 가져오기 -->
+	<select id="selectLongestStreak" resultType="int">
+		SELECT streak_passed
+		FROM streak
+		ORDER BY streak_passed DESC
+		LIMIT 1
+	</select>
+	
+	<!-- 가장 최근 스트릭 가져오기 -->
+	<select id="selectRecentStreak" resultMap="streak">
+		SELECT *
+		FROM streak
+		ORDER BY streak_start_date DESC
+		LIMIT 1
+	</select>
+
+</mapper>

@@ -1,25 +1,16 @@
 <template>
-  <div class="background">
+  <div>
     <header-nav></header-nav>
-    <div class="main">
+    <div class="boardcontainer">
       <div class="boardviewscrap">
-        <hr />
         <scraps-my></scraps-my>
-        <hr />
       </div>
       <div class="boardviewvideo">
-        <div class="select">
-          <div>
-            <select v-model="selectedOption" @change="navigateToBoard">
-              <option value="" disabled selected>카테고리</option>
-              <option
-                v-for="board in boards"
-                :key="board.name"
-                :value="board.name"
-              >
-                {{ board.label }}
-              </option>
-            </select>
+        <div class="btngroup">
+          <div v-for="(board, index) in boards" :key="index">
+            <button class="btn" @click="selectboard(board.name)">
+              {{ board.label }}
+            </button>
           </div>
         </div>
         <br />
@@ -37,7 +28,6 @@ export default {
   components: { HeaderNav, ScrapsMy },
   data() {
     return {
-      selectedOption: "",
       boards: [
         { name: "BoardAbs", label: "복근" },
         { name: "BoardBack", label: "등" },
@@ -52,48 +42,63 @@ export default {
       ],
     };
   },
+  created() {
+    this.$router.push({ name: "BoardAbs" });
+  },
   methods: {
-    navigateToBoard() {
-      const selectedBoard = this.boards.find(
-        (board) => board.name === this.selectedOption
-      );
-      if (selectedBoard) {
-        this.$router.push({ name: selectedBoard.name });
-      }
+    selectboard(boardname) {
+      this.$router.push({ name: boardname });
     },
   },
 };
 </script>
 
 <style scoped>
-.background {
-  background-color: rgb(241, 248, 248);
-}
-.main {
+.boardcontainer {
   position: absolute;
-  top: 50px;
-  left: 250px;
-  width: 1600px;
-  height: 800px;
+  width: 1470px;
+  height: 880px;
+  top: calc(50% - 880px / 2 - 12px);
+  left: 320px;
+  /* background: #ffffff; */
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
 }
 .boardviewscrap {
-  border: solid 1px black;
-  width: 1600px;
-  border-radius: 5px;
+  border: solid black;
+  width: 1470px;
+  height: 260px;
+  background: #ffffff;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
 }
 .boardviewvideo {
+  margin-top: 20px;
   align-items: center;
-  border: solid 1px black;
   display: inline-flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 500px;
-  width: 1600px;
-  border-radius: 5px;
+  height: 600px;
+  width: 1470px;
+}
+.btngroup {
+  position: absolute;
+  right: 0px;
+  top: 290px;
+  display: flex;
+  z-index: -1;
 }
 
-.select {
-  background-color: white;
-  border: solid 1px black;
+.btn {
+  width: 60px;
+  border: #ffffff;
+  background: #ffffff;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  margin-right: 5px;
+}
+.btn:hover {
+  transform: scale(1.2);
+  /* transition: transform 0.2s ease; */
 }
 </style>

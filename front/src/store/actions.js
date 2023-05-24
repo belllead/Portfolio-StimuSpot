@@ -27,7 +27,7 @@ export default {
     //     console.log(err);
     //   });
   },
-  getInitialYoutubeVideos({ commit }) {
+  getInitialYoutubeVideos({ commit }, payload) {
     const key = process.env.VUE_APP_YOUTUBE_API_KEY2;
     const API_URL = process.env.VUE_APP_YOUTUBE_API_URL;
 
@@ -37,9 +37,9 @@ export default {
       params: {
         key: key,
         part: "snippet",
-        q: "복근운동",
+        q: payload,
         type: "video",
-        maxResults: 20,
+        maxResults: 21,
         videoEmbeddable: true,
       },
       // headers:{
@@ -108,7 +108,6 @@ export default {
     console.log(dateFormat(startDate));
     console.log(dateFormat(lastDate));
     commit;
-    // const API_URL =
   },
   setScrap() {},
   setScraps() {},
@@ -124,20 +123,19 @@ export default {
       .then((res) => {
         console.log(res);
         sessionStorage.setItem("access-token", res.data["access-token"]);
-        sessionStorage.setItem("userNum",res.data["userNum"]);
-        commit;
+        commit("USER_LOGIN", res.data["userNum"]);
       })
       .catch((err) => {
         console.log(err);
       });
   },
 
-  setParts({ commit}) {
+  setParts({ commit, state }) {
     axios({
       method: "GET",
       url: `http://localhost:9999/part-api`,
       params: {
-        userNum: sessionStorage.getItem("userNum"),
+        userNum: state.loginUser,
       },
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
@@ -152,7 +150,7 @@ export default {
       });
   },
 
-  setAchieves({ commit}) {
+  setAchieves({ commit }) {
     axios({
       method: "GET",
       url: `http://localhost:9999/achievement-api`,
@@ -169,12 +167,12 @@ export default {
       });
   },
 
-  setUserAchieves({ commit}) {
+  setUserAchieves({ commit, state }) {
     axios({
       method: "GET",
       url: `http://localhost:9999/achievement-api/achieved`,
       params: {
-        userNum: sessionStorage.getItem("userNum"),
+        userNum: state.loginUser,
       },
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
@@ -183,6 +181,24 @@ export default {
       .then((res) => {
         commit("SET_USERACHIEVES", res.data);
         console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  createScrap({ commit }, scrap) {
+    axios({
+      method: "POST",
+      url: `http://localhost:9999/scrap-api/`,
+      data: scrap,
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        commit;
       })
       .catch((err) => {
         console.log(err);

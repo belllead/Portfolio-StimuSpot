@@ -1,11 +1,15 @@
 <template>
   <div>
-    <h2>chest</h2>
+    <videos-youtube :body-part="'가슴운동'"></videos-youtube>
   </div>
 </template>
+
 <script>
+import VideosYoutube from "./include/VideosYoutube.vue";
+
 export default {
   name: "BoardChest",
+  components: { VideosYoutube },
 };
 </script>
 
