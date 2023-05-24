@@ -10,15 +10,17 @@
 		<result column="scrap_title" property="scrapTitle" />
 		<result column="scrap_url" property="scrapUrl" />
 		<result column="scrap_vtitle" property="scrapVtitle" />
+		<result column="scrap_thumbnail" property="scrapThumbnail" />
 		<result column="scrap_content" property="scrapContent" />
 		<result column="scrap_regdate" property="scrapRegdate" />
 
 	</resultMap>
 
-	<!-- 전체 스크랩 조회 -->
-	<select id="selectAll" resultMap="scrap">
+	<!-- 사용자 전체 스크랩 조회 -->
+	<select id="selectAll" parameterType="int" resultMap="scrap">
 		SELECT *
-		FROM scraps;
+		FROM scraps
+		WHERE user_num = ${userNum};
 	</select>
 
 	<!-- id로 스크랩 조회 -->

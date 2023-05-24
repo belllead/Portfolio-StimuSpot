@@ -111,6 +111,10 @@ export default {
   flex-direction: column;
 }
 
+.achv:hover{
+  transform: scale(1.05);
+}
+
 .achvtitle {
   background: #d9d9d9;
   border-radius: 8px;

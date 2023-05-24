@@ -6,8 +6,8 @@ import com.ssafy.pjt.model.dto.ScrapDto;
 
 public interface ScrapService {
 	
-	// 전체 스크랩 조회
-	public List<ScrapDto> getScrapList();
+	// 사용자 전체 스크랩 조회
+	public List<ScrapDto> getScrapList(int userNum);
 	
 	// id로 스크랩 조회
 	public ScrapDto readScrapById(int id);

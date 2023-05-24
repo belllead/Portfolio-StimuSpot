@@ -21,54 +21,57 @@
     </div>
 
     <!-- modal -->
-    <div class="modalBg" v-if="modalShow"></div>
-    <div class="modal" v-if="modalShow">
-      <label for="title">제목</label>
-      <div class="view">{{ diary.diaryTitle }}</div>
-      <br />
-      <label for="regdate">날짜</label>
-      <div class="view">{{ diary.diaryRegdate }}</div>
-      <br />
-      <label for="rating">성취도</label>
-      <br />
-      <div id="rating" class="main-calendar-rating-box">
-        <div>
-          <div v-if="diary.diaryRating > 0" class="main-rating-container"></div>
-          <div v-else class="main-rating-container-grey"></div>
-        </div>
-        <div>
-          <div v-if="diary.diaryRating > 1" class="main-rating-container"></div>
-          <div v-else class="main-rating-container-grey"></div>
-        </div>
-        <div>
-          <div v-if="diary.diaryRating > 2" class="main-rating-container"></div>
-          <div v-else class="main-rating-container-grey"></div>
-        </div>
-        <div>
-          <div v-if="diary.diaryRating > 3" class="main-rating-container"></div>
-          <div v-else class="main-rating-container-grey"></div>
-        </div>
-        <div>
-          <div v-if="diary.diaryRating > 4" class="main-rating-container"></div>
-          <div v-else class="main-rating-container-grey"></div>
+    <transition name="slide-modal">
+      <div class="modalBg" v-if="modalShow">
+        <div class="modal" v-if="modalShow">
+          <label for="title">제목</label>
+          <div class="view">{{ diary.diaryTitle }}</div>
+          <br />
+          <label for="regdate">날짜</label>
+          <div class="view">{{ diary.diaryRegdate }}</div>
+          <br />
+          <label for="rating">성취도</label>
+          <br />
+          <div id="rating" class="main-calendar-rating-box">
+            <div>
+              <div v-if="diary.diaryRating > 0" class="main-rating-container"></div>
+              <div v-else class="main-rating-container-grey"></div>
+            </div>
+            <div>
+              <div v-if="diary.diaryRating > 1" class="main-rating-container"></div>
+              <div v-else class="main-rating-container-grey"></div>
+            </div>
+            <div>
+              <div v-if="diary.diaryRating > 2" class="main-rating-container"></div>
+              <div v-else class="main-rating-container-grey"></div>
+            </div>
+            <div>
+              <div v-if="diary.diaryRating > 3" class="main-rating-container"></div>
+              <div v-else class="main-rating-container-grey"></div>
+            </div>
+            <div>
+              <div v-if="diary.diaryRating > 4" class="main-rating-container"></div>
+              <div v-else class="main-rating-container-grey"></div>
+            </div>
+          </div>
+          <br />
+          <label for="parts">자극 부위</label>
+          <div class="view">
+            <span v-for="(part, i) in diaryParts" :key="i">{{ `${part} ` }}</span>
+          </div>
+          <br />
+          <hr />
+          <label for="content">내용</label>
+          <div class="view">{{ diary.diaryContent }}</div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <router-link to="/calendar" class="btn">수정하기</router-link>
+          <button @click="modalClose">창 닫기</button>
         </div>
       </div>
-      <br />
-      <label for="parts">자극 부위</label>
-      <div class="view">
-        <span v-for="(part, i) in diaryParts" :key="i">{{ `${part} ` }}</span>
-      </div>
-      <br />
-      <hr />
-      <label for="content">내용</label>
-      <div class="view">{{ diary.diaryContent }}</div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <router-link to="/calendar" class="btn">수정하기</router-link>
-      <button @click="modalClose">창 닫기</button>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -213,7 +216,6 @@ export default {
   border-radius: 8px;
   z-index: 1;
 }
-
 .modal {
   position: absolute;
   top: 0;
@@ -258,5 +260,21 @@ export default {
 
 .main-calendar-rating-box {
   display: inline-flex;
+}
+
+.slide-modal-enter-active {
+  transition: transform 0.5s ease;
+}
+
+.slide-modal-leave-active {
+  transition: transform 0.5s ease;
+}
+
+.slide-modal-enter {
+  transform: translateX(100%);
+}
+
+.slide-modal-leave-to {
+  transform: translateX(100%);
 }
 </style>

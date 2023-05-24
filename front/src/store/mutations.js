@@ -50,4 +50,10 @@ export default {
   SET_TODAY_LUCK_ID(state, payload) {
     state.todayLuckId = payload;
   },
+  SET_SCRAPS(state, payload){
+    state.scraps = payload;
+  },
+  SET_SCRAP(state,payload){
+    state.scrap = payload;
+  },
 };

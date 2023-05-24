@@ -1,5 +1,5 @@
 {
-  "name": "front2",
+  "name": "front",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -18,6 +18,7 @@
     "moment": "^2.29.4",
     "sass-loader": "^13.2.2",
     "v-calendar": "^2.4.1",
+    "v-click-outside": "^3.2.0",
     "vue": "^2.6.14",
     "vue-carousel": "^0.18.0",
     "vue-moment-lib": "^1.2.2",

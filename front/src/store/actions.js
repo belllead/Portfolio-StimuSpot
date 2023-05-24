@@ -117,6 +117,9 @@ export default {
         endDate: end,
         userNum: 1,
       },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
     })
       .then((res) => {
         return [...res.data];
@@ -127,10 +130,7 @@ export default {
       });
     // .then((res) => console.log(res));
   },
-  setScrap() {},
-  setScraps() {},
-  updateScrap() {},
-  deleteScrap() {},
+
   userLogin({ commit }, user) {
     const API_URL = `http://localhost:9999/user-api/login`;
     axios({
@@ -172,10 +172,13 @@ export default {
     axios({
       method: "GET",
       url: `http://localhost:9999/achievement-api`,
-       commit("SET_ACHIEVES", res.data);
-        console.log(res);
-      })
-      .catch((err) => {
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    }).then((res)=>{
+      commit("SET_ACHIEVES", res.data);
+      console.log(res);
+    }).catch((err) => {
         console.log(err);
       });
   },
@@ -200,22 +203,6 @@ export default {
       });
   },
 
-  createScrap({ commit }, scrap) {
-    axios({
-      method: "POST",
-      url: `http://localhost:9999/scrap-api/`,
-      data: scrap,
-      headers: {
-        "access-token": sessionStorage.getItem("access-token"),
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        commit;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   getDiary({ commit }, date) {
     const API_URL = `http://localhost:9999/diary-api/detail`;
     axios({
@@ -248,6 +235,9 @@ export default {
       params: {
         userNum: 1,
       },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
     }).then((res) => {
       {
         console.log(userNum);
@@ -264,10 +254,87 @@ export default {
       params: {
         luckId: state.todayLuckId,
       },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
     }).then((res) => {
       console.log(res.data);
       commit("SET_TODAY_LUCK", res.data.luckContent);
       commit("SET_TODAY_LUCK_ID", res.data.luckId);
+    });
+  },
+
+  setScraps({commit, state}) {
+    const API_URL = `http://localhost:9999/scrap-api/`;
+    axios({
+      url: API_URL,
+      method: "GET",
+      params: {
+        userNum: state.loginUser,
+      },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    }).then((res)=>{
+      console.log(res.data);
+      commit("SET_SCRAPS",res.data);
+    }).catch((err)=>{
+      console.log(err);
+    });
+  },
+
+  
+  createScrap({ commit }, scrap) {
+    axios({
+      method: "POST",
+      url: `http://localhost:9999/scrap-api/`,
+      data: scrap,
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      commit;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  },
+
+  updateScrap({commit}, scrap){
+    const API_URL = `http://localhost:9999/scrap-api/`;
+    axios({
+      url: API_URL,
+      method: "PUT",
+      data: scrap,
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    }).then((res)=>{
+      console.log(res);
+      commit;
+    }).catch((err)=>{
+      console.log(err);
+    });
+  },
+
+  deleteScrap({commit}, id){
+    const API_URL = `http://localhost:9999/scrap-api/`;
+    axios({
+      url: API_URL,
+      method: "DELETE",
+      params: {
+        id: id,
+      },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    }).then((res)=>{
+      console.log(res);
+      commit;
+    }).catch((err)=>{
+      console.log(err);
     });
   },
 };
