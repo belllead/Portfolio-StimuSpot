@@ -2,7 +2,6 @@
 
 <template>
   <div
-    class=""
     @click="rerun"
     :class="{ hover: refreshChance > 0, disabled: refreshChance <= 0 }"
   >

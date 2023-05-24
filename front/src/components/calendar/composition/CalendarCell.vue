@@ -22,7 +22,7 @@ export default {
         { "cell--sunday": this.isSunday && this.isMonth },
         { "cell--other-month": !this.isMonth },
         { "cell--now": this.isNow },
-        { "cell--month": this.isMonth && !this.isBefore },
+        // { "cell--month": this.isMonth && !this.isBefore },
         { "cell--active": this.active },
       ];
     },
@@ -58,22 +58,23 @@ export default {
 
 <style scoped>
 .cell {
-  height: 90px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  border: 1px solid #fff;
+  height: 60px;
+  width: 60px;
+  margin: 10px 5px 10px;
+  /* background-color: red; */
+  border-radius: 4px;
+  /* border: 1px solid #fff; */
   transition: all 0.1s ease-in;
   z-index: 1;
 }
-.cell--month {
+/* .cell--month {
   color: #434141;
   background-color: #fff;
-}
+} */
 
 .cell--other-month {
   color: #b7b4b4;
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
 }
 .cell--saturday .cell__day {
   color: #7676f4;
@@ -93,14 +94,14 @@ export default {
   color: #08e200;
 } */
 .cell__day {
-  text-align: end;
-  padding: 0 5px 0 0;
-  font-weight: bold;
+  text-align: center;
+  padding: 10px 0 0;
+  /* font-weight: 400; */
 }
 .cell__body {
-  padding: 0 5px;
+  /* padding: 0 5px;
   width: 100px;
-  position: relative;
+  position: relative; */
 }
 .cell:hover {
   z-index: 2;

@@ -1,24 +1,18 @@
 <template>
   <div class="calendar">
-    <div>
-      <div class="calendar__date">
-        <span class="calendar__prev" @click="next(-1)">&#5176;</span>
-        <h3 class="calendar__month">{{ nowMonth }}</h3>
-        <span class="calendar__next" @click="next(1)">&#5171;</span>
-      </div>
-      <div class="calendar__btn" @click="$emit('add', $event)">+</div>
-    </div>
-    <div class="calendar__header">
-      <div v-for="day of daysWeek" :key="day" class="calendar__day">
+    <div class="calendar-header">
+      <div v-for="day of daysWeek" :key="day" class="calendar-day">
         {{ day }}
       </div>
     </div>
-    <div class="calendar__body">
+
+    <div class="calendar-body">
       <CalendarCell
         v-for="(day, i) of days"
         :key="'day_' + i"
         v-bind="day"
         @select="click"
+        class="canlendar-cell"
       >
         <CalendarBadge
           v-for="(badge, i) of getBadges(day)"
@@ -27,18 +21,35 @@
         />
       </CalendarCell>
     </div>
+
+    <div>
+      <div class="calendar-date">
+        <span class="calendar-prev" @click="next(-1)"
+          ><button-arrow-left class="sqr-btn"
+        /></span>
+        <h3 class="calendar-month">{{ nowMonth }}</h3>
+        <span class="calendar-next" @click="next(1)"
+          ><button-arrow-right class="sqr-btn"
+        /></span>
+      </div>
+      <div class="calendar-btn" @click="$emit('add', $event)">+</div>
+    </div>
   </div>
 </template>
 
 <script>
 import CalendarCell from "./composition/CalendarCell.vue";
 import CalendarBadge from "./composition/CalendarBadge.vue";
+import ButtonArrowLeft from "../ui-element/ButtonArrowLeft.vue";
+import ButtonArrowRight from "../ui-element/ButtonArrowRight.vue";
 
 export default {
   name: "CalendarIndex",
   components: {
     CalendarCell,
     CalendarBadge,
+    ButtonArrowLeft,
+    ButtonArrowRight,
   },
   props: {
     events: {
@@ -53,15 +64,7 @@ export default {
       // 현재 기준인 날짜 (기본은 오늘, next()가 눌리면 한달 단위로 변경)
       date: null,
       month: 0,
-      daysWeek: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
+      daysWeek: ["일", "월", "화", "수", "목", "금", "토"],
     };
   },
   computed: {
@@ -159,52 +162,64 @@ export default {
 
 <style>
 .calendar {
-  width: 100%;
-  min-height: 600px;
-  border-radius: 20px;
-  background-color: #ffffff;
-  user-select: none;
-  padding: 5px 5px 10px 5px;
-  position: relative;
+  width: 550px;
+  /* min-height: 500px; */
+  /* user-select: none; */
+  /* padding: 5px 5px 10px 5px; */
+  /* position: relative; */
+  /* background-color: aqua; */
+  position: absolute;
+  left: 100px;
+  top: 160px;
 }
-.calendar__date {
+
+.calendar-header {
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-around;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day {
+  text-align: center;
+}
+
+.calendar-body {
+  /* background-color: #efefef; */
+  margin-top: 40px;
+  padding: 4px;
+  /* margin: 10px; */
+  /* border-radius: 5px; */
+  /* border: none; */
+  display: flex;
+  /* grid-template-columns: repeat(7, 1fr); */
+  justify-content: space-around;
+  flex-wrap: wrap;
+  /* gap: 2px; */
+}
+
+/* ------------------ */
+.calendar-date {
   display: flex;
   align-items: center;
   height: 50px;
   padding: 10px 20px;
 }
-.calendar__date span {
+.calendar-date span {
   height: 25px;
   width: 25px;
   cursor: pointer;
   text-align: center;
 }
-.calendar__month {
+.calendar-month {
   margin: 0 5px;
   min-width: 110px;
   text-align: center;
   text-transform: uppercase;
   color: #3c32c9;
 }
-.calendar__header {
-  padding: 0 10px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-}
-.calendar__day {
-  text-align: end;
-}
 
-.calendar__body {
-  background-color: #efefef;
-  padding: 2px;
-  margin: 10px;
-  border-radius: 5px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-}
-.calendar__btn {
+.calendar-btn {
   height: 30px;
   width: 30px;
   background-color: indigo;

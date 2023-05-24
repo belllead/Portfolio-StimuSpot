@@ -916,7 +916,7 @@ export default {
   position: absolute;
   left: 100px;
   top: 64px;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 600;
 }
 

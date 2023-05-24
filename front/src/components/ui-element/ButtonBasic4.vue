@@ -1,4 +1,4 @@
-<!-- 홈으로 버튼 -->
+<!-- 관련 영상 보기 버튼 -->
 
 <template>
   <div class="hover" @click="movePage">

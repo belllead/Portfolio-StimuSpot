@@ -14,15 +14,19 @@
       <router-link :to="{ name: 'CalendarView' }"
         ><button-basic-1 class="basic-btn"></button-basic-1>
       </router-link>
+      <button-basic-6 class="sqr-btn" @click="writeModalShow"></button-basic-6>
       <!-- <div class="arrow-btns">
         <button-arrow-left class="left-btn" />
         <button-arrow-right class="right-btn" />
       </div> -->
     </div>
 
+    <div style="width: 100px; height: 100px; background-color: red"></div>
     <!-- modal -->
     <div class="modalBg" v-if="modalShow"></div>
-    <div class="modal" v-if="modalShow">
+    <write-modal :modalShow="modalShow" />
+
+    <!-- <div class="modal" v-if="modalShow">
       <label for="title">제목</label>
       <div class="view">{{ diary.diaryTitle }}</div>
       <br />
@@ -68,7 +72,7 @@
       <br />
       <router-link to="/calendar" class="btn">수정하기</router-link>
       <button @click="modalClose">창 닫기</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -76,13 +80,15 @@
 import { mapState } from "vuex";
 import { ref } from "vue";
 import ButtonBasic1 from "../ui-element/ButtonBasic1.vue";
+import ButtonBasic6 from "../ui-element/ButtonBasic6.vue";
 import { dateFormat } from "@/util/dateFormat";
+import WriteModal from "./include/WriteModal.vue";
 // import ButtonArrowLeft from "../ui-element/ButtonArrowLeft.vue";
 // import ButtonArrowRight from "../ui-element/ButtonArrowRight.vue";
 
 export default {
   name: "CalenderUi",
-  components: { ButtonBasic1 },
+  components: { ButtonBasic1, ButtonBasic6, WriteModal },
   data() {
     const date = new Date();
     const year = date.getFullYear();
@@ -110,7 +116,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["diary", "diaryParts"]),
+    ...mapState(["diary", "diaryParts", "selectedDate"]),
     selectedDates() {
       return this.$store.state.selectedDates;
     },
@@ -151,14 +157,14 @@ export default {
   position: absolute;
   left: 80px;
   top: 60px;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 600;
 }
 
 .main-calendar {
   width: 270px;
   height: 330px;
-  /* border: none; */
+  border: none;
   margin-top: 120px;
 }
 
@@ -179,6 +185,12 @@ export default {
 }
 .basic-btn {
   width: 80px;
+  height: 40px;
+  color: #a0a0a0;
+}
+
+.sqr-btn {
+  width: 40px;
   height: 40px;
   color: #a0a0a0;
 }
@@ -259,4 +271,6 @@ export default {
 .main-calendar-rating-box {
   display: inline-flex;
 }
+
+/* 여기부터 가져온 거 */
 </style>
