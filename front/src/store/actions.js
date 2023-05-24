@@ -141,7 +141,8 @@ export default {
       .then((res) => {
         console.log(res);
         sessionStorage.setItem("access-token", res.data["access-token"]);
-        commit("USER_LOGIN", res.data["userNum"]);
+        sessionStorage.setItem("userNum",res.data["userNum"]);
+        commit;
       })
       .catch((err) => {
         console.log(err);
@@ -153,13 +154,14 @@ export default {
       method: "GET",
       url: `http://localhost:9999/part-api`,
       params: {
-        userNum: state.loginUser,
+        userNum: sessionStorage.getItem("userNum"),
       },
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
       },
     })
       .then((res) => {
+        console.log(state.loginUser);
         commit("SET_PARTS", res.data);
         console.log(res);
       })
