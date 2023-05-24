@@ -215,9 +215,12 @@ DESC parts;
 SELECT * From diary_part;
 
 SELECT * from users;
+
 desc diaries;
 SELECT * from diaries;
 
+select * from parts;
+select * from user_part;
 
 
 insert into diaries (user_num, diary_title, diary_rating, diary_regdate, diary_content)

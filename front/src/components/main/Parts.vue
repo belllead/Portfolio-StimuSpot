@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h2>운동부위</h2>
+  <div class="container">
     <svg
+      class="bodys"
       width="550"
       height="500"
       viewBox="0 0 550 500"
@@ -713,6 +713,13 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  width: 540px;
+  height: 480px;
+  position: relative;
+  padding: 120px 80px;
+}
+
 .focused path {
   fill: green;
   fill-opacity: 1;

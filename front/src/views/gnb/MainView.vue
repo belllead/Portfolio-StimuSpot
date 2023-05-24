@@ -8,8 +8,7 @@
         <!-- <achievements-ui></achievements-ui> -->
       </div>
       <div class="center">
-        <div class="part-card"></div>
-        <!-- <parts-ui></parts-ui> -->
+        <div class="part-card"><parts-ui /></div>
       </div>
       <div class="right">
         <div class="rank-card"></div>
@@ -29,7 +28,7 @@ import HeaderNav from "@/components/common/HeaderNav.vue";
 // import AchievementsUi from "@/components/main/Achievements.vue";
 import CalenderUi from "@/components/main/Calender.vue";
 // import PartRankingUi from "@/components/main/PartRanking.vue";
-// import PartsUi from "@/components/main/Parts.vue";
+import PartsUi from "@/components/main/Parts.vue";
 // import StreakUi from "@/components/main/Streak.vue";
 // import TodayLuckUi from "@/components/main/TodayLuck.vue";
 
@@ -40,7 +39,7 @@ export default {
     // AchievementsUi,
     CalenderUi,
     // PartRankingUi,
-    // PartsUi,
+    PartsUi,
     // StreakUi,
     // TodayLuckUi,
   },
@@ -81,13 +80,12 @@ export default {
 .center {
   width: 680px;
   height: 790px;
-  background-color: aqua;
 }
 
 .part-card {
   width: 680px;
   height: 790px;
-  background: red;
+  background-color: white;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
 }

@@ -13,5 +13,13 @@
 		DELETE FROM diary_part
 		WHERE diary_id = #{diaryId}
 	</delete>
+	
+	<select id="selectDiaryPart" resultType="PartDto">
+		SELECT p.part_id AS partID, part_name AS partName, part_content AS partContent, part_icon AS partIcon
+        FROM diary_part dp
+        JOIN parts p
+        ON dp.part_id = p.part_id
+        WHERE diary_id = 8;
+	</select>
 
 </mapper>
