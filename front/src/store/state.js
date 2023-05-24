@@ -1,5 +1,6 @@
 export default {
   parts: [],
+  partScores: [],
   selectedPart: null,
   selectedDate: null,
   achievements: [
@@ -138,4 +139,6 @@ export default {
   youtubeVideos: [],
   nextPageToken: "",
   prevPageToken: "",
+  todayLuck: "1asdfs",
+  todayLuckId: 0,
 };

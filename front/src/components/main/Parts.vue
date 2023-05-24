@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <div class="container" @mouseup="clearSelectedPart">
+    <div class="title">최근 운동한 부위</div>
     <svg
       class="bodys"
       width="550"
@@ -248,7 +249,19 @@
       </g>
       <g
         id="chest"
-        :class="{ focused: selectedPart === 'chest' }"
+        :class="{
+          focused: selectedPart === '가슴',
+          'fill-ani-100': is100('가슴'),
+          'fill-ani-90': is90('가슴'),
+          'fill-ani-80': is80('가슴'),
+          'fill-ani-70': is70('가슴'),
+          'fill-ani-60': is60('가슴'),
+          'fill-ani-50': is50('가슴'),
+          'fill-ani-40': is40('가슴'),
+          'fill-ani-30': is30('가슴'),
+          'fill-ani-20': is20('가슴'),
+          'fill-ani-10': is10('가슴'),
+        }"
         @click="selectChest"
       >
         <path
@@ -266,7 +279,19 @@
       </g>
       <g
         id="shoulder"
-        :class="{ focused: selectedPart === 'shoulder' }"
+        :class="{
+          focused: selectedPart === '어깨',
+          'fill-ani-100': is100('어깨'),
+          'fill-ani-90': is90('어깨'),
+          'fill-ani-80': is80('어깨'),
+          'fill-ani-70': is70('어깨'),
+          'fill-ani-60': is60('어깨'),
+          'fill-ani-50': is50('어깨'),
+          'fill-ani-40': is40('어깨'),
+          'fill-ani-30': is30('어깨'),
+          'fill-ani-20': is20('어깨'),
+          'fill-ani-10': is10('어깨'),
+        }"
         @click="selectShoulder"
       >
         <path
@@ -296,7 +321,19 @@
       </g>
       <g
         id="bicep"
-        :class="{ focused: selectedPart === 'bicep' }"
+        :class="{
+          focused: selectedPart === '이두',
+          'fill-ani-100': is100('이두'),
+          'fill-ani-90': is90('이두'),
+          'fill-ani-80': is80('이두'),
+          'fill-ani-70': is70('이두'),
+          'fill-ani-60': is60('이두'),
+          'fill-ani-50': is50('이두'),
+          'fill-ani-40': is40('이두'),
+          'fill-ani-30': is30('이두'),
+          'fill-ani-20': is20('이두'),
+          'fill-ani-10': is10('이두'),
+        }"
         @click="selectBicep"
       >
         <path
@@ -326,7 +363,19 @@
       </g>
       <g
         id="forearm"
-        :class="{ focused: selectedPart === 'forearm' }"
+        :class="{
+          focused: selectedPart === '전완근',
+          'fill-ani-100': is100('전완근'),
+          'fill-ani-90': is90('전완근'),
+          'fill-ani-80': is80('전완근'),
+          'fill-ani-70': is70('전완근'),
+          'fill-ani-60': is60('전완근'),
+          'fill-ani-50': is50('전완근'),
+          'fill-ani-40': is40('전완근'),
+          'fill-ani-30': is30('전완근'),
+          'fill-ani-20': is20('전완근'),
+          'fill-ani-10': is10('전완근'),
+        }"
         @click="selectForearm"
       >
         <path
@@ -392,7 +441,19 @@
       </g>
       <g
         id="abs"
-        :class="{ focused: selectedPart === 'abs' }"
+        :class="{
+          focused: selectedPart === '복근',
+          'fill-ani-100': is100('복근'),
+          'fill-ani-90': is90('복근'),
+          'fill-ani-80': is80('복근'),
+          'fill-ani-70': is70('복근'),
+          'fill-ani-60': is60('복근'),
+          'fill-ani-50': is50('복근'),
+          'fill-ani-40': is40('복근'),
+          'fill-ani-30': is30('복근'),
+          'fill-ani-20': is20('복근'),
+          'fill-ani-10': is10('복근'),
+        }"
         @click="selectAbs"
       >
         <path
@@ -446,7 +507,19 @@
       </g>
       <g
         id="back"
-        :class="{ focused: selectedPart === 'back' }"
+        :class="{
+          focused: selectedPart === '등',
+          'fill-ani-100': is100('등'),
+          'fill-ani-90': is90('등'),
+          'fill-ani-80': is80('등'),
+          'fill-ani-70': is70('등'),
+          'fill-ani-60': is60('등'),
+          'fill-ani-50': is50('등'),
+          'fill-ani-40': is40('등'),
+          'fill-ani-30': is30('등'),
+          'fill-ani-20': is20('등'),
+          'fill-ani-10': is10('등'),
+        }"
         @click="selectBack"
       >
         <path
@@ -494,7 +567,19 @@
       </g>
       <g
         id="tricep"
-        :class="{ focused: selectedPart === 'tricep' }"
+        :class="{
+          focused: selectedPart === '삼두',
+          'fill-ani-100': is100('삼두'),
+          'fill-ani-90': is90('삼두'),
+          'fill-ani-80': is80('삼두'),
+          'fill-ani-70': is70('삼두'),
+          'fill-ani-60': is60('삼두'),
+          'fill-ani-50': is50('삼두'),
+          'fill-ani-40': is40('삼두'),
+          'fill-ani-30': is30('삼두'),
+          'fill-ani-20': is20('삼두'),
+          'fill-ani-10': is10('삼두'),
+        }"
         @click="selectTricep"
       >
         <path
@@ -524,7 +609,19 @@
       </g>
       <g
         id="glute"
-        :class="{ focused: selectedPart === 'glute' }"
+        :class="{
+          focused: selectedPart === '엉덩이',
+          'fill-ani-100': is100('엉덩이'),
+          'fill-ani-90': is90('엉덩이'),
+          'fill-ani-80': is80('엉덩이'),
+          'fill-ani-70': is70('엉덩이'),
+          'fill-ani-60': is60('엉덩이'),
+          'fill-ani-50': is50('엉덩이'),
+          'fill-ani-40': is40('엉덩이'),
+          'fill-ani-30': is30('엉덩이'),
+          'fill-ani-20': is20('엉덩이'),
+          'fill-ani-10': is10('엉덩이'),
+        }"
         @click="selectGlute"
       >
         <path
@@ -543,7 +640,19 @@
       </g>
       <g
         id="thigh"
-        :class="{ focused: selectedPart === 'thigh' }"
+        :class="{
+          focused: selectedPart === '허벅지',
+          'fill-ani-100': is100('허벅지'),
+          'fill-ani-90': is90('허벅지'),
+          'fill-ani-80': is80('허벅지'),
+          'fill-ani-70': is70('허벅지'),
+          'fill-ani-60': is60('허벅지'),
+          'fill-ani-50': is50('허벅지'),
+          'fill-ani-40': is40('허벅지'),
+          'fill-ani-30': is30('허벅지'),
+          'fill-ani-20': is20('허벅지'),
+          'fill-ani-10': is10('허벅지'),
+        }"
         @click="selectThigh"
       >
         <path
@@ -609,7 +718,19 @@
       </g>
       <g
         id="calf"
-        :class="{ focused: selectedPart === 'calf' }"
+        :class="{
+          focused: selectedPart === '종아리',
+          'fill-ani-100': is100('종아리'),
+          'fill-ani-90': is90('종아리'),
+          'fill-ani-80': is80('종아리'),
+          'fill-ani-70': is70('종아리'),
+          'fill-ani-60': is60('종아리'),
+          'fill-ani-50': is50('종아리'),
+          'fill-ani-40': is40('종아리'),
+          'fill-ani-30': is30('종아리'),
+          'fill-ani-20': is20('종아리'),
+          'fill-ani-10': is10('종아리'),
+        }"
         @click="selectCalf"
       >
         <path
@@ -662,52 +783,123 @@
         />
       </g>
     </svg>
-    <button v-if="selectedPart">{{ selectedPart }} 관련 영상 보기</button>
+    <button-basic-4
+      v-if="selectedPart"
+      class="basic-btn"
+      :selectedPart="selectedPart"
+      @movePage="moveToBoard"
+    ></button-basic-4>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import ButtonBasic4 from "../ui-element/ButtonBasic4.vue";
+import { partMap } from "@/util/partMap";
 
 export default {
+  components: { ButtonBasic4 },
   name: "PartsUi",
-  methods: {
-    selectChest() {
-      this.$store.dispatch("focusPart", "chest");
-    },
-    selectShoulder() {
-      this.$store.dispatch("focusPart", "shoulder");
-    },
-    selectBicep() {
-      this.$store.dispatch("focusPart", "bicep");
-    },
-    selectForearm() {
-      this.$store.dispatch("focusPart", "forearm");
-    },
-    selectAbs() {
-      this.$store.dispatch("focusPart", "abs");
-    },
-    selectBack() {
-      this.$store.dispatch("focusPart", "back");
-    },
-    selectTricep() {
-      this.$store.dispatch("focusPart", "tricep");
-    },
-    selectThigh() {
-      this.$store.dispatch("focusPart", "thigh");
-    },
-    selectCalf() {
-      this.$store.dispatch("focusPart", "calf");
-    },
-    selectGlute() {
-      this.$store.dispatch("focusPart", "glute");
-    },
-  },
-  computed: {
-    ...mapState(["selectedPart"]),
-  },
   created() {
     this.$store.dispatch("clearFocus");
+    this.$store.dispatch("setPartScores", this.$store.state.loginUser);
+  },
+  computed: {
+    ...mapState(["selectedPart", "partScores"]),
+  },
+  methods: {
+    selectChest() {
+      this.$store.dispatch("focusPart", "가슴");
+    },
+    selectShoulder() {
+      this.$store.dispatch("focusPart", "어깨");
+    },
+    selectBicep() {
+      this.$store.dispatch("focusPart", "이두");
+    },
+    selectForearm() {
+      this.$store.dispatch("focusPart", "전완근");
+    },
+    selectAbs() {
+      this.$store.dispatch("focusPart", "복근");
+    },
+    selectBack() {
+      this.$store.dispatch("focusPart", "등");
+    },
+    selectTricep() {
+      this.$store.dispatch("focusPart", "삼두");
+    },
+    selectThigh() {
+      this.$store.dispatch("focusPart", "허벅지");
+    },
+    selectCalf() {
+      this.$store.dispatch("focusPart", "종아리");
+    },
+    selectGlute() {
+      this.$store.dispatch("focusPart", "엉덩이");
+    },
+    moveToBoard() {
+      let partNum = 0;
+      if (this.selectedPart == "복근") partNum = 2;
+      else if (this.selectedPart == "등") partNum = 3;
+      else if (this.selectedPart == "이두") partNum = 4;
+      else if (this.selectedPart == "종아리") partNum = 5;
+      else if (this.selectedPart == "가슴") partNum = 6;
+      else if (this.selectedPart == "전완근") partNum = 7;
+      else if (this.selectedPart == "엉덩이") partNum = 8;
+      else if (this.selectedPart == "어깨") partNum = 9;
+      else if (this.selectedPart == "허벅지") partNum = 1;
+      else if (this.selectedPart == "삼두") partNum = 10;
+
+      this.$router.push({
+        // name: "BoardView",
+        path: `/board/${partNum}`,
+      });
+    },
+    is100(partName) {
+      // if (partName === "가슴") {
+      //   if (this.partScores["1"] === 10) return true;
+      // }
+      // 이거를 리터럴 형태로 바꾼 것
+      if (this.partScores[`${partMap[`${partName}`]}`] === 10) return true;
+    },
+    is90(partName) {
+      if (this.partScores[`${partMap[`${partName}`]}`] == 9) return true;
+    },
+    is80(partName) {
+      if (this.partScores[`${partMap[`${partName}`]}`] == 8) return true;
+    },
+    is70(partName) {
+      if (this.partScores[`${partMap[`${partName}`]}`] == 7) return true;
+    },
+    is60(partName) {
+      if (this.partScores[`${partMap[`${partName}`]}`] == 6) return true;
+    },
+    is50(partName) {
+      if (this.partScores[`${partMap[`${partName}`]}`] == 5) return true;
+    },
+    is40(partName) {
+      if (this.partScores[`${partMap[`${partName}`]}`] == 4) return true;
+    },
+    is30(partName) {
+      if (this.partScores[`${partMap[`${partName}`]}`] == 3) return true;
+    },
+    is20(partName) {
+      if (this.partScores[`${partMap[`${partName}`]}`] == 2) return true;
+    },
+    is10(partName) {
+      if (this.partScores[`${partMap[`${partName}`]}`] == 1) return true;
+    },
+    clearSelectedPart(event) {
+      const body = this.$el.querySelector("g");
+      const btn = this.$el.querySelector(".basic-btn");
+
+      if (btn === null) return;
+
+      if (!body.contains(event.target) && !btn.contains(event.target)) {
+        this.$store.commit("CLEAR_PART");
+      }
+    },
   },
 };
 </script>
@@ -720,8 +912,24 @@ export default {
   padding: 120px 80px;
 }
 
+.title {
+  position: absolute;
+  left: 100px;
+  top: 64px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.basic-btn {
+  width: 160px;
+  height: 40px;
+  color: #a0a0a0;
+  position: absolute;
+  left: 263px;
+  bottom: 0;
+}
 .focused path {
-  fill: green;
+  fill: #e8cb66;
   fill-opacity: 1;
 }
 
@@ -737,16 +945,39 @@ export default {
     forwards;
 }
 
-#thigh {
+.fill-ani-100 {
   animation: fill-ani-100 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+}
+.fill-ani-90 {
+  animation: fill-ani-90 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+}
+.fill-ani-80 {
+  animation: fill-ani-80 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+}
+.fill-ani-70 {
+  animation: fill-ani-70 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+}
+.fill-ani-60 {
+  animation: fill-ani-60 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+}
+.fill-ani-50 {
+  animation: fill-ani-50 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+}
+.fill-ani-40 {
+  animation: fill-ani-40 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+}
+.fill-ani-30 {
+  animation: fill-ani-30 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+}
+.fill-ani-20 {
+  animation: fill-ani-20 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+}
+.fill-ani-10 {
+  animation: fill-ani-10 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
 }
 
 #thigh:hover {
   transform: translate(0, -3px);
-}
-
-#calf {
-  animation: fill-ani-100 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
 }
 
 #calf:hover {
@@ -754,68 +985,44 @@ export default {
   transform: translate(0, -3px);
 }
 
-#shoulder {
-  animation: fill-ani-80 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
-}
-
 #shoulder:hover {
   transform: translate(0, -3px);
-}
-
-#chest {
-  animation: fill-ani-40 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
 }
 
 #chest:hover {
   transform: translate(0, -3px);
 }
 
-#back {
-  animation: fill-ani-20 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
-}
-
 #back:hover {
   transform: translate(0, -3px);
-}
-
-#bicep {
-  animation: fill-ani-20 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
 }
 
 #bicep:hover {
   transform: translate(0, -3px);
 }
 
-#tricep {
-  animation: fill-ani-40 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
-}
-
 #tricep:hover {
   transform: translate(0, -3px);
-}
-
-#abs {
-  animation: fill-ani-80 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
 }
 
 #abs:hover {
   transform: translate(0, -3px);
 }
 
-#glute {
-  animation: fill-ani-100 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
-}
-
 #glute:hover {
   transform: translate(0, -3px);
 }
 
-#forearm {
-  animation: fill-ani-20 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
-}
-
 #forearm:hover {
   transform: translate(0, -3px);
+}
+
+.clearSelectedPart {
+  width: 680px;
+  height: 790px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 /* keyframes */
@@ -844,12 +1051,24 @@ export default {
 
 @keyframes fill-ani-100 {
   from {
-    fill: #da0037;
+    fill: #e86666;
     fill-opacity: 0;
   }
 
   to {
-    fill: #da0037;
+    fill: #e86666;
+    fill-opacity: 1;
+    stroke-opacity: 0;
+  }
+}
+@keyframes fill-ani-90 {
+  from {
+    fill: #e97575;
+    fill-opacity: 0;
+  }
+
+  to {
+    fill: #e97575;
     fill-opacity: 1;
     stroke-opacity: 0;
   }
@@ -857,52 +1076,100 @@ export default {
 
 @keyframes fill-ani-80 {
   from {
-    fill: #da0037;
+    fill: #ea8383;
     fill-opacity: 0;
   }
 
   to {
-    fill: #da0037;
-    fill-opacity: 0.8;
+    fill: #ea8383;
+    fill-opacity: 1;
+    stroke-opacity: 0;
+  }
+}
+@keyframes fill-ani-70 {
+  from {
+    fill: #eb9f9f;
+    fill-opacity: 0;
+  }
+
+  to {
+    fill: #eb9f9f;
+    fill-opacity: 1;
     stroke-opacity: 0;
   }
 }
 
 @keyframes fill-ani-60 {
   from {
-    fill: #da0037;
+    fill: #ecbcbc;
     fill-opacity: 0;
   }
 
   to {
-    fill: #da0037;
-    fill-opacity: 0.6;
+    fill: #ecbcbc;
+    fill-opacity: 1;
+    stroke-opacity: 0;
+  }
+}
+@keyframes fill-ani-50 {
+  from {
+    fill: #eed3d3;
+    fill-opacity: 0;
+  }
+
+  to {
+    fill: #eed3d3;
+    fill-opacity: 1;
     stroke-opacity: 0;
   }
 }
 
 @keyframes fill-ani-40 {
   from {
-    fill: #da0037;
+    fill: #eedcdc;
     fill-opacity: 0;
   }
 
   to {
-    fill: #da0037;
-    fill-opacity: 0.4;
+    fill: #eedcdc;
+    fill-opacity: 1;
+    stroke-opacity: 0;
+  }
+}
+@keyframes fill-ani-30 {
+  from {
+    fill: #efe4e4;
+    fill-opacity: 0;
+  }
+
+  to {
+    fill: #efe4e4;
+    fill-opacity: 1;
     stroke-opacity: 0;
   }
 }
 
 @keyframes fill-ani-20 {
   from {
-    fill: #da0037;
+    fill: #efeded;
     fill-opacity: 0;
   }
 
   to {
-    fill: #da0037;
-    fill-opacity: 0.2;
+    fill: #efeded;
+    fill-opacity: 1;
+    stroke-opacity: 0;
+  }
+}
+@keyframes fill-ani-10 {
+  from {
+    fill: #eef0f0;
+    fill-opacity: 0;
+  }
+
+  to {
+    fill: #eef0f0;
+    fill-opacity: 1;
     stroke-opacity: 0;
   }
 }

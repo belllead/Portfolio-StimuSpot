@@ -35,4 +35,13 @@ export default {
   SET_DIARY_PARTS(state, payload) {
     state.diaryParts = payload;
   },
+  SET_PART_SCORES(state, payload) {
+    state.partScores = payload;
+  },
+  SET_TODAY_LUCK(state, payload) {
+    state.todayLuck = payload;
+  },
+  SET_TODAY_LUCK_ID(state, payload) {
+    state.todayLuckId = payload;
+  },
 };

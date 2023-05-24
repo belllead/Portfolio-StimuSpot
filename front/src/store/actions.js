@@ -192,4 +192,34 @@ export default {
         return;
       });
   },
+  setPartScores({ commit }, userNum) {
+    const API_URL = `http://localhost:9999/part-api/score`;
+    axios({
+      url: API_URL,
+      method: "GET",
+      params: {
+        userNum: 1,
+      },
+    }).then((res) => {
+      {
+        console.log(userNum);
+        console.log(res.data);
+        commit("SET_PART_SCORES", res.data);
+      }
+    });
+  },
+  setTodayLuck({ commit, state }) {
+    const API_URL = `http://localhost:9999/today-luck-api`;
+    axios({
+      url: API_URL,
+      method: "GET",
+      params: {
+        luckId: state.todayLuckId,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      commit("SET_TODAY_LUCK", res.data.luckContent);
+      commit("SET_TODAY_LUCK_ID", res.data.luckId);
+    });
+  },
 };

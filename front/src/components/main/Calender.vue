@@ -1,14 +1,14 @@
 <template>
   <div class="container">
+    <div class="title">다이어리</div>
     <!-- calendar -->
     <v-date-picker
       v-model="date"
       @input="selectDate"
       :attributes="attributes"
-      color="yellow"
       class="main-calendar"
+      color="yellow"
     />
-    <br />
 
     <div class="btns">
       <router-link :to="{ name: 'CalendarView' }"
@@ -92,7 +92,7 @@ export default {
         key: "part",
         highlight: {
           color: "red",
-          fillMode: "solid",
+          fillMode: "outline",
           contentClass: "italic",
         },
         dates: [],
@@ -146,12 +146,26 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.title {
+  position: absolute;
+  left: 80px;
+  top: 60px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
 .main-calendar {
   width: 270px;
   height: 330px;
-  border: none;
+  /* border: none; */
   margin-top: 120px;
+}
+
+.main-calendar .v-date-picker-table-cell {
+  padding: 20px;
+  margin: 20px;
+  height: 60px;
 }
 
 .btns {

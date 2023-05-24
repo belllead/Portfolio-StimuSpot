@@ -17,7 +17,7 @@ export default new Vuex.Store({
   actions,
   plugins: [
     createPersistedState({
-      paths: ["selectedDates"],
+      paths: ["selectedDates", "todayLuck", "todayLuckId"],
       key: "vuexPersistedStore",
       storage: window.sessionStorage,
     }),
