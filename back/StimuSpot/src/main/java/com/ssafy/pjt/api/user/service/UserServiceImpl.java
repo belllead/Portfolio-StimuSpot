@@ -9,14 +9,14 @@ import com.ssafy.pjt.model.dto.UserDto;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	private UserDao userDao;
-	
+
 	@Autowired
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
+
 	@Transactional
 	@Override
 	public boolean signup(UserDto user) {
@@ -26,10 +26,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto login(String userId, String userPw) {
 		UserDto temp = userDao.selectById(userId);
-		if(temp != null && temp.getUserPw().equals(userPw)) {
+
+    if (temp != null && temp.getUserPw().equals(userPw)) {
 //			userDao.insertLog(temp.getUserNum());
 			return temp;
 		}
+		
 		return null;
 	}
 
@@ -37,7 +39,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto searchByNum(int userNum) {
 		return userDao.selectByNum(userNum);
 	}
-	
+
 	@Transactional
 	@Override
 	public boolean modifyUser(UserDto user) {

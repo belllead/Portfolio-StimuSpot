@@ -10,6 +10,7 @@ public class DiaryDto {
 	int diaryRating;
 	String diaryContent;
 	List<Integer> partIds;
+	List<String> partNames;
 
 	public DiaryDto() {
 	}
@@ -70,12 +71,19 @@ public class DiaryDto {
 		this.partIds = partIds;
 	}
 
+	public List<String> getPartNames() {
+		return partNames;
+	}
+
+	public void setPartNames(List<String> partNames) {
+		this.partNames = partNames;
+	}
+
 	@Override
 	public String toString() {
 		return "DiaryDto [diaryId=" + diaryId + ", userNum=" + userNum + ", diaryTitle=" + diaryTitle
 				+ ", diaryRegdate=" + diaryRegdate + ", diaryRating=" + diaryRating + ", diaryContent=" + diaryContent
 				+ ", partIds=" + partIds + "]";
 	}
-	
-	
+
 }

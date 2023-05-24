@@ -1,5 +1,6 @@
 package com.ssafy.pjt.api.diary.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import com.ssafy.pjt.model.dao.DiaryDao;
 import com.ssafy.pjt.model.dao.DiaryPartDao;
 import com.ssafy.pjt.model.dto.DiaryDto;
 import com.ssafy.pjt.model.dto.DiaryQueryDto;
+import com.ssafy.pjt.model.dto.PartDto;
 
 @Service
 public class DiaryServiceImpl implements DiaryService{
@@ -26,7 +28,17 @@ public class DiaryServiceImpl implements DiaryService{
 
 	@Override
 	public DiaryDto readDiary(DiaryQueryDto diaryOne) {
-		return diaryDao.selectOne(diaryOne);
+		DiaryDto result = diaryDao.selectOne(diaryOne);
+		List<PartDto> parts = diaryPartDao.selectDiaryPart(result.getDiaryId());
+		
+		List<String> partList = new ArrayList<>();
+		
+		for (int i=0; i<parts.size(); i++) {
+			partList.add(parts.get(i).getPartName());
+		}
+		
+		result.setPartNames(partList);
+		return result;
 	}
 
 	@Override

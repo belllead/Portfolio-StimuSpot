@@ -9,6 +9,8 @@ import getters from "./getters";
 import mutations from "./mutations";
 import actions from "./actions";
 
+import createPersistedState from "vuex-persistedstate";
+
 export default new Vuex.Store({
   state,
   getters,
@@ -16,7 +18,8 @@ export default new Vuex.Store({
   actions,
   plugins: [
     createPersistedState({
-      paths: ["loginUser"],
+      paths: ["loginUser", "selectedDates", "todayLuck", "todayLuckId"],
+      key: "vuexPersistedStore",
       storage: window.sessionStorage,
     }),
   ],

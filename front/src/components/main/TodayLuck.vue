@@ -1,26 +1,31 @@
 <template>
-  <div class="main-todayluck">
-    <h2>오늘의 운세</h2>
+  <div class="container">
+    <h2 class="title">오늘의 한마디</h2>
     <div>
-      <div>오늘의 운세</div>
-      <div>{{ todayLuck }}</div>
-      <button :disabled="refreshChance <= 0" @click="setTodayLuck">
-        다른 운세 보기 {{ refreshChance }}번 가능
-      </button>
+      <div class="content">{{ todayLuck }}</div>
+      <button-basic-5
+        :refreshChance="refreshChance"
+        @rerun="setTodayLuck"
+      ></button-basic-5>
     </div>
   </div>
 </template>
 
 <script>
 import dayjs from "dayjs";
+import ButtonBasic5 from "../ui-element/ButtonBasic5.vue";
+import { mapState } from "vuex";
 
 export default {
+  components: { ButtonBasic5 },
   name: "TodayLuckUi",
   data() {
     return {
-      todayLuck: "",
       refreshChance: null,
     };
+  },
+  computed: {
+    ...mapState(["todayLuck"]),
   },
   created() {
     const now = dayjs();
@@ -39,15 +44,16 @@ export default {
     if (newDate === curDate && newMonth === curMonth) {
       this.todayLuck = JSON.parse(sessionStorage.getItem("todayLuck")).content;
     } else {
-      const content = Math.random() * 100; // api로 변경 필요
+      // const content = Math.random() * 100; // api로 변경 필요
+      this.$store.dispatch("setTodayLuck");
+
       const newLuck = {
         date: newDate,
         month: newMonth,
-        content: content,
+        content: this.todayLuck,
       };
       sessionStorage.setItem("todayLuck", JSON.stringify(newLuck));
-      sessionStorage.setItem("refreshChance", 3);
-      this.todayLuck = content;
+      sessionStorage.setItem("refreshChance", 10);
     }
 
     const refreshChance = JSON.parse(sessionStorage.getItem("refreshChance"));
@@ -63,15 +69,35 @@ export default {
 
       let todayLuck = JSON.parse(sessionStorage.getItem("todayLuck"));
 
-      const content = Math.random() * 100; // api로 변경 필요
-      todayLuck.content = content;
+      // const content = Math.random() * 100; // api로 변경 필요
+      this.$store.dispatch("setTodayLuck");
 
       sessionStorage.setItem("todayLuck", JSON.stringify(todayLuck));
       sessionStorage.setItem("refreshChance", JSON.stringify(refreshChance));
-      this.todayLuck = content;
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  position: relative;
+}
+
+.title {
+  position: absolute;
+  left: 56px;
+  top: 40px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.content {
+  position: absolute;
+  left: 56px;
+  top: 150px;
+  text-align: left;
+  width: 200px;
+  font-size: 0.8em;
+}
+</style>

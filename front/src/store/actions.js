@@ -105,9 +105,27 @@ export default {
     const startDate = new Date(year, month, 1);
     const lastDate = new Date(year, month + 1, 0);
 
-    console.log(dateFormat(startDate));
-    console.log(dateFormat(lastDate));
-    commit;
+    const start = dateFormat(startDate);
+    const end = dateFormat(lastDate);
+
+    const API_URL = `http://localhost:9999/diary-api`;
+    axios({
+      url: API_URL,
+      method: "GET",
+      params: {
+        startDate: start,
+        endDate: end,
+        userNum: 1,
+      },
+    })
+      .then((res) => {
+        return [...res.data];
+      })
+      .then((res) => res.map((el) => el.diaryRegdate))
+      .then((res) => {
+        commit("SET_SELECTED_DATES", res);
+      });
+    // .then((res) => console.log(res));
   },
   setScrap() {},
   setScraps() {},
@@ -154,12 +172,7 @@ export default {
     axios({
       method: "GET",
       url: `http://localhost:9999/achievement-api`,
-      headers: {
-        "access-token": sessionStorage.getItem("access-token"),
-      },
-    })
-      .then((res) => {
-        commit("SET_ACHIEVES", res.data);
+       commit("SET_ACHIEVES", res.data);
         console.log(res);
       })
       .catch((err) => {
@@ -203,5 +216,58 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+  getDiary({ commit }, date) {
+    const API_URL = `http://localhost:9999/diary-api/detail`;
+    axios({
+      url: API_URL,
+      method: "GET",
+      params: {
+        specificDate: date,
+        userNum: 1,
+      },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => {
+        // console.log(res.data);
+        commit("SET_DIARY", res.data);
+        console.log(res.data.partIds);
+        commit("SET_DIARY_PARTS", res.data.partNames);
+      })
+      // .catch((err) => console.log(err));
+      .catch(() => {
+        return;
+      });
+  },
+  setPartScores({ commit }, userNum) {
+    const API_URL = `http://localhost:9999/part-api/score`;
+    axios({
+      url: API_URL,
+      method: "GET",
+      params: {
+        userNum: 1,
+      },
+    }).then((res) => {
+      {
+        console.log(userNum);
+        console.log(res.data);
+        commit("SET_PART_SCORES", res.data);
+      }
+    });
+  },
+  setTodayLuck({ commit, state }) {
+    const API_URL = `http://localhost:9999/today-luck-api`;
+    axios({
+      url: API_URL,
+      method: "GET",
+      params: {
+        luckId: state.todayLuckId,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      commit("SET_TODAY_LUCK", res.data.luckContent);
+      commit("SET_TODAY_LUCK_ID", res.data.luckId);
+    });
   },
 };
