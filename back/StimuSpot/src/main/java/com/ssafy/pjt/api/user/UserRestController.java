@@ -32,90 +32,99 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/user-api")
 @CrossOrigin("*")
 public class UserRestController {
-	
+
 	@Autowired
 	private JWTUtil jwtUtil;
-	
+
 	@Autowired
 	UserService service;
-	
+
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
-	
-	@ApiOperation(value= "로그인", response = Map.class)
+
+	@ApiOperation(value = "로그인", response = Map.class)
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody UserDto user, HttpSession session){
+	public ResponseEntity<?> login(@RequestBody UserDto user, HttpSession session) {
 		UserDto temp = service.login(user.getUserId(), user.getUserPw());
-		
-		Map<String, Object> result = new HashMap<String,Object>();
+
+		Map<String, Object> result = new HashMap<String, Object>();
 		HttpStatus status = null;
-		
+
 		try {
-			if(temp != null) {
-				result.put("access-token", jwtUtil.createToken("id",temp.getUserId()));
+			if (temp != null) {
+				result.put("access-token", jwtUtil.createToken("id", temp.getUserId()));
 				result.put("message", SUCCESS);
-				result.put("userNum",temp.getUserNum());
+				result.put("userNum", temp.getUserNum());
 				status = HttpStatus.ACCEPTED;
-			}else {
+			} else {
 				result.put("message", FAIL);
 				status = HttpStatus.NOT_ACCEPTABLE;
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return ErrorHandler.exceptionHandling(e);
 		}
-		return new ResponseEntity<Map<String, Object>>(result,status);
+
+		return new ResponseEntity<Map<String, Object>>(result, status);
 	}
-	
-	@ApiOperation(value= "회원가입", response = String.class)
+
+	@ApiOperation(value = "회원가입", response = String.class)
 	@PostMapping("/regist")
-	public ResponseEntity<?> signup(UserDto user){
+	public ResponseEntity<?> signup(UserDto user) {
 		try {
-			if(service.signup(user)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
-			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
-		}catch(Exception e) {
+			if (service.signup(user))
+				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+			else
+				return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
+		} catch (Exception e) {
 			return ErrorHandler.exceptionHandling(e);
 		}
 	}
-	
-	@ApiOperation(value= "로그아웃", response = Void.class)
+
+	@ApiOperation(value = "로그아웃", response = Void.class)
 	@GetMapping("/logout")
 	public ResponseEntity<Void> logout(HttpSession session) {
 		session.invalidate();
-		return new ResponseEntity<Void>(HttpStatus.OK);	
-	}	
-	
-	@ApiOperation(value= "num으로 유저 정보 조회", response = UserDto.class)
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+
+	@ApiOperation(value = "num으로 유저 정보 조회", response = UserDto.class)
 	@GetMapping("/")
-	public ResponseEntity<?> getUserInfo(@RequestParam(required = true) int userNum){
+	public ResponseEntity<?> getUserInfo(@RequestParam(required = true) int userNum) {
 		UserDto user = service.searchByNum(userNum);
 		try {
-			if(user != null ) return new ResponseEntity<UserDto>(user,HttpStatus.OK);
-			
-			else return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);
-		}catch(Exception e) {
+			if (user != null)
+				return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+
+			else
+				return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
 			return ErrorHandler.exceptionHandling(e);
 		}
 	}
-	
-	@ApiOperation(value= "사용자 정보 수정", response = String.class)
+
+	@ApiOperation(value = "사용자 정보 수정", response = String.class)
 	@PutMapping("/")
-	public ResponseEntity<?> updateUserInfo(UserDto user){
+	public ResponseEntity<?> updateUserInfo(UserDto user) {
 		try {
-			if(service.modifyUser(user)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
-			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
-		}catch(Exception e) {
+			if (service.modifyUser(user))
+				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+			else
+				return new ResponseEntity<String>(FAIL, HttpStatus.NOT_ACCEPTABLE);
+		} catch (Exception e) {
 			return ErrorHandler.exceptionHandling(e);
 		}
 	}
-	
-	@ApiOperation(value= "접속 기록 조회", response = UserDto.class)
+
+	@ApiOperation(value = "접속 기록 조회", response = UserDto.class)
 	@GetMapping("/log")
-	public ResponseEntity<?> getLoginLog(@RequestParam(required = true) int userNum){
+	public ResponseEntity<?> getLoginLog(@RequestParam(required = true) int userNum) {
 		String log = service.getLog(userNum);
 		try {
-			if(log != null) return new ResponseEntity<String>(log,HttpStatus.OK);
-			else return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);			
-		}catch(Exception e) {
+			if (log != null)
+				return new ResponseEntity<String>(log, HttpStatus.OK);
+			else
+				return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
 			return ErrorHandler.exceptionHandling(e);
 		}
 	}

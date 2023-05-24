@@ -1,5 +1,6 @@
 export default {
   parts: [],
+  partScores: [],
   selectedPart: null,
   selectedDate: null,
   achievements: [
@@ -18,15 +19,17 @@ export default {
   loginUser: 0,
   diaries: [],
   diary: {
-    diaryId: 1,
-    diaryTitle: "오늘은 하체데이~ 징징이 다리되는 날!",
-    diaryRegdate: "2023-05-10",
-    diaryRating: 2,
-    diaryContent:
-      "오늘은 하체날이었는데 하체가 너무 재미없어서 데드리프트랑 케틀벨도 같이 조졌다. 하체 왜 해야 해...하지만 하체 없이는 성장이 없지..!",
+    // diaryId: 1,
+    // diaryTitle: "오늘은 하체데이~ 징징이 다리되는 날!",
+    // diaryRegdate: "2023-05-10",
+    // diaryRating: 2,
+    // diaryContent:
+    //   "오늘은 하체날이었는데 하체가 너무 재미없어서 데드리프트랑 케틀벨도 같이 조졌다. 하체 왜 해야 해...하지만 하체 없이는 성장이 없지..!",
   },
-  diaryParts: ["abs", "thigh", "back"],
-  selectedDates: ["2023-05-10", "2023-05-19", "2023-05-26", "2023-05-31"],
+  diaryParts: [
+    // "abs", "thigh", "back"
+  ],
+  selectedDates: [],
   scrap: {
     scrapId: 1,
     scrapTitle: "첫번째 스크랩입니다",
@@ -136,4 +139,6 @@ export default {
   youtubeVideos: [],
   nextPageToken: "",
   prevPageToken: "",
+  todayLuck: "1asdfs",
+  todayLuckId: 0,
 };

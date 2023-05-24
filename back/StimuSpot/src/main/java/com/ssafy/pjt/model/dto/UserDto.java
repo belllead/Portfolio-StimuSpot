@@ -79,4 +79,13 @@ public class UserDto {
 	public void setUserSelfie(String userSelfie) {
 		this.userSelfie = userSelfie;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDto [userNum=" + userNum + ", userId=" + userId + ", userPw=" + userPw + ", userNickname="
+				+ userNickname + ", userEmail=" + userEmail + ", userAge=" + userAge + ", userSelfie=" + userSelfie
+				+ "]";
+	}
+	
+	
 }

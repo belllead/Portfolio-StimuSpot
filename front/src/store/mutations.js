@@ -26,4 +26,22 @@ export default {
   SET_PARTS(state, payload) {
     state.parts = payload;
   },
+  SET_SELECTED_DATES(state, payload) {
+    state.selectedDates = payload;
+  },
+  SET_DIARY(state, payload) {
+    state.diary = payload;
+  },
+  SET_DIARY_PARTS(state, payload) {
+    state.diaryParts = payload;
+  },
+  SET_PART_SCORES(state, payload) {
+    state.partScores = payload;
+  },
+  SET_TODAY_LUCK(state, payload) {
+    state.todayLuck = payload;
+  },
+  SET_TODAY_LUCK_ID(state, payload) {
+    state.todayLuckId = payload;
+  },
 };

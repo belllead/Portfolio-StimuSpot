@@ -57,7 +57,7 @@ export default {
   },
   props: { bodyPart: String },
   created() {
-    // this.$store.dispatch("getInitialYoutubeVideos");
+    this.$store.dispatch("getInitialYoutubeVideos");
     console.log("할당량 때문에 일단 기능 막아둠");
   },
   computed: {
