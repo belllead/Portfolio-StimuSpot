@@ -32,9 +32,9 @@
 	<insert id="insertScrap" parameterType="ScrapDto"
 		keyProperty="scrapId" useGeneratedKeys="true">
 		INSERT INTO scraps (user_num,
-		scrap_title, scrap_url, scrap_vtitle, scrap_thumbnail, scrap_content)
+		scrap_title, scrap_url, scrap_vtitle, scrap_thumbnail, scrap_content, scrap_regdate)
 		VALUES (#{userNum}, #{scrapTitle}, #{scrapUrl}, #{scrapVtitle},
-		#{scrapThumbnail}, #{scrapContent});
+		#{scrapThumbnail}, #{scrapContent}, now());
 	</insert>
 
 	<!-- 스크랩 삭제 -->

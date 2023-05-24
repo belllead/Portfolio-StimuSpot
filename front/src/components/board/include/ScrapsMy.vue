@@ -190,7 +190,7 @@ export default {
     <div>
       <div v-if="scrapCnt" class="scrapbox">
         <div
-          class=""
+          class="scrap"
           v-for="(scrap, index) in currentScraps"
           :key="index"
           @click="getDetail(scrap.scrapId)"
@@ -209,18 +209,29 @@ export default {
             />
           </div>
         </div>
-        <div>
-          <button @click="previousPage" :disabled="currentPage === 1">
-            이전
-          </button>
-          <button @click="nextPage" :disabled="currentPage === totalPages">
-            다음
-          </button>
+        <div style="display: flex; flex-direction: column; margin: auto">
+          <div>
+            <button
+              @click="previousPage"
+              :disabled="currentPage === 1"
+              class="arrow-button top"
+            >
+              <span class="arrow-up"></span>
+            </button>
+            <br />
+            <button
+              @click="nextPage"
+              :disabled="currentPage === totalPages"
+              class="arrow-button bottom"
+            >
+              <span class="arrow-down"></span>
+            </button>
+          </div>
         </div>
       </div>
       <div v-else>스크랩한 동영상이 없습니다.</div>
     </div>
-    <transition name="fade">
+    <transition name="slide-modal">
       <div class="scrapmodal" v-if="modalview == true">
         <label for="title">제목</label>
         <input
@@ -269,7 +280,7 @@ export default {
   data() {
     return {
       currentPage: 1,
-      perPage: 3,
+      perPage: 6,
       plugin: null,
       modalview: false,
       myVideos: [{}],
@@ -332,22 +343,60 @@ export default {
 
 <style scoped>
 .scrapbox {
-  display: inline-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 280px;
+}
+
+.scrap {
+  width: 200px;
+  height: 200px;
+  border: solid black;
+  border-radius: 8px;
+  margin: 10px;
+  margin-top: 25px;
 }
 .scrap_img {
-  width: 500px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 }
 
 .scrapmodal {
-  width: 1000px;
-  height: 1200px;
-  /* background-color: rgba(0, 0, 0, 0.8);
-   */
-  background-color: antiquewhite;
-  border: solid 1px black;
-  margin-left: auto;
-  margin-right: auto;
+  box-sizing: border-box;
+  position: absolute;
+  width: 1500px;
+  height: 1000px;
+  left: 396px;
+  top: 12px;
+  background: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1),
+    inset 0px 0px 4px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(15px);
+  border-radius: 8px;
+}
+
+.arrow-button {
+  position: relative;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.arrow-button:hover {
+  transform: scale(1.05);
+}
+
+.arrow-up::before {
+  content: "v";
+  transform: rotate(180deg);
+}
+
+.arrow-down::before {
+  content: "v";
 }
 
 .view {
@@ -360,17 +409,19 @@ export default {
   box-sizing: border-box;
   font-size: medium;
 }
-
-.fade-enter {
-  opacity: 0;
+.slide-modal-enter-active {
+  transition: transform 0.5s ease;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease-out;
+.slide-modal-leave-active {
+  transition: transform 0.5s ease;
 }
 
-.fade-leave-to {
-  opacity: 0;
+.slide-modal-enter {
+  transform: translateX(100%);
+}
+
+.slide-modal-leave-to {
+  transform: translateX(100%);
 }
 </style>

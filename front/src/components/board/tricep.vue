@@ -1,12 +1,15 @@
 <template>
   <div>
-    <h2>tricep</h2>
+    <videos-youtube :body-part="'삼두운동'"></videos-youtube>
   </div>
 </template>
 
 <script>
+import VideosYoutube from "./include/VideosYoutube.vue";
+
 export default {
   name: "BoardTricep",
+  components: { VideosYoutube },
 };
 </script>
 

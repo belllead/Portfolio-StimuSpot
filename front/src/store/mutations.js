@@ -26,6 +26,12 @@ export default {
   SET_PARTS(state, payload) {
     state.parts = payload;
   },
+  SET_ACHIEVES(state, payload){
+    state.achievements = payload;
+  },
+  SET_USERACHIEVES(state, payload){
+    state.userAchievements = payload;
+  },
   SET_SELECTED_DATES(state, payload) {
     state.selectedDates = payload;
   },

@@ -3,19 +3,8 @@ export default {
   partScores: [],
   selectedPart: null,
   selectedDate: null,
-  achievements: [
-    {
-      achvId: 1,
-      achvTitle: "시작이 반이다",
-      achvContent: "첫 다이어리 작성 완료",
-    },
-    {
-      achvId: 2,
-      achvTitle: "남자는 하체",
-      achvContent: "하체 운동 30일 연속",
-    },
-  ],
-  achievement: {},
+  achievements: [],
+  userAchievements: [],
   loginUser: 0,
   diaries: [],
   diary: {
@@ -32,7 +21,7 @@ export default {
   selectedDates: [],
   scrap: {
     scrapId: 1,
-    scrapTitle: "첫번째 스크랩입니다",
+    scrapTitle: "111111111111",
     scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
     scrapVtitle: "영상 제목은 이거죠",
     scrapThumbnail:
@@ -42,7 +31,7 @@ export default {
   scraps: [
     {
       scrapId: 1,
-      scrapTitle: "첫번째 스크랩입니다",
+      scrapTitle: "111111111111",
       scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
@@ -51,7 +40,7 @@ export default {
     },
     {
       scrapId: 2,
-      scrapTitle: "두번째 스크랩입니다",
+      scrapTitle: "2222222222222",
       scrapUrl: "https://www.youtube.com/watch?v=8VVRietOeXo",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
@@ -60,7 +49,7 @@ export default {
     },
     {
       scrapId: 1,
-      scrapTitle: "첫번째 스크랩입니다",
+      scrapTitle: "3333333333333333",
       scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
@@ -69,7 +58,7 @@ export default {
     },
     {
       scrapId: 1,
-      scrapTitle: "첫번째 스크랩입니다",
+      scrapTitle: "4444444444444",
       scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
@@ -78,7 +67,7 @@ export default {
     },
     {
       scrapId: 1,
-      scrapTitle: "첫번째 스크랩입니다",
+      scrapTitle: "555555555555555",
       scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
@@ -87,7 +76,7 @@ export default {
     },
     {
       scrapId: 1,
-      scrapTitle: "첫번째 스크랩입니다",
+      scrapTitle: "666666666666",
       scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
@@ -96,7 +85,7 @@ export default {
     },
     {
       scrapId: 1,
-      scrapTitle: "첫번째 스크랩입니다",
+      scrapTitle: "777777777777777",
       scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
@@ -105,7 +94,7 @@ export default {
     },
     {
       scrapId: 1,
-      scrapTitle: "첫번째 스크랩입니다",
+      scrapTitle: "888888888888888",
       scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
@@ -114,11 +103,92 @@ export default {
     },
     {
       scrapId: 1,
-      scrapTitle: "첫번째 스크랩입니다",
+      scrapTitle: "999999999999999",
       scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
       scrapVtitle: "영상 제목은 이거죠",
       scrapThumbnail:
         "https://i.ytimg.com/vi/4jM5y9iG4NU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCbmzUCTubUSnbJQe3MTdR8CZCQ9A",
+      scrapContent: "꼭 해야 됨",
+    },
+    {
+      scrapId: 1,
+      scrapTitle: "1010101010101101010",
+      scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrapVtitle: "영상 제목은 이거죠",
+      scrapThumbnail:
+        "https://i.ytimg.com/vi/VX9jXFe08GI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCJVBp5BXKySzvSjEgTbJAW5FI-yQ",
+      scrapContent: "꼭 해야 됨",
+    },
+    {
+      scrapId: 1,
+      scrapTitle: "11번쨰 영상",
+      scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrapVtitle: "영상 제목은 이거죠",
+      scrapThumbnail:
+        "https://i.ytimg.com/vi/VX9jXFe08GI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCJVBp5BXKySzvSjEgTbJAW5FI-yQ",
+      scrapContent: "꼭 해야 됨",
+    },
+    {
+      scrapId: 1,
+      scrapTitle: "12번쨰 영상",
+      scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrapVtitle: "영상 제목은 이거죠",
+      scrapThumbnail:
+        "https://i.ytimg.com/vi/VX9jXFe08GI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCJVBp5BXKySzvSjEgTbJAW5FI-yQ",
+      scrapContent: "꼭 해야 됨",
+    },
+    {
+      scrapId: 1,
+      scrapTitle: "13번쨰 영상",
+      scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrapVtitle: "영상 제목은 이거죠",
+      scrapThumbnail:
+        "https://i.ytimg.com/vi/VX9jXFe08GI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCJVBp5BXKySzvSjEgTbJAW5FI-yQ",
+      scrapContent: "꼭 해야 됨",
+    },
+    {
+      scrapId: 1,
+      scrapTitle: "14번쨰 영상",
+      scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrapVtitle: "영상 제목은 이거죠",
+      scrapThumbnail:
+        "https://i.ytimg.com/vi/VX9jXFe08GI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCJVBp5BXKySzvSjEgTbJAW5FI-yQ",
+      scrapContent: "꼭 해야 됨",
+    },
+    {
+      scrapId: 1,
+      scrapTitle: "15번쨰 영상",
+      scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrapVtitle: "영상 제목은 이거죠",
+      scrapThumbnail:
+        "https://i.ytimg.com/vi/VX9jXFe08GI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCJVBp5BXKySzvSjEgTbJAW5FI-yQ",
+      scrapContent: "꼭 해야 됨",
+    },
+    {
+      scrapId: 1,
+      scrapTitle: "16번쨰 영상",
+      scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrapVtitle: "영상 제목은 이거죠",
+      scrapThumbnail:
+        "https://i.ytimg.com/vi/VX9jXFe08GI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCJVBp5BXKySzvSjEgTbJAW5FI-yQ",
+      scrapContent: "꼭 해야 됨",
+    },
+    {
+      scrapId: 1,
+      scrapTitle: "17번쨰 영상",
+      scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrapVtitle: "영상 제목은 이거죠",
+      scrapThumbnail:
+        "https://i.ytimg.com/vi/VX9jXFe08GI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCJVBp5BXKySzvSjEgTbJAW5FI-yQ",
+      scrapContent: "꼭 해야 됨",
+    },
+    {
+      scrapId: 1,
+      scrapTitle: "18번쨰 영상",
+      scrapUrl: "https://www.youtube.com/watch?v=4jM5y9iG4NU",
+      scrapVtitle: "영상 제목은 이거죠",
+      scrapThumbnail:
+        "https://i.ytimg.com/vi/VX9jXFe08GI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCJVBp5BXKySzvSjEgTbJAW5FI-yQ",
       scrapContent: "꼭 해야 됨",
     },
   ],

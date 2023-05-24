@@ -4,6 +4,7 @@ public class UserDto {
 	private int userNum;
 	private String userId;
 	private String userPw;
+	private String userName;
 	private String userNickname;
 	private String userEmail;
 	private int userAge;
@@ -12,12 +13,13 @@ public class UserDto {
 	public UserDto() {
 	}
 
-	public UserDto(int userNum, String userId, String userPw, String userNickname, String userEmail, int userAge,
+	public UserDto(int userNum, String userId, String userPw, String userName, String userNickname, String userEmail, int userAge,
 			String userSelfie) {
 		super();
 		this.userNum = userNum;
 		this.userId = userId;
 		this.userPw = userPw;
+		this.userName = userName;
 		this.userNickname = userNickname;
 		this.userEmail = userEmail;
 		this.userAge = userAge;
@@ -80,6 +82,14 @@ public class UserDto {
 		this.userSelfie = userSelfie;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+  
 	@Override
 	public String toString() {
 		return "UserDto [userNum=" + userNum + ", userId=" + userId + ", userPw=" + userPw + ", userNickname="

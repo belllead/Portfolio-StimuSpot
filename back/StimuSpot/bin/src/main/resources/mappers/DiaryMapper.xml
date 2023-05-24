@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.ssafy.pjt.model.dao.DiaryDao">
+ <resultMap type="com.ssafy.pjt.model.dto.DiaryDto" id="diary">
+ <result column="diary_id" property="diaryId"/>
+ <result column="user_num" property="userNum"/>
+ <result column="diary_title" property="diaryTitle"/>
+ <result column="diary_regdate" property="diaryRegdate"/>
+ <result column="diary_rating" property="diaryRating"/>
+ <result column="diary_content" property="diaryContent"/>
+ </resultMap>
+
+	<!-- 달력 시작일과 끝일 사이 다이어리 조회 -->
+	<select id="selectMany" resultMap="diary" parameterType="DiaryQueryDto">
+		SELECT *
+		FROM diaries
+		WHERE diary_regdate BETWEEN #{startDate} AND #{endDate}
+		AND user_num = #{userNum}
+	</select>
+	
+	<!-- date와 userNum으로 일기 한 개 조회 -->
+	<select id="selectOne" resultMap="diary" parameterType="DiaryQueryDto">
+		SELECT *
+		FROM diaries
+		WHERE diary_regdate = #{specificDate}
+		AND user_num = #{userNum}
+	</select>
+	
+	<!-- 다이어리 등록 -->
+	<insert id="insertDiary" parameterType="DiaryDto" keyProperty="diaryId" useGeneratedKeys="true">
+		INSERT INTO diaries (user_num, diary_title, diary_rating, diary_regdate, diary_content)
+		VALUES (${userNum}, #{diaryTitle}, #{diaryRating}, #{diaryRegdate}, #{diaryContent})
+	</insert>
+	
+	<!-- 다이어리 삭제 -->
+	<delete id="deleteDiary" parameterType="int">
+		DELETE FROM diaries
+		WHERE diary_id = #{diaryId}
+	</delete>
+	
+	<!-- 다이어리 수정 -->
+	<delete id="updateDiary" parameterType="DiaryDto">
+		UPDATE diaries
+		SET diary_title = #{diaryTitle}, diary_rating = #{diaryRating}, diary_content = #{diaryContent}
+		WHERE diary_id = #{diaryId}
+	</delete>
+	
+	
+</mapper>

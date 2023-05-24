@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.pjt.api.achievement.service.AchievementService;
@@ -40,10 +41,10 @@ public class AchievementRestController {
 	}
 
 	@ApiOperation(value = "유저가 달성한 업적 반환", response = List.class)
-	@GetMapping("/{user_num}")
-	public ResponseEntity<?> getAchievementListByUser(@PathVariable int user_num) {
+	@GetMapping("/achieved")
+	public ResponseEntity<?> getAchievementListByUser(@RequestParam(required = true)int userNum) {
 
-		List<AchievementDto> list = service.getAchievementByUser(user_num);
+		List<AchievementDto> list = service.getAchievementByUser(userNum);
 
 		try {
 			if (list == null || list.isEmpty())

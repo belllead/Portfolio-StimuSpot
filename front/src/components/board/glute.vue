@@ -1,12 +1,15 @@
 <template>
   <div>
-    <h2>glute</h2>
+    <videos-youtube :body-part="'엉덩이운동'"></videos-youtube>
   </div>
 </template>
 
 <script>
+import VideosYoutube from "./include/VideosYoutube.vue";
+
 export default {
   name: "BoardGlute",
+  components: { VideosYoutube },
 };
 </script>
 
