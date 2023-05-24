@@ -1,13 +1,13 @@
 <template>
   <div>
     <header-nav></header-nav>
-    <h2>다이어리</h2>
-    <div class="diary-body">
-      <div class="diary-calendar">
-        <div class="calendar__inner">
-          <CalendarIndex :events="events" @add="add" />
-        </div>
-        <diary-detail></diary-detail>
+
+    <div class="card-group">
+      <div class="calendar-card">
+        <CalendarIndex :events="events" @add="add" />
+      </div>
+      <div class="diary-card">
+        <diary-detail />
       </div>
     </div>
   </div>
@@ -20,7 +20,11 @@ import DiaryDetail from "@/components/calendar/diary/DiaryDetail.vue";
 
 export default {
   name: "CalendarView",
-  components: { HeaderNav, CalendarIndex, DiaryDetail },
+  components: {
+    HeaderNav,
+    CalendarIndex,
+    DiaryDetail,
+  },
   data() {
     return {
       events: [],
@@ -91,4 +95,27 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.card-group {
+  position: absolute;
+  display: flex;
+  top: 60px;
+  left: 320px;
+}
+.calendar-card {
+  width: 730px;
+  height: 880px;
+  background: #ffffff;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+}
+
+.diary-card {
+  width: 720px;
+  height: 880px;
+  background: #ffffff;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  margin-left: 20px;
+}
+</style>

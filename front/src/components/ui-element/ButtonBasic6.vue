@@ -19,16 +19,16 @@
             rx="3.5"
             ry="3.5"
           />
-          <path class="cls-2" d="m15,27l10-7-10-7" />
+          <!-- <path class="cls-1" d="m15,27l10-7-10-7" /> -->
         </g>
       </g>
     </svg>
-    <!-- <span class="btn-text">&#5176;</span> -->
+    <span class="btn-text">일기</span>
   </div>
 </template>
 
 <script>
-export default {};
+export default { name: "ButtonBasic6" };
 </script>
 
 <style scoped>
@@ -61,7 +61,8 @@ export default {};
   transform: translate(-2em, -0.75em);
 }
 
-.hover:hover .cls-2 {
-  stroke: white;
+.hover:hover .btn-text {
+  color: white;
+  font-weight: 600;
 }
 </style>

@@ -242,12 +242,19 @@ SELECT ua.achv_id AS achvId, ac.achv_title AS achvTitle, ac.achv_content AS achv
 		WHERE ua.user_num = 1;
         
 insert INTO user_part
-values (1, 10, '2023-05-20');
+values (1, 10, '2023-05-20'),
+ (1, 9, '2023-05-22'),
+ (1, 8, '2023-05-23');
 select * from user_part;
 select * from parts;
 
+
+
 select * from luck;
-INSERT INTO luck
+
+alter table luck
+MODIFY luck_content varchar(150);
+INSERT INTO luck (luck_content)
 VALUES ('삶이 있는 한 희망은 있다.'),
 ('산다는 것, 그것은 치열한 전투이다.'),
 ('하루에 3시간을 걸으면 7년 후에 지구를 한바퀴 돌 수 있다.'),

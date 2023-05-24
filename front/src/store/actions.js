@@ -172,7 +172,12 @@ export default {
     axios({
       method: "GET",
       url: `http://localhost:9999/achievement-api`,
-       commit("SET_ACHIEVES", res.data);
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => {
+        commit("SET_ACHIEVES", res.data);
         console.log(res);
       })
       .catch((err) => {
@@ -216,6 +221,7 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+  },
   getDiary({ commit }, date) {
     const API_URL = `http://localhost:9999/diary-api/detail`;
     axios({
