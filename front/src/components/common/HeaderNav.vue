@@ -13,11 +13,11 @@
 
       <router-link to="/main" class="nav-btn">Dashboard</router-link>
       <router-link to="/calendar" class="nav-btn">Diary</router-link>
-      <router-link to="/board" class="nav-btn">Board</router-link>
+      <router-link to="/board/1" class="nav-btn">Board</router-link>
       <router-link to="/achievement" class="nav-btn">Achievement</router-link>
       <router-link to="/part-ranking" class="nav-btn">Part Ranking</router-link>
     </header>
-    <footer>
+    <footer @click="logout">
       <div class="profile-img"></div>
       <span class="text-btn" @click="logout">OOO님 안녕하세요!</span>
     </footer>

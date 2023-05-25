@@ -84,7 +84,7 @@
           class="input-window"
         /><br />
       </div>
-      <button class="btn">가입하기</button>
+      <button class="btn" @click="registUser">가입하기</button>
       <router-link :to="{ name: 'UserLogin' }" class="text-btn"
         >로그인하러 가기</router-link
       >
@@ -108,6 +108,19 @@ export default {
     };
   },
   methods: {
+    registUser() {
+      let user = {
+        userId: this.id,
+        userPw: this.password,
+        userName: this.name,
+        userNickname: this.nickname,
+        userEmail: this.email,
+        userAge: this.age,
+        userSelfie: this.profileImg,
+      };
+      this.$store.dispatch("registUser", user);
+      this.$router.push({ path: "/user" });
+    },
     uploadImg(e) {
       let file = e.target.files;
       let url = URL.createObjectURL(file[0]);

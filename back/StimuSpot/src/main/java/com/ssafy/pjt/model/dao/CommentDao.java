@@ -11,4 +11,6 @@ public interface CommentDao {
 	int createComment(CommentDto comment);
 	
 	int deleteComment(int id);
+	
+	int deleteCommentByScrap(int scrapId);
 }

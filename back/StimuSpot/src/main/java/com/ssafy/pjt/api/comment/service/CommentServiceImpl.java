@@ -36,4 +36,10 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.deleteComment(id) > 0;
 	}
 
+	@Transactional
+	@Override
+	public boolean removeCommentByScrap(int scrapId) {
+		return commentDao.deleteCommentByScrap(scrapId) > 0;
+	}
+
 }

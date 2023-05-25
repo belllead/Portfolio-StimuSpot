@@ -4,10 +4,10 @@
     <!-- calendar -->
     <v-date-picker
       v-model="date"
-      @input="selectDate"
       :attributes="attributes"
       class="main-calendar"
       color="yellow"
+      @input="selectDate"
     />
 
     <div class="btns">
@@ -25,6 +25,7 @@
 
     <div style="width: 100px; height: 100px; background-color: red"></div>
     <!-- modal -->
+    <transition name="slide-modal">
     <div class="modalBg" v-if="modalShow"></div>
     <write-modal
       :modalType="modalType"
@@ -58,15 +59,6 @@
           <div v-if="diary.diaryRating > 3" class="main-rating-container"></div>
           <div v-else class="main-rating-container-grey"></div>
         </div>
-        <div>
-          <div v-if="diary.diaryRating > 4" class="main-rating-container"></div>
-          <div v-else class="main-rating-container-grey"></div>
-        </div>
-      </div>
-      <br />
-      <label for="parts">자극 부위</label>
-      <div class="view">
-        <span v-for="(part, i) in diaryParts" :key="i">{{ `${part} ` }}</span>
       </div>
       <br />
       <hr />
@@ -79,6 +71,7 @@
       <router-link to="/calendar" class="btn">수정하기</router-link>
       <button @click="modalClose">창 닫기</button>
     </div> -->
+</transition>
   </div>
 </template>
 
@@ -111,6 +104,7 @@ export default {
       },
     ]);
     return {
+      test: "",
       modalShow: false,
       masks: {
         weekdays: "WWW",
@@ -180,6 +174,7 @@ export default {
     },
     modalClose() {
       this.modalShow = false;
+      this.test = null;
     },
   },
 };
@@ -258,7 +253,6 @@ export default {
   border-radius: 8px;
   z-index: 1;
 }
-
 .modal {
   position: absolute;
   top: 0;
@@ -303,5 +297,21 @@ export default {
 
 .main-calendar-rating-box {
   display: inline-flex;
+}
+
+.slide-modal-enter-active {
+  transition: transform 0.5s ease;
+}
+
+.slide-modal-leave-active {
+  transition: transform 0.5s ease;
+}
+
+.slide-modal-enter {
+  transform: translateX(100%);
+}
+
+.slide-modal-leave-to {
+  transform: translateX(100%);
 }
 </style>

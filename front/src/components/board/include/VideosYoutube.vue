@@ -9,45 +9,42 @@
     >
       <div v-for="video in videos" :key="video.id.videoId" class="videobox">
         <div class="video" @click="newscrap(video)">
-          <div class="videotitle">
-            <h5>{{ video.snippet.title }}</h5>
-          </div>
           <img :src="`${video.snippet.thumbnails.high.url}`" alt="" />
+          <div class="videotitle">
+            <div>{{ video.snippet.title }}</div>
+          </div>
         </div>
       </div>
     </div>
     <transition name="slide-modal2">
       <div class="scrapmodal2" v-if="modalview == true">
-        <label for="title">제목</label>
-        <input
-          class="view"
-          id="title"
-          type="text"
-          v-model="Scrap.scrapTitle"
-        /><br />
-        <label for="vtitle">영상 제목</label>
-        <input
-          class="view"
-          id="vtitle"
-          type="text"
-          v-model="Scrap.scrapVtitle"
-        /><br />
-        <a :href="Scrap.scrapUrl"
-          ><img :src="Scrap.scrapThumbnail" alt="thumbnail" /></a
-        ><br />
-        <label for="content">내용</label>
-        <textarea
-          class="view"
-          id="content"
-          cols="100"
-          rows="20"
-          v-model="Scrap.scrapContent"
-        ></textarea
-        ><br />
-        <hr />
-        <!-- <comments-my :id="Scrap.scrapId"></comments-my> -->
-        <button @click="createScrap">등록</button>
-        <button @click="modalClose">닫기</button>
+        <div class="modalcontent" v-if="modalview == true">
+          <br />
+          <br />
+          <div>
+            <youtube :video-id="Scrap.scrapUrl" ref="youtube"></youtube><br />
+          </div>
+          <h4>{{ "< " + Scrap.scrapVtitle + " >" }}</h4>
+          <label for="title">제목</label>
+          <input
+            class="view"
+            id="title"
+            type="text"
+            v-model="Scrap.scrapTitle"
+          />
+          <label for="content">내용</label>
+          <textarea
+            class="view"
+            id="content"
+            cols="100"
+            rows="15"
+            v-model="Scrap.scrapContent"
+          ></textarea>
+          <div class="btns">
+            <button @click="createScrap">스크랩</button>
+            <button @click="modalClose">닫기</button>
+          </div>
+        </div>
       </div>
     </transition>
   </div>
@@ -83,7 +80,11 @@ export default {
   },
   methods: {
     createScrap() {
-      this.$store.dispatch("createScrap", this.Scrap);
+      this.$store.dispatch("createScrap", this.Scrap).then(() => {
+        this.$store.dispatch("setScraps");
+      });
+      this.modalview = !this.modalview;
+      // this.$router.go(this.$router.currentRoute);
     },
     newscrap(video) {
       this.modalview = !this.modalview;
@@ -91,6 +92,8 @@ export default {
       this.Scrap.scrapUrl = video.id.videoId;
       this.Scrap.scrapVtitle = video.snippet.title;
       this.Scrap.scrapThumbnail = video.snippet.thumbnails.high.url;
+      this.Scrap.scrapTitle = "";
+      this.Scrap.scrapContent = "";
     },
     modalClose() {
       this.modalview = false;
@@ -123,7 +126,7 @@ export default {
 <style scoped>
 .container {
   margin-top: 10px;
-  height: 500px;
+  height: 540px;
   width: 1600px;
   display: flex;
   flex-wrap: wrap;
@@ -147,50 +150,85 @@ export default {
   background: #ffffff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   margin: 10px;
-  flex-wrap: wrap;
+  align-items: center;
 }
 
 .video:hover {
   transform: scale(1.05);
 }
 
-.video > img {
-  margin-top: 5px;
-  width: 280px;
-  height: 150px;
+.video img {
+  margin: 8px;
+  width: 400px;
+  height: 200px;
+  border-radius: 8px;
 }
 
 .videotitle {
-  width: 380px;
-  height: 20px;
+  width: 400px;
+  height: 25px;
   background: #d9d9d9;
   border-radius: 8px;
-  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-body h5 {
+.videotitle div {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 350px;
+  width: 370px;
 }
 
 .scrapmodal2 {
   box-sizing: border-box;
   position: absolute;
   width: 1500px;
-  height: 1000px;
-  left: 396px;
-  top: 12px;
+  height: 950px;
+  left: 76px;
+  top: -20px;
   background: rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1),
     inset 0px 0px 4px rgba(0, 0, 0, 0.24);
   backdrop-filter: blur(15px);
   border-radius: 8px;
+}
+
+.modalcontent {
+  position: absolute;
+  width: 1094px;
+  height: 920px;
+  left: 190px;
+  top: calc(50% - 920px / 2);
+  background: #ffffff;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.btns button {
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: solid 1px D9D9D9;
+  color: D9D9D9;
+  margin-left: 10px;
+}
+
+.view {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: medium;
 }
 
 .slide-modal2-enter-active {

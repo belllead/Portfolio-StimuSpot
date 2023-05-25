@@ -26,7 +26,7 @@ public class PartRestController {
 	@Autowired
 	PartService service;
 	
-	@ApiOperation("가장 최근 자극된 순으로 정렬해서 가져오기 (겹치면 큰근육 순) 부위 테이블이랑 JOIN해서 정보 다 가져오기 => 부위 순위")
+	@ApiOperation("자극된지 오래된 순으로 정렬해서 가져오기 (겹치면 큰근육 순) 부위 테이블이랑 JOIN해서 정보 다 가져오기 => 부위 순위")
 	@GetMapping("")
 	public ResponseEntity<?> getPartList(@RequestParam(required = true) int userNum) {
 		List<PartDto> list = service.getPartList(userNum); 

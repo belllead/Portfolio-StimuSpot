@@ -6,7 +6,7 @@ import com.ssafy.pjt.model.dto.ScrapDto;
 
 public interface ScrapDao {
 	
-	public List<ScrapDto> selectAll();
+	public List<ScrapDto> selectAll(int userNum);
 	
 	public ScrapDto selectById(int id);
 	

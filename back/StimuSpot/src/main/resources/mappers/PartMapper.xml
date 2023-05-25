@@ -10,7 +10,7 @@
 		JOIN parts p
 		ON up.part_id = p.part_id
 		WHERE up.user_num = #{userNum}
-		ORDER BY last_workout DESC;
+		ORDER BY last_workout ASC;
 	</select>
 	
 </mapper>

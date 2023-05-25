@@ -20,8 +20,8 @@ public class ScrapServiceImpl implements ScrapService {
 	}
 	
 	@Override
-	public List<ScrapDto> getScrapList() {
-		return scrapDao.selectAll();
+	public List<ScrapDto> getScrapList(int userNum) {
+		return scrapDao.selectAll(userNum);
 	}
 
 	@Override
@@ -46,4 +46,5 @@ public class ScrapServiceImpl implements ScrapService {
 	public boolean modifyScrap(ScrapDto scrap) {
 		return scrapDao.updateScrap(scrap) > 0;
 	}
+
 }

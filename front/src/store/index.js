@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -16,7 +15,13 @@ export default new Vuex.Store({
   actions,
   plugins: [
     createPersistedState({
-      paths: ["loginUser", "selectedDates", "todayLuck", "todayLuckId"],
+      paths: [
+        "loginUser",
+        "selectedDates",
+        "todayLuck",
+        "todayLuckId",
+        "selectedPart",
+      ],
       key: "vuexPersistedStore",
       storage: window.sessionStorage,
     }),
