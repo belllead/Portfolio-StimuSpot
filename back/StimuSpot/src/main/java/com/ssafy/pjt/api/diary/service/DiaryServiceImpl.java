@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.pjt.model.dao.DiaryDao;
 import com.ssafy.pjt.model.dao.DiaryPartDao;
+import com.ssafy.pjt.model.dao.UserPartDao;
 import com.ssafy.pjt.model.dto.DiaryDto;
 import com.ssafy.pjt.model.dto.DiaryQueryDto;
 import com.ssafy.pjt.model.dto.PartDto;
@@ -20,6 +21,9 @@ public class DiaryServiceImpl implements DiaryService{
 	
 	@Autowired
 	DiaryPartDao diaryPartDao;
+	
+	@Autowired
+	UserPartDao userPartDao;
 
 	@Override
 	public List<DiaryDto> getDiaryList(DiaryQueryDto diaryList) {
@@ -45,8 +49,22 @@ public class DiaryServiceImpl implements DiaryService{
 	public boolean writeDiary(DiaryDto diary) {
 		int result = diaryDao.insertDiary(diary);
 		
-		for (int i=0; i<diary.getPartIds().size(); i++)
+		for (int i=0; i<diary.getPartIds().size(); i++) {
 			diaryPartDao.insertDiaryPart(diary.getDiaryId(), diary.getPartIds().get(i));
+			
+			String currentLastWorkout = userPartDao.getLastWorkout(diary.getUserNum(), diary.getPartIds().get(i));
+			
+//			System.out.println(currentLastWorkout.replace("-", ""));
+//			System.out.println(diary.getDiaryRegdate());
+			int curr = Integer.parseInt(currentLastWorkout.replace("-", "")); 
+			int neww = Integer.parseInt(diary.getDiaryRegdate());
+//			System.out.println(curr < neww);
+			
+			if (curr < neww) {
+				userPartDao.updateLastWorkout(diary.getUserNum(), diary.getPartIds().get(i), diary.getDiaryRegdate());
+//				System.out.println("executed" + i);
+			}
+		}
 		
 		return result > 0;
 	}
