@@ -214,23 +214,6 @@ export default {
       });
   },
 
-  createScrap({ commit }, scrap) {
-    axios({
-      method: "POST",
-      url: `http://localhost:9999/scrap-api/`,
-      data: scrap,
-      headers: {
-        "access-token": sessionStorage.getItem("access-token"),
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        commit;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
   getDiary({ commit }, date) {
     const API_URL = `http://localhost:9999/diary-api/detail`;
     axios({

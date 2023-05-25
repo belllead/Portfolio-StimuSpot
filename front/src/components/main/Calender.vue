@@ -26,14 +26,15 @@
     <div style="width: 100px; height: 100px; background-color: red"></div>
     <!-- modal -->
     <transition name="slide-modal">
-    <div class="modalBg" v-if="modalShow"></div>
-    <write-modal
-      :modalType="modalType"
-      :modalShow="modalShow"
-      @modalClose="modalClose"
-    />
+      <div class="modalBg" v-if="modalShow">
+        <write-modal
+          :modalType="modalType"
+          :modalShow="modalShow"
+          @modalClose="modalClose"
+        />
+      </div>
 
-    <!-- <div class="modal" v-if="modalShow">
+      <!-- <div class="modal" v-if="modalShow">
       <label for="title">제목</label>
       <div class="view">{{ diary.diaryTitle }}</div>
       <br />
@@ -71,7 +72,7 @@
       <router-link to="/calendar" class="btn">수정하기</router-link>
       <button @click="modalClose">창 닫기</button>
     </div> -->
-</transition>
+    </transition>
   </div>
 </template>
 
