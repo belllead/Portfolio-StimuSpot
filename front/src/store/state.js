@@ -5,7 +5,8 @@ export default {
   selectedDate: null,
   achievements: [],
   userAchievements: [],
-  loginUser: 0,
+  loginUserNum: 0,
+  loginUserNickname: "",
   diaries: [],
   diary: {
     // diaryId: 1,

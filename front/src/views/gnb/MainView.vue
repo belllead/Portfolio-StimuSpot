@@ -1,6 +1,7 @@
 <template>
   <div>
     <header-nav></header-nav>
+
     <div class="card">
       <div class="left">
         <div class="cal-card"><calender-ui /></div>
@@ -17,6 +18,7 @@
     <!-- <div>
       <streak-ui></streak-ui>
     </div> -->
+    <footer-info-2 />
   </div>
 </template>
 
@@ -28,6 +30,7 @@ import PartRankingUi from "@/components/main/PartRanking.vue";
 import PartsUi from "@/components/main/Parts.vue";
 // import StreakUi from "@/components/main/Streak.vue";
 import TodayLuckUi from "@/components/main/TodayLuck.vue";
+import FooterInfo2 from "../../components/common/FooterInfo2.vue";
 
 export default {
   name: "MainView",
@@ -39,6 +42,7 @@ export default {
     PartsUi,
     // StreakUi,
     TodayLuckUi,
+    FooterInfo2,
   },
 };
 </script>

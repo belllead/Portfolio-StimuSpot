@@ -18,23 +18,27 @@
       <router-link to="/part-ranking" class="nav-btn">Part Ranking</router-link>
     </header>
     <footer @click="logout">
-      <div class="profile-img"></div>
-      <span class="text-btn" @click="logout">OOO님 안녕하세요!</span>
+      <img src="../../../../resources/img/iu.jpg" class="profile-img" />
+      <span class="text-btn">{{ loginUserNickname }} 님 안녕하세요!</span>
+      <span class="text-btn click" @click="logout">로그아웃하기</span>
     </footer>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import LogoStaticStroke from "../ui-element/LogoStaticStroke.vue";
 
 export default {
   name: "HeaderNav",
   components: { LogoStaticStroke },
+  computed: {
+    ...mapState(["loginUserNickname"]),
+  },
   methods: {
     logout() {
       sessionStorage.removeItem("access-token");
-      this.$store.commit("USER_LOGOUT");
-      this.$router.push("/");
+      this.$store.dispatch("userLogout");
     },
   },
 };
@@ -97,7 +101,9 @@ footer {
 
 .text-btn {
   margin-left: 0.5em;
+  margin-right: 1em;
   text-decoration: none;
   color: #a0a0a0;
+  font-size: 14px;
 }
 </style>

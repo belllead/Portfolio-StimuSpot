@@ -1,37 +1,35 @@
 <template>
   <div class="main-achieve">
     <div class="title">업적</div>
-    <div>
-      <div class="main-achieve-list">
-        <div class="achv">
-          <div v-if="userAchievements[0] != null">
-            <div class="main-achieve-container"></div>
-            <h4>*{{ userAchievements[0].achvTitle }}*</h4>
-          </div>
-          <div v-else>
-            <div class="main-achieve-container-grey"></div>
-            <p class="word-grey">업적을 얻어보세요</p>
-          </div>
+    <div class="main-achieve-list">
+      <div class="achv">
+        <div v-if="userAchievements[0] != null">
+          <div class="main-achieve-container"></div>
+          <h4>{{ userAchievements[0].achvTitle }}</h4>
         </div>
-        <div class="achv">
-          <div v-if="userAchievements[1] != null">
-            <div class="main-achieve-container"></div>
-            <h4>*{{ userAchievements[1].achvTitle }}*</h4>
-          </div>
-          <div v-else>
-            <div class="main-achieve-container-grey"></div>
-            <p class="word-grey">업적을 얻어보세요</p>
-          </div>
+        <div v-else>
+          <div class="main-achieve-container-grey"></div>
+          <p class="word-grey">업적을 얻어보세요</p>
         </div>
-        <div class="achv">
-          <div v-if="userAchievements[2] != null">
-            <div class="main-achieve-container"></div>
-            <h4>*{{ userAchievements[2].achvTitle }}*</h4>
-          </div>
-          <div v-else>
-            <div class="main-achieve-container-grey"></div>
-            <p class="word-grey">업적을 얻어보세요</p>
-          </div>
+      </div>
+      <div class="achv">
+        <div v-if="userAchievements[1] != null">
+          <div class="main-achieve-container"></div>
+          <h4>{{ userAchievements[1].achvTitle }}</h4>
+        </div>
+        <div v-else>
+          <div class="main-achieve-container-grey"></div>
+          <p class="word-grey">업적을 얻어보세요</p>
+        </div>
+      </div>
+      <div class="achv">
+        <div v-if="userAchievements[2] != null">
+          <div class="main-achieve-container"></div>
+          <h4>{{ userAchievements[2].achvTitle }}</h4>
+        </div>
+        <div v-else>
+          <div class="main-achieve-container-grey"></div>
+          <p class="word-grey">업적을 얻어보세요</p>
         </div>
       </div>
     </div>
@@ -67,7 +65,7 @@ export default {
   position: absolute;
   left: 80px;
   top: 570px;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 600;
 }
 
@@ -80,7 +78,8 @@ export default {
   color: #a0a0a0;
 }
 h4 {
-  margin-top: 15px;
+  margin-top: 4px;
+  font-size: 0.8em;
 }
 
 .achv:hover {
@@ -88,18 +87,21 @@ h4 {
 }
 
 .main-achieve-list {
-  left: 40px;
-  bottom: -10px;
+  width: 270px;
+  height: 64px;
+
   position: absolute;
-  display: inline-flex;
-  height: 200px;
+  left: 80px;
+  top: 615px;
+
+  display: flex;
 }
 
 .main-achieve-container {
   background-image: url(@/assets/achv_icon.png.png);
   background-size: contain;
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   margin-left: 15px;
   margin-right: 15px;
 }
@@ -107,13 +109,18 @@ h4 {
 .main-achieve-container-grey {
   background-image: url(@/assets/achv_icon_grey.png);
   background-size: contain;
-  width: 80px;
-  height: 80px;
+  width: 640px;
+  height: 64px;
   margin-left: 15px;
   margin-right: 15px;
 }
 
 .word-grey {
   color: grey;
+}
+
+.btns {
+  position: absolute;
+  top: 765px;
 }
 </style>

@@ -16,7 +16,7 @@ export default {
 <style scoped>
 .footer {
   color: #a0a0a0;
-  font-size: 0.5em;
+  font-size: 0.8em;
   position: absolute;
   bottom: 0;
   width: 100vw;
@@ -25,6 +25,6 @@ export default {
 .info {
   display: flex;
   justify-content: space-between;
-  margin: 0 40px 8px;
+  margin: 0 64px 8px 390px;
 }
 </style>

@@ -42,6 +42,11 @@ public class PartServiceImpl implements PartService {
 		for (int i = 0; i < list.size(); i++) {
 			PartDto part = list.get(i);
 
+			if (part.getLastWorkout() == null) {
+				map.replace(part.getPartId(), 0);
+				continue;
+			}
+			
 			Date lastWorkOut = sdf1.parse(part.getLastWorkout());
 
 			cal.setTime(lastWorkOut);

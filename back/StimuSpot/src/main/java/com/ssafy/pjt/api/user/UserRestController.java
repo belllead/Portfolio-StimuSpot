@@ -55,6 +55,7 @@ public class UserRestController {
 				result.put("access-token", jwtUtil.createToken("id", temp.getUserId()));
 				result.put("message", SUCCESS);
 				result.put("userNum", temp.getUserNum());
+				result.put("userNickname", temp.getUserNickname());
 				status = HttpStatus.ACCEPTED;
 			} else {
 				result.put("message", FAIL);
@@ -69,7 +70,7 @@ public class UserRestController {
 
 	@ApiOperation(value = "회원가입", response = String.class)
 	@PostMapping("/regist")
-	public ResponseEntity<?> signup(UserDto user) {
+	public ResponseEntity<?> signup(@RequestBody UserDto user) {
 		try {
 			if (service.signup(user))
 				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);

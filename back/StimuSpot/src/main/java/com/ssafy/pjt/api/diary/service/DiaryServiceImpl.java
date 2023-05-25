@@ -56,8 +56,20 @@ public class DiaryServiceImpl implements DiaryService{
 			
 //			System.out.println(currentLastWorkout.replace("-", ""));
 //			System.out.println(diary.getDiaryRegdate());
-			int curr = Integer.parseInt(currentLastWorkout.replace("-", "")); 
-			int neww = Integer.parseInt(diary.getDiaryRegdate());
+			int curr = 0;
+			
+			try {
+				curr = Integer.parseInt(currentLastWorkout.replace("-", "")); 
+			} catch (Exception e) {
+				curr = 0;
+			}
+
+			int neww = 0;
+			try {
+				neww = Integer.parseInt(diary.getDiaryRegdate());
+			} catch (Exception e) {
+				neww = Integer.parseInt(diary.getDiaryRegdate().replace("-", ""));
+			}
 //			System.out.println(curr < neww);
 			
 			if (curr < neww) {

@@ -53,6 +53,7 @@ export default {
   methods: {
     click() {
       this.$emit("select", this.day);
+      this.$emit("select2", this.day);
     },
   },
 };
@@ -108,7 +109,7 @@ export default {
 }
 .cell:hover {
   z-index: 2;
-  background-color: aqua;
+  background-color: #eb9f9f;
 }
 
 .diary-mark {

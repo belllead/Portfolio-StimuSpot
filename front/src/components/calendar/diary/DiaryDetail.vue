@@ -8,84 +8,94 @@
             <input
               type="checkbox"
               class="checkbox"
-              id="check1"
-              value="bicep"
-              v-model="DiaryParts"
+              id="bicep"
+              value="5"
+              v-model="diaryPartNums"
+              disabled
             />
-            <label class="part-label" for="check1">이두</label>
+            <label class="part-label" for="bicep">이두</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check2"
-              value="tricep"
-              v-model="DiaryParts"
+              id="tricep"
+              value="6"
+              v-model="diaryPartNums"
+              disabled
             />
-            <label class="part-label" for="check2">삼두</label>
+            <label class="part-label" for="tricep">삼두</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check3"
-              value="forearm"
-              v-model="DiaryParts"
+              id="forearm"
+              value="2"
+              v-model="diaryPartNums"
+              disabled
             />
-            <label class="part-label" for="check3">전완근</label>
+            <label class="part-label" for="forearm">전완근</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check4"
-              value="shoulder"
-              v-model="DiaryParts"
+              id="shoulder"
+              value="7"
+              v-model="diaryPartNums"
+              disabled
             />
-            <label class="part-label" for="check4">어깨</label>
+            <label class="part-label" for="shoulder">어깨</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check5"
-              value="chest"
-              v-model="DiaryParts"
+              id="chest"
+              value="1"
+              v-model="diaryPartNums"
+              disabled
             />
-            <label class="part-label" for="check5">가슴</label>
+            <label class="part-label" for="chechestck5">가슴</label>
             <div class="line-divider"></div>
             <input
               type="checkbox"
               class="checkbox"
-              id="check6"
-              value="abs"
-              v-model="DiaryParts"
+              id="abs"
+              value="4"
+              v-model="diaryPartNums"
+              disabled
             />
-            <label class="part-label" for="check6">복근</label>
+            <label class="part-label" for="abs">복근</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check7"
-              value="back"
-              v-model="DiaryParts"
+              id="back"
+              value="8"
+              v-model="diaryPartNums"
+              disabled
             />
-            <label class="part-label" for="check7">등</label>
+            <label class="part-label" for="back">등</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check8"
-              value="glute"
-              v-model="DiaryParts"
+              id="glute"
+              value="3"
+              v-model="diaryPartNums"
+              disabled
             />
-            <label class="part-label" for="check8">엉덩이</label>
+            <label class="part-label" for="glute">엉덩이</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check9"
-              value="thigh"
-              v-model="DiaryParts"
+              id="thigh"
+              value="10"
+              v-model="diaryPartNums"
+              disabled
             />
-            <label class="part-label" for="check9">허벅지</label>
+            <label class="part-label" for="thigh">허벅지</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check10"
-              value="calf"
-              v-model="DiaryParts"
+              id="calf"
+              value="9"
+              v-model="diaryPartNums"
+              disabled
             />
-            <label class="part-label" for="check10">종아리</label>
+            <label class="part-label" for="calf">종아리</label>
           </div>
         </div>
 
@@ -98,6 +108,7 @@
             name="diaryTitle"
             v-model="diary.diaryTitle"
             ref="diaryTitle"
+            disabled
           />
         </div>
 
@@ -111,6 +122,7 @@
               name="diaryRegdate"
               v-model="diary.diaryRegdate"
               ref="diaryRegdate"
+              disabled
             />
           </div>
 
@@ -155,6 +167,7 @@
                   class="star_radio"
                   v-model.number="diary.diaryRating"
                   value="0.5"
+                  disabled
                 />
                 <input
                   type="radio"
@@ -163,6 +176,7 @@
                   class="star_radio"
                   v-model.number="diary.diaryRating"
                   value="1"
+                  disabled
                 />
                 <input
                   type="radio"
@@ -171,6 +185,7 @@
                   class="star_radio"
                   v-model.number="diary.diaryRating"
                   value="1.5"
+                  disabled
                 />
                 <input
                   type="radio"
@@ -179,6 +194,7 @@
                   class="star_radio"
                   v-model.number="diary.diaryRating"
                   value="2"
+                  disabled
                 />
                 <input
                   type="radio"
@@ -187,6 +203,7 @@
                   class="star_radio"
                   v-model.number="diary.diaryRating"
                   value="2.5"
+                  disabled
                 />
                 <input
                   type="radio"
@@ -195,6 +212,7 @@
                   class="star_radio"
                   v-model.number="diary.diaryRating"
                   value="3"
+                  disabled
                 />
                 <input
                   type="radio"
@@ -203,6 +221,7 @@
                   class="star_radio"
                   v-model.number="diary.diaryRating"
                   value="3.5"
+                  disabled
                 />
                 <input
                   type="radio"
@@ -211,6 +230,7 @@
                   class="star_radio"
                   v-model.number="diary.diaryRating"
                   value="4"
+                  disabled
                 />
                 <input
                   type="radio"
@@ -219,6 +239,7 @@
                   class="star_radio"
                   v-model.number="diary.diaryRating"
                   value="4.5"
+                  disabled
                 />
                 <input
                   type="radio"
@@ -227,6 +248,7 @@
                   class="star_radio"
                   v-model.number="diary.diaryRating"
                   value="5"
+                  disabled
                 />
                 <rating-stars class="rating-stars" :starFill="starFill" />
 
@@ -244,10 +266,15 @@
             name="diary_content"
             v-model="diary.diaryContent"
             ref="diary_content"
+            readonly
           ></textarea>
         </div>
         <div class="btn-group">
-          <button-basic-7 class="basic-btn" />
+          <button-basic-9
+            class="basic-btn click"
+            v-if="Object.keys(this.$store.state.diary).length != 0"
+          />
+          <button-basic-7 class="basic-btn click" v-else />
 
           <span class="click" @click="modalClose"
             ><button-basic-8 class="basic-btn"
@@ -259,13 +286,14 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import RatingStars from "../../ui-element/RatingStars.vue";
-import ButtonBasic7 from "@/components/ui-element/ButtonBasic7.vue";
+import ButtonBasic9 from "@/components/ui-element/ButtonBasic9.vue";
 import ButtonBasic8 from "../../ui-element/ButtonBasic8.vue";
+import ButtonBasic7 from "../../ui-element/ButtonBasic7.vue";
 
 export default {
-  components: { RatingStars, ButtonBasic7, ButtonBasic8 },
+  components: { RatingStars, ButtonBasic9, ButtonBasic8, ButtonBasic7 },
   name: "DiaryDetail",
   data() {
     return {
@@ -282,8 +310,9 @@ export default {
   computed: {
     ...mapState(["diary"]),
     ...mapState(["diaryParts"]),
+    ...mapGetters(["diaryPartNums"]),
     starFill() {
-      return this.Diary.diaryRating;
+      return this.diary.diaryRating;
     },
   },
   created() {
@@ -294,6 +323,7 @@ export default {
     registDiary() {},
     modalClose() {
       this.$emit("modalClose");
+      console.log(this.diaryPartNums);
     },
   },
 };
@@ -391,15 +421,21 @@ export default {
 }
 
 .regdate-input {
-  width: 197px;
+  width: 181px;
   height: 48px;
 
   margin-top: 12px;
+  padding: 1em;
 
   border: none;
   background: #eeeeee;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
+}
+
+.regdate-input:focus {
+  outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04) inset;
 }
 
 /* -----rating----- */

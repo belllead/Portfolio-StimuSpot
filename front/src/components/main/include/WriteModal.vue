@@ -1,7 +1,11 @@
 <template>
   <div class="modal" v-if="modalShow">
     <diary-detail v-if="modalType == 'detail'" @modalClose="modalClose" />
-    <diary-write v-if="modalType == 'write'" @modalClose="modalClose" />
+    <diary-write
+      v-if="modalType == 'write'"
+      @modalClose="modalClose"
+      @refreshDates="refreshDates"
+    />
   </div>
 </template>
 
@@ -30,6 +34,9 @@ export default {
   methods: {
     modalClose() {
       this.$emit("modalClose");
+    },
+    refreshDates() {
+      this.$emit("refreshDates");
     },
   },
 };

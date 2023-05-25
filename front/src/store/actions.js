@@ -102,12 +102,12 @@ export default {
   selectDate({ commit }, payload) {
     commit("SELECT_DATE", payload);
   },
-  setMonthlyDiaryDates({ commit }) {
+  setMonthlyDiaryDates({ commit, state }) {
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth();
-    const startDate = new Date(year, month, 1);
-    const lastDate = new Date(year, month + 1, 0);
+    const startDate = new Date(year, month - 3, 1);
+    const lastDate = new Date(year, month + 3, 0);
 
     const start = dateFormat(startDate);
     const end = dateFormat(lastDate);
@@ -119,7 +119,7 @@ export default {
       params: {
         startDate: start,
         endDate: end,
-        userNum: 1,
+        userNum: state.loginUserNum,
       },
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
@@ -145,7 +145,9 @@ export default {
       .then((res) => {
         // console.log(res);
         sessionStorage.setItem("access-token", res.data["access-token"]);
-        commit("USER_LOGIN", res.data["userNum"]);
+        console.log(res.data);
+        commit("SET_LOGIN_USER_NUM", res.data["userNum"]);
+        commit("SET_LOGIN_USER_NICKNAME", res.data["userNickname"]);
         router.push({ name: "MainView" });
       })
       .catch(() => {
@@ -153,8 +155,10 @@ export default {
       });
   },
 
-  userLogout({ commit }) {
-    commit("USER_LOGOUT");
+  async userLogout({ commit }) {
+    await commit("CLEAR_SELECTED_DATES");
+    await commit("USER_LOGOUT");
+    router.push({ name: "HomeView" });
   },
 
   setParts({ commit, state }) {
@@ -162,7 +166,7 @@ export default {
       method: "GET",
       url: `http://localhost:9999/part-api`,
       params: {
-        userNum: state.loginUser,
+        userNum: state.loginUserNum,
       },
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
@@ -170,10 +174,11 @@ export default {
     })
       .then((res) => {
         commit("SET_PARTS", res.data);
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
+        err;
       });
   },
 
@@ -199,7 +204,7 @@ export default {
       method: "GET",
       url: `http://localhost:9999/achievement-api/achieved`,
       params: {
-        userNum: state.loginUser,
+        userNum: state.loginUserNum,
       },
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
@@ -207,38 +212,22 @@ export default {
     })
       .then((res) => {
         commit("SET_USERACHIEVES", res.data);
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
+        err;
       });
   },
 
-  createScrap({ commit }, scrap) {
-    axios({
-      method: "POST",
-      url: `http://localhost:9999/scrap-api/`,
-      data: scrap,
-      headers: {
-        "access-token": sessionStorage.getItem("access-token"),
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        commit;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-  getDiary({ commit }, date) {
+  getDiary({ commit, state }, date) {
     const API_URL = `http://localhost:9999/diary-api/detail`;
     axios({
       url: API_URL,
       method: "GET",
       params: {
         specificDate: date,
-        userNum: 1,
+        userNum: state.loginUserNum,
       },
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
@@ -247,7 +236,6 @@ export default {
       .then((res) => {
         // console.log(res.data);
         commit("SET_DIARY", res.data);
-        console.log(res.data.partIds);
         commit("SET_DIARY_PARTS", res.data.partNames);
       })
       // .catch((err) => console.log(err));
@@ -256,8 +244,9 @@ export default {
       });
   },
   registDiary({ commit, state }, payload) {
+    commit;
     const API_URL = `http://localhost:9999/diary-api`;
-    axios({
+    return axios({
       url: API_URL,
       method: "POST",
       data: {
@@ -266,31 +255,28 @@ export default {
         diaryRegdate: payload.diary.diaryRegdate,
         diaryTitle: payload.diary.diaryTitle,
         partIds: payload.diaryParts,
-        userNum: state.loginUser,
+        userNum: state.loginUserNum,
       },
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
       },
     }).then((res) => console.log(res.data));
-    commit;
-    console.log(payload.diary);
-    console.log(payload.diaryParts);
   },
-  setPartScores({ commit }, userNum) {
+  setPartScores({ commit, state }) {
     const API_URL = `http://localhost:9999/part-api/score`;
     axios({
       url: API_URL,
       method: "GET",
       params: {
-        userNum: 1,
+        userNum: state.loginUserNum,
       },
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
       },
     }).then((res) => {
       {
-        console.log(userNum);
-        console.log(res.data);
+        // console.log(userNum);
+        // console.log(res.data);
         commit("SET_PART_SCORES", res.data);
       }
     });
@@ -319,7 +305,7 @@ export default {
       url: API_URL,
       method: "GET",
       params: {
-        userNum: state.loginUser,
+        userNum: state.loginUserNum,
       },
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
