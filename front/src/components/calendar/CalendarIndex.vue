@@ -1,44 +1,57 @@
 <template>
   <div class="calendar">
-    <div>
-      <div class="calendar__date">
-        <span class="calendar__prev" @click="next(-1)">&#5176;</span>
-        <h3 class="calendar__month">{{ nowMonth }}</h3>
-        <span class="calendar__next" @click="next(1)">&#5171;</span>
-      </div>
-      <div class="calendar__btn" @click="$emit('add', $event)">+</div>
-    </div>
-    <div class="calendar__header">
-      <div v-for="day of daysWeek" :key="day" class="calendar__day">
+    <div class="calendar-month">{{ nowMonth }}</div>
+
+    <div class="calendar-header">
+      <div v-for="day of daysWeek" :key="day" class="calendar-day">
         {{ day }}
       </div>
     </div>
-    <div class="calendar__body">
+
+    <div class="calendar-body">
       <CalendarCell
         v-for="(day, i) of days"
         :key="'day_' + i"
         v-bind="day"
         @select="click"
+        class="canlendar-cell"
       >
-        <CalendarBadge
+        <!-- <CalendarBadge
           v-for="(badge, i) of getBadges(day)"
           :key="`badge_${i}`"
           v-bind="badge"
-        />
+        /> -->
       </CalendarCell>
+    </div>
+
+    <div class="calendar-footer">
+      <div class="calendar-date">
+        <span class="calendar-prev" @click="next(-1)"
+          ><button-arrow-left class="sqr-btn"
+        /></span>
+        <span class="calendar-next" @click="next(1)"
+          ><button-arrow-right class="sqr-btn"
+        /></span>
+      </div>
+      <!-- <div class="calendar-btn" @click="$emit('add', $event)">+</div> -->
     </div>
   </div>
 </template>
 
 <script>
 import CalendarCell from "./composition/CalendarCell.vue";
-import CalendarBadge from "./composition/CalendarBadge.vue";
+// import CalendarBadge from "./composition/CalendarBadge.vue";
+import ButtonArrowLeft from "../ui-element/ButtonArrowLeft.vue";
+import ButtonArrowRight from "../ui-element/ButtonArrowRight.vue";
+import { dateFormat } from "@/util/dateFormat";
 
 export default {
   name: "CalendarIndex",
   components: {
     CalendarCell,
-    CalendarBadge,
+    // CalendarBadge,
+    ButtonArrowLeft,
+    ButtonArrowRight,
   },
   props: {
     events: {
@@ -53,18 +66,18 @@ export default {
       // 현재 기준인 날짜 (기본은 오늘, next()가 눌리면 한달 단위로 변경)
       date: null,
       month: 0,
-      daysWeek: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
+      daysWeek: ["일", "월", "화", "수", "목", "금", "토"],
     };
   },
+  created() {
+    this.$store.dispatch("setMonthlyDiaryDates");
+    this.date = this.$moment().clone();
+  },
   computed: {
+    selectedDates() {
+      return this.$store.state.selectedDates;
+    },
+
     // 달력 상단에 띄우는 지금 보고 있는 년월 정보
     // 현재 날짜 기준으로 렌더링
     nowMonth() {
@@ -80,26 +93,23 @@ export default {
       const monthEnd = this.date.clone().endOf("month");
       // 이번 달의 시작 날짜가 속한 주의 시작하는 날짜(일요일)
       const weekStart = monthStart.clone().startOf("week");
-      // console.log(
-      //   [...Array(monthEnd.diff(weekStart, "days") >= 35 ? 42 : 35)].map(
-      //     (_, i) => {
-      //       const day = weekStart.clone().add(i, "day");
-      //       const active = this.active(day);
-      //       return { day, active, date: this.date };
-      //     }
-      //   )
-      // );
       // 이번 달의 끝 날짜와 시작 주의 첫 날짜 차이가 35보다 크거나 같으면
       // 42개의 원소를 가진 배열 반환 / 작으면 35개 원소 => 6주를 표기할지 5주를 표기할지
       // 해당 원소는 객체로 채움
       // day: 해당 원소가 나타내는 날짜 = 달력에 제일 처음 보이는 (시작 주의 시작일) 날짜 + 인덱스
       // active: 활성화된 날짜인지
       // date: 기준일
+      const diaryDates = this.$store.state.selectedDates;
       return [...Array(monthEnd.diff(weekStart, "days") >= 35 ? 42 : 35)].map(
         (_, i) => {
           const day = weekStart.clone().add(i, "day");
           const active = this.active(day);
-          return { day, active, date: this.date };
+          let hasDiary = false;
+          const date = dateFormat(day._d);
+          for (let i = 0; i < diaryDates.length; i++) {
+            if (diaryDates[i] == date) hasDiary = true;
+          }
+          return { day, active, date: this.date, hasDiary };
         }
       );
     },
@@ -151,60 +161,84 @@ export default {
       return this.events.filter((item) => item.date.isSame(day, "day"));
     },
   },
-  created() {
-    this.date = this.$moment().clone();
-  },
 };
 </script>
 
 <style>
 .calendar {
-  width: 100%;
-  min-height: 600px;
-  border-radius: 20px;
-  background-color: #ffffff;
-  user-select: none;
-  padding: 5px 5px 10px 5px;
-  position: relative;
+  width: 550px;
+  /* min-height: 500px; */
+  /* user-select: none; */
+  /* padding: 5px 5px 10px 5px; */
+  /* position: relative; */
+  /* background-color: aqua; */
+  position: absolute;
+  left: 100px;
+  top: 160px;
 }
-.calendar__date {
+
+.calendar-header {
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-around;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day {
+  text-align: center;
+}
+
+.calendar-body {
+  /* background-color: #efefef; */
+  margin-top: 40px;
+  padding: 4px;
+  /* margin: 10px; */
+  /* border-radius: 5px; */
+  /* border: none; */
+  display: flex;
+  /* grid-template-columns: repeat(7, 1fr); */
+  justify-content: space-around;
+  flex-wrap: wrap;
+  /* gap: 2px; */
+}
+
+.calendar-footer {
+  position: absolute;
+  right: -20px;
+  bottom: -68px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-date {
   display: flex;
   align-items: center;
+  position: absolute;
+  right: 0;
   height: 50px;
   padding: 10px 20px;
 }
-.calendar__date span {
-  height: 25px;
-  width: 25px;
+.calendar-date span {
+  height: 40px;
+  width: 40px;
   cursor: pointer;
   text-align: center;
 }
-.calendar__month {
-  margin: 0 5px;
-  min-width: 110px;
-  text-align: center;
-  text-transform: uppercase;
-  color: #3c32c9;
-}
-.calendar__header {
-  padding: 0 10px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-}
-.calendar__day {
-  text-align: end;
+
+.calendar-prev {
+  margin-right: 8px;
 }
 
-.calendar__body {
-  background-color: #efefef;
-  padding: 2px;
-  margin: 10px;
-  border-radius: 5px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
+.calendar-month {
+  margin: 0 20px 40px;
+  /* min-width: 110px; */
+  text-align: end;
+  text-transform: uppercase;
+  color: #a0a0a0;
 }
-.calendar__btn {
+/* ------------------ */
+
+.calendar-btn {
   height: 30px;
   width: 30px;
   background-color: indigo;

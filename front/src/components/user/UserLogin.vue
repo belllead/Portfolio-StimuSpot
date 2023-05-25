@@ -1,7 +1,7 @@
 <template>
   <div class="card">
-    <fieldset class="input">
-      <h2 class="title">내 다이어리 열기</h2>
+    <fieldset class="input" v-if="!loginUser">
+      <h2 class="title">나만의 다이어리</h2>
       <input
         type="text"
         id="id"
@@ -16,10 +16,13 @@
         placeholder="패스워드"
         class="input-window"
       />
-      <div class="checkbox">
+      <!-- <div class="checkbox">
         <input type="checkbox" id="keep-logged-in" />
-        <label for="keepLoggendIn" class="checkbox-text">로그인 유지하기</label>
-      </div>
+        <label for="keep-logged-in" class="checkbox-text"
+          >로그인 유지하기</label
+        >
+      </div> -->
+      <div style="height: 35px"></div>
       <button class="btn" @click="login">로그인</button>
       <div class="regist">
         <h3>계정이 없으신가요?</h3>
@@ -28,10 +31,19 @@
         >
       </div>
     </fieldset>
+    <fieldset class="input" v-else>
+      <h2 class="title" style="margin-top: 160px">내 다이어리 열기</h2>
+      <div style="height: 40px"></div>
+      <router-link to="/main">
+        <button class="btn">다이어리</button></router-link
+      >
+      <button class="btn2" @click="logout">로그아웃</button>
+    </fieldset>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "UserLogin",
   data() {
@@ -42,10 +54,24 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapState(["loginUser"]),
+  },
   methods: {
-    login() {
-      this.$store.dispatch("userLogin", this.user);
-      this.$router.push({ path: "/main" });
+    async login() {
+      if (!this.user.userId || !this.user.userPw) {
+        alert("로그인 정보를 입력하세요.");
+        return;
+      }
+      await this.$store.dispatch("userLogin", this.user);
+
+      this.user.userId = "";
+      this.user.userPw = "";
+    },
+    logout() {
+      sessionStorage.removeItem("access-token");
+      this.$store.commit("USER_LOGOUT");
+      this.$router.push("/");
     },
   },
 };
@@ -101,6 +127,7 @@ export default {
 
 .input-window:focus {
   outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04) inset;
 }
 
 .checkbox {
@@ -121,11 +148,38 @@ export default {
   height: 48px;
   background: #e86666;
   border-radius: 4px;
-  border: none;
   font-weight: 600;
+  border: none;
   font-size: 1em;
   color: #fff;
   margin-top: 1em;
+}
+.btn:hover {
+  outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+}
+.btn:active {
+  outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12) inset;
+}
+
+.btn2 {
+  width: 280px;
+  height: 48px;
+  background-color: #a0a0a0;
+  border-radius: 4px;
+  border: none;
+  font-size: 1em;
+  color: #fff;
+  margin-top: 1em;
+}
+.btn2:hover {
+  outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+}
+.btn2:active {
+  outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12) inset;
 }
 
 .regist {

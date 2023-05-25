@@ -18,13 +18,20 @@
       /><br />
       <div class="text-left">
         <label for="id">아이디</label>
-        <input type="text" id="id" v-model="id" class="input-window" /><br />
+        <input
+          type="text"
+          id="id"
+          v-model="id"
+          class="input-window"
+          placeholder="6~20자 영문, 숫자"
+        /><br />
         <label for="password">비밀번호</label>
         <input
           type="password"
           id="password"
           v-model="password"
           class="input-window"
+          placeholder="6~12자 영문, 숫자, 특수문자"
         /><br />
         <div class="horizontal">
           <div class="text-left2">
@@ -41,20 +48,34 @@
             <input
               type="number"
               id="age"
-              v-model="age"
+              v-model.number="age"
+              placeholder="0"
               class="input-window-small"
             /><br />
           </div>
         </div>
         <br />
-        <label for="email">이메일</label>
-        <input
-          type="email"
-          id="email"
-          v-model="email"
-          class="input-window"
-        /><br />
-
+        <div class="horizontal">
+          <div class="text-left2">
+            <label for="email">이메일</label>
+            <input
+              type="email"
+              id="email"
+              v-model="email"
+              class="input-window"
+            /><br />
+          </div>
+          <div class="text-left3">
+            <div>성별</div>
+            <div class="radio">
+              <input type="radio" id="male" value="male" name="sex" />
+              <label for="male">남성</label>
+              <input type="radio" id="female" value="female" name="sex" />
+              <label for="female">여성</label>
+            </div>
+          </div>
+        </div>
+        <br />
         <label for="nickname">닉네임</label>
         <input
           type="text"
@@ -81,7 +102,7 @@ export default {
       password: "",
       name: "",
       email: "",
-      age: 0,
+      age: null,
       nickname: "",
       profileImg: "",
     };
@@ -143,7 +164,7 @@ export default {
   left: 420px;
   top: 140px;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
-  background-color: #e8cb66;
+  background-color: #eb9f9f;
   border-radius: 8px;
 }
 .title {
@@ -167,6 +188,13 @@ export default {
   margin-bottom: -0.5em;
 }
 
+.text-left3 {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 40px;
+}
+
 .horizontal {
   display: flex;
 }
@@ -175,9 +203,9 @@ export default {
   height: 48px;
   background: #eeeeee;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+
   border: none;
   border-radius: 4px;
-  vertical-align: middle;
   font-size: 1em;
   padding-left: 1em;
   margin-top: 0.8em;
@@ -188,33 +216,52 @@ export default {
   height: 48px;
   background: #eeeeee;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+
   border: none;
   border-radius: 4px;
   font-size: 1em;
   padding-left: 1em;
+
   margin-top: 0.8em;
   margin-right: 40px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .input-window::placeholder {
   color: #c0c0c0;
 }
 
-.input-window:focus {
-  outline: none;
+.input-window-small::placeholder {
+  color: #c0c0c0;
 }
 
-.checkbox {
-  width: 110px;
+.input-window:focus {
+  outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04) inset;
+}
+
+.input-window-small:focus {
+  outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04) inset;
+}
+
+.radio {
+  width: 100%;
   height: auto;
   display: flex;
   align-items: center;
-  margin-top: 1em;
+  margin-top: 1.3em;
+  align-items: center;
 }
 
-.checkbox-text {
-  margin-left: 0.5em;
-  font-size: 0.75em;
+.radio label {
+  font-size: 1em;
+  margin: 1px 12px 0 4px;
 }
 
 .btn {
@@ -227,6 +274,16 @@ export default {
   font-size: 1em;
   color: #fff;
   margin-top: 1em;
+}
+
+.btn:hover {
+  outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.btn:active {
+  outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12) inset;
 }
 
 .regist {

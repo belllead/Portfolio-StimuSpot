@@ -4,6 +4,7 @@
     <div>
       <div class="content">{{ todayLuck }}</div>
       <button-basic-5
+        class="click"
         :refreshChance="refreshChance"
         @rerun="setTodayLuck"
       ></button-basic-5>
@@ -42,7 +43,7 @@ export default {
     }
 
     if (newDate === curDate && newMonth === curMonth) {
-      this.todayLuck = JSON.parse(sessionStorage.getItem("todayLuck")).content;
+      // this.todayLuck = JSON.parse(sessionStorage.getItem("todayLuck")).content;
     } else {
       // const content = Math.random() * 100; // api로 변경 필요
       this.$store.dispatch("setTodayLuck");
@@ -88,16 +89,16 @@ export default {
   position: absolute;
   left: 56px;
   top: 40px;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 600;
 }
 
 .content {
   position: absolute;
   left: 56px;
-  top: 150px;
+  top: 120px;
   text-align: left;
   width: 200px;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 </style>

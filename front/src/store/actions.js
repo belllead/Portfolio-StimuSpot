@@ -1,5 +1,6 @@
 import { dateFormat } from "@/util/dateFormat";
 import axios from "axios";
+import router from "@/router";
 
 export default {
   focusPart({ commit }, payload) {
@@ -142,12 +143,13 @@ export default {
       data: user,
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         sessionStorage.setItem("access-token", res.data["access-token"]);
         commit("USER_LOGIN", res.data["userNum"]);
+        router.push({ name: "MainView" });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        alert("아이디 또는 비밀번호 입력이 잘못되었습니다.");
       });
   },
 
@@ -212,6 +214,23 @@ export default {
       });
   },
 
+  createScrap({ commit }, scrap) {
+    axios({
+      method: "POST",
+      url: `http://localhost:9999/scrap-api/`,
+      data: scrap,
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        commit;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   getDiary({ commit }, date) {
     const API_URL = `http://localhost:9999/diary-api/detail`;
     axios({
@@ -235,6 +254,27 @@ export default {
       .catch(() => {
         return;
       });
+  },
+  registDiary({ commit, state }, payload) {
+    const API_URL = `http://localhost:9999/diary-api`;
+    axios({
+      url: API_URL,
+      method: "POST",
+      data: {
+        diaryContent: payload.diary.diaryContent,
+        diaryRating: payload.diary.diaryRating,
+        diaryRegdate: payload.diary.diaryRegdate,
+        diaryTitle: payload.diary.diaryTitle,
+        partIds: payload.diaryParts,
+        userNum: state.loginUser,
+      },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    }).then((res) => console.log(res.data));
+    commit;
+    console.log(payload.diary);
+    console.log(payload.diaryParts);
   },
   setPartScores({ commit }, userNum) {
     const API_URL = `http://localhost:9999/part-api/score`;

@@ -8,8 +8,6 @@ import getters from "./getters";
 import mutations from "./mutations";
 import actions from "./actions";
 
-import createPersistedState from "vuex-persistedstate";
-
 export default new Vuex.Store({
   state,
   getters,

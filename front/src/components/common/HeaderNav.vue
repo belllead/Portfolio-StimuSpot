@@ -19,7 +19,7 @@
     </header>
     <footer @click="logout">
       <div class="profile-img"></div>
-      <span class="text-btn">로그아웃</span>
+      <span class="text-btn" @click="logout">OOO님 안녕하세요!</span>
     </footer>
   </div>
 </template>
@@ -32,7 +32,8 @@ export default {
   components: { LogoStaticStroke },
   methods: {
     logout() {
-      this.$store.dispatch("userLogout");
+      sessionStorage.removeItem("access-token");
+      this.$store.commit("USER_LOGOUT");
       this.$router.push("/");
     },
   },

@@ -24,7 +24,6 @@ export default {
     state.loginUser = userNum;
   },
   USER_LOGOUT(state) {
-    sessionStorage.clear();
     state.loginUser = null;
   },
   SET_PARTS(state, payload) {

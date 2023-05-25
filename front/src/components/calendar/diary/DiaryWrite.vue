@@ -8,84 +8,84 @@
             <input
               type="checkbox"
               class="checkbox"
-              id="check1"
-              value="bicep"
-              v-model="DiaryParts"
+              id="bicep"
+              value="5"
+              v-model.number="diaryParts"
             />
-            <label class="part-label" for="check1">이두</label>
+            <label class="part-label" for="bicep">이두</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check2"
-              value="tricep"
-              v-model="DiaryParts"
+              id="tricep"
+              value="6"
+              v-model.number="diaryParts"
             />
-            <label class="part-label" for="check2">삼두</label>
+            <label class="part-label" for="tricep">삼두</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check3"
-              value="forearm"
-              v-model="DiaryParts"
+              id="forearm"
+              value="2"
+              v-model.number="diaryParts"
             />
-            <label class="part-label" for="check3">전완근</label>
+            <label class="part-label" for="forearm">전완근</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check4"
-              value="shoulder"
-              v-model="DiaryParts"
+              id="shoulder"
+              value="7"
+              v-model.number="diaryParts"
             />
-            <label class="part-label" for="check4">어깨</label>
+            <label class="part-label" for="shoulder">어깨</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check5"
-              value="chest"
-              v-model="DiaryParts"
+              id="chest"
+              value="1"
+              v-model.number="diaryParts"
             />
-            <label class="part-label" for="check5">가슴</label>
+            <label class="part-label" for="chest">가슴</label>
             <div class="line-divider"></div>
             <input
               type="checkbox"
               class="checkbox"
-              id="check6"
-              value="abs"
-              v-model="DiaryParts"
+              id="abs"
+              value="4"
+              v-model.number="diaryParts"
             />
-            <label class="part-label" for="check6">복근</label>
+            <label class="part-label" for="abs">복근</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check7"
-              value="back"
-              v-model="DiaryParts"
+              id="back"
+              value="8"
+              v-model.number="diaryParts"
             />
-            <label class="part-label" for="check7">등</label>
+            <label class="part-label" for="back">등</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check8"
-              value="glute"
-              v-model="DiaryParts"
+              id="glute"
+              value="3"
+              v-model.number="diaryParts"
             />
-            <label class="part-label" for="check8">엉덩이</label>
+            <label class="part-label" for="glute">엉덩이</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check9"
-              value="thigh"
-              v-model="DiaryParts"
+              id="thigh"
+              value="10"
+              v-model.number="diaryParts"
             />
-            <label class="part-label" for="check9">허벅지</label>
+            <label class="part-label" for="thigh">허벅지</label>
             <input
               type="checkbox"
               class="checkbox"
-              id="check10"
-              value="calf"
-              v-model="DiaryParts"
+              id="calf"
+              value="9"
+              v-model.number="diaryParts"
             />
-            <label class="part-label" for="check10">종아리</label>
+            <label class="part-label" for="calf">종아리</label>
           </div>
         </div>
 
@@ -105,12 +105,13 @@
           <div class="regdate-group">
             <label class="regdate-label" for="regdate">날짜</label>
             <input
-              type="text"
+              type="date"
               id="regdate"
               class="regdate-input"
               name="diaryRegdate"
               v-model="diary.diaryRegdate"
               ref="diaryRegdate"
+              :max="today"
             />
           </div>
 
@@ -247,8 +248,9 @@
           ></textarea>
         </div>
         <div class="btn-group">
-          <button-basic-7 class="basic-btn" />
-
+          <span class="click" @click="registDiary">
+            <button-basic-7 class="basic-btn" />
+          </span>
           <span class="click" @click="modalClose"
             ><button-basic-8 class="basic-btn"
           /></span>
@@ -259,39 +261,42 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import RatingStars from "../../ui-element/RatingStars.vue";
 import ButtonBasic7 from "@/components/ui-element/ButtonBasic7.vue";
 import ButtonBasic8 from "../../ui-element/ButtonBasic8.vue";
+import { dateFormat } from "@/util/dateFormat";
 
 export default {
   components: { RatingStars, ButtonBasic7, ButtonBasic8 },
   name: "DiaryDetail",
   data() {
     return {
-      // Diary: {
-      //   diaryId: 0,
-      //   diaryTitle: "",
-      //   diaryRegdate: "",
-      //   diaryRating: 0,
-      //   diaryContent: "",
-      // },
-      // DiaryParts: [],
+      diary: {
+        diaryId: 0,
+        diaryTitle: "",
+        diaryRegdate: "",
+        diaryRating: 0,
+        diaryContent: "",
+      },
+      diaryParts: [],
+      today: "",
     };
   },
+  created() {
+    return (this.today = dateFormat(new Date()));
+  },
   computed: {
-    ...mapState(["diary"]),
-    ...mapState(["diaryParts"]),
     starFill() {
-      return this.Diary.diaryRating;
+      return this.diary.diaryRating;
     },
   },
-  created() {
-    this.Diary = this.diary;
-    this.DiaryParts = this.diaryParts;
-  },
   methods: {
-    registDiary() {},
+    registDiary() {
+      this.$store.dispatch("registDiary", {
+        diary: this.diary,
+        diaryParts: this.diaryParts,
+      });
+    },
     modalClose() {
       this.$emit("modalClose");
     },
@@ -391,15 +396,21 @@ export default {
 }
 
 .regdate-input {
-  width: 197px;
+  width: 181px;
   height: 48px;
 
   margin-top: 12px;
+  padding: 1em;
 
   border: none;
   background: #eeeeee;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
+}
+
+.regdate-input:focus {
+  outline: none;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04) inset;
 }
 
 /* -----rating----- */
@@ -488,5 +499,10 @@ export default {
   width: 80px;
   height: 40px;
   margin-right: 12px;
+}
+
+input[type="date"] {
+  font-family: "Noto Sans KR";
+  font-size: 14px;
 }
 </style>

@@ -43,7 +43,8 @@ export default {
   margin: 0;
   height: 100vh;
   width: 100vw;
-  /* background-image: url("C:/Users/SSAFY/Desktop/ssafit_final/StimuSpot/resources/img/Landing M Processed.png"); */
+  background-image: url("C:/Users/SSAFY/Desktop/ssafit_final/StimuSpot/resources/img/Landing M Processed.png");
+  /* background-image: url("/Users/jongseopark/Desktop/StimuSpot/resources/img/Landing M Processed.png"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
