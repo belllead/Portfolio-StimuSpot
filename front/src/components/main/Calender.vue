@@ -14,15 +14,25 @@
       <router-link :to="{ name: 'CalendarView' }"
         ><button-basic-1 class="basic-btn"></button-basic-1>
       </router-link>
+      <div class="click" @click="writeModalOpen">
+        <button-basic-6 class="diary-btn" />
+      </div>
       <!-- <div class="arrow-btns">
         <button-arrow-left class="left-btn" />
         <button-arrow-right class="right-btn" />
       </div> -->
     </div>
 
+    <div style="width: 100px; height: 100px; background-color: red"></div>
     <!-- modal -->
     <div class="modalBg" v-if="modalShow"></div>
-    <div class="modal" v-if="modalShow">
+    <write-modal
+      :modalType="modalType"
+      :modalShow="modalShow"
+      @modalClose="modalClose"
+    />
+
+    <!-- <div class="modal" v-if="modalShow">
       <label for="title">제목</label>
       <div class="view">{{ diary.diaryTitle }}</div>
       <br />
@@ -68,7 +78,7 @@
       <br />
       <router-link to="/calendar" class="btn">수정하기</router-link>
       <button @click="modalClose">창 닫기</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -76,13 +86,15 @@
 import { mapState } from "vuex";
 import { ref } from "vue";
 import ButtonBasic1 from "../ui-element/ButtonBasic1.vue";
+import ButtonBasic6 from "../ui-element/ButtonBasic6.vue";
 import { dateFormat } from "@/util/dateFormat";
+import WriteModal from "./include/WriteModal.vue";
 // import ButtonArrowLeft from "../ui-element/ButtonArrowLeft.vue";
 // import ButtonArrowRight from "../ui-element/ButtonArrowRight.vue";
 
 export default {
   name: "CalenderUi",
-  components: { ButtonBasic1 },
+  components: { ButtonBasic1, ButtonBasic6, WriteModal },
   data() {
     const date = new Date();
     const year = date.getFullYear();
@@ -107,10 +119,11 @@ export default {
       year,
       month,
       attributes,
+      modalType: "",
     };
   },
   computed: {
-    ...mapState(["diary", "diaryParts"]),
+    ...mapState(["diary", "diaryParts", "selectedDate"]),
     selectedDates() {
       return this.$store.state.selectedDates;
     },
@@ -121,6 +134,8 @@ export default {
   },
   methods: {
     selectDate(date) {
+      if (!date) return;
+
       const selected = dateFormat(date);
 
       let flag = true;
@@ -137,6 +152,30 @@ export default {
       this.$store.dispatch("selectDate", selected);
       this.$store.dispatch("getDiary", selected);
 
+      this.modalType = "detail";
+      this.modalShow = true;
+    },
+    writeModalOpen() {
+      // const today = dateFormat(new Date());
+
+      // let flag = true;
+
+      // for (var d of this.selectedDates) {
+      //   if (today == d) {
+      //     flag = false;
+      //     break;
+      //   }
+      // }
+
+      // if (flag) {
+      //   this.modalType = "write";
+      // } else {
+      //   this.$store.dispatch("selectDate", today);
+      //   this.$store.dispatch("getDiary", today);
+
+      //   this.modalType = "detail";
+      // }
+      this.modalType = "write";
       this.modalShow = true;
     },
     modalClose() {
@@ -151,14 +190,14 @@ export default {
   position: absolute;
   left: 80px;
   top: 60px;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 600;
 }
 
 .main-calendar {
   width: 270px;
   height: 330px;
-  /* border: none; */
+  border: none;
   margin-top: 120px;
 }
 
@@ -178,6 +217,12 @@ export default {
   display: flex;
 }
 .basic-btn {
+  width: 80px;
+  height: 40px;
+  color: #a0a0a0;
+}
+
+.diary-btn {
   width: 80px;
   height: 40px;
   color: #a0a0a0;

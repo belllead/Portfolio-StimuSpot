@@ -2,7 +2,6 @@
 
 <template>
   <div
-    class=""
     @click="rerun"
     :class="{ hover: refreshChance > 0, disabled: refreshChance <= 0 }"
   >
@@ -39,7 +38,7 @@
 import { mapState } from "vuex";
 export default {
   name: "ButtonBasic5",
-  props: { refreshChance: String },
+  props: { refreshChance: Number },
   computed: {
     ...mapState(["selectedPart"]),
   },
