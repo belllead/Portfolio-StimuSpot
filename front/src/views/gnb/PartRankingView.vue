@@ -2,7 +2,6 @@
   <div>
     <header-nav></header-nav>
     <div class="rankingcontainer">
-      <h2>부위 순위</h2>
       <div class="table">
         <table>
           <colgroup>
@@ -14,11 +13,11 @@
           </colgroup>
           <thead>
             <tr>
-              <th>순위</th>
-              <th>아이콘</th>
-              <th>마지막 운동 일시</th>
-              <th>부위 명</th>
-              <th>부위 정보</th>
+              <th><div class="view1">순위</div></th>
+              <!-- <th>아이콘</th> -->
+              <th><div class="view3">마지막 운동 일시</div></th>
+              <th><div class="view4">부위 명</div></th>
+              <th><div class="view5">부위 정보</div></th>
             </tr>
           </thead>
           <tbody>
@@ -28,11 +27,11 @@
                   {{ index + 1 }}
                 </div>
               </td>
-              <td>
+              <!-- <td>
                 <div class="view2">
                   {{ part.partIcon }}
                 </div>
-              </td>
+              </td> -->
               <td>
                 <div class="view3">
                   {{ part.lastWorkout }}
@@ -53,16 +52,19 @@
         </table>
       </div>
     </div>
+
+    <footer-info-2 />
   </div>
 </template>
 
 <script>
 import HeaderNav from "@/components/common/HeaderNav.vue";
 import { mapState } from "vuex";
+import FooterInfo2 from "../../components/common/FooterInfo2.vue";
 
 export default {
   name: "PartRankingView",
-  components: { HeaderNav },
+  components: { HeaderNav, FooterInfo2 },
   computed: {
     ...mapState(["parts"]),
   },
@@ -74,11 +76,10 @@ export default {
 
 <style scoped>
 .rankingcontainer {
-  border: solid black;
   position: absolute;
   width: 1470px;
-  height: 880px;
-  top: calc(50% - 880px / 2 - 12px);
+  height: 800px;
+  top: 30px;
   left: 320px;
   background: #ffffff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
@@ -86,11 +87,23 @@ export default {
 }
 
 .table {
-  margin: auto;
   width: 1240px;
   height: 680px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-620px, -370px);
 }
 
+th {
+  color: #e86666;
+  font-weight: 600;
+}
+
+th,
+td {
+  text-align: left;
+}
 col {
   display: flex;
   align-items: center;
@@ -100,7 +113,7 @@ col {
   height: 40px;
   width: 40px;
   border-radius: 8px;
-  background-color: #d9d9d9;
+  /* background-color: #d9d9d9; */
   line-height: 40px;
   margin: 0px 15px;
 }
@@ -116,7 +129,7 @@ col {
   height: 40px;
   width: 200px;
   border-radius: 8px;
-  background-color: #d9d9d9;
+  /* background-color: #d9d9d9; */
   line-height: 40px;
   margin: 10px;
 }
@@ -124,7 +137,7 @@ col {
   height: 40px;
   width: 200px;
   border-radius: 8px;
-  background-color: #d9d9d9;
+  /* background-color: #d9d9d9; */
   line-height: 40px;
   margin: 10px;
 }
@@ -132,7 +145,7 @@ col {
   height: 40px;
   width: 540px;
   border-radius: 8px;
-  background-color: #d9d9d9;
+  /* background-color: #d9d9d9; */
   line-height: 40px;
   margin: 10px;
 }

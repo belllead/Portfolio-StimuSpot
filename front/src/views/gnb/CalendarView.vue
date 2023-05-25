@@ -4,12 +4,14 @@
 
     <div class="card-group">
       <div class="calendar-card">
-        <CalendarIndex :events="events" @add="add" />
+        <CalendarIndex :events="events" @add="add" @selectDate="selectDate" />
       </div>
       <div class="diary-card">
-        <diary-detail />
+        <diary-detail style="transform: translateY(-60px)" />
       </div>
     </div>
+
+    <footer-info-2 />
   </div>
 </template>
 
@@ -17,6 +19,8 @@
 import HeaderNav from "@/components/common/HeaderNav.vue";
 import CalendarIndex from "@/components/calendar/CalendarIndex.vue";
 import DiaryDetail from "@/components/calendar/diary/DiaryDetail.vue";
+import { dateFormat } from "@/util/dateFormat";
+import FooterInfo2 from "../../components/common/FooterInfo2.vue";
 
 export default {
   name: "CalendarView",
@@ -24,6 +28,7 @@ export default {
     HeaderNav,
     CalendarIndex,
     DiaryDetail,
+    FooterInfo2,
   },
   data() {
     return {
@@ -91,6 +96,33 @@ export default {
         date: data.clone().add(maxId - 10, "day"),
       });
     },
+    selectDate(day) {
+      const date = day._d;
+      if (!date) return;
+
+      const selected = dateFormat(date);
+
+      let flag = true;
+
+      for (var d of this.$store.state.selectedDates) {
+        if (selected == d) {
+          flag = false;
+          break;
+        }
+      }
+
+      if (flag) {
+        this.$store.commit("CLEAR_DIARY");
+        this.$router.go(0);
+        return;
+      }
+
+      this.$store.dispatch("selectDate", selected);
+      this.$store.dispatch("getDiary", selected);
+
+      this.modalType = "detail";
+      this.modalShow = true;
+    },
   },
 };
 </script>
@@ -104,7 +136,7 @@ export default {
 }
 .calendar-card {
   width: 730px;
-  height: 880px;
+  height: 800px;
   background: #ffffff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
@@ -112,7 +144,7 @@ export default {
 
 .diary-card {
   width: 720px;
-  height: 880px;
+  height: 800px;
   background: #ffffff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   border-radius: 8px;

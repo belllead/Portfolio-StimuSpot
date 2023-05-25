@@ -8,6 +8,7 @@
         v-model="user.userId"
         placeholder="아이디"
         class="input-window"
+        @keyup.enter="login"
       />
       <input
         type="password"
@@ -15,6 +16,7 @@
         v-model="user.userPw"
         placeholder="패스워드"
         class="input-window"
+        @keyup.enter="login"
       />
       <!-- <div class="checkbox">
         <input type="checkbox" id="keep-logged-in" />

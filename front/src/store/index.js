@@ -18,7 +18,8 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState({
       paths: [
-        "loginUser",
+        "loginUserNum",
+        "loginUserNickname",
         "selectedDates",
         "todayLuck",
         "todayLuckId",

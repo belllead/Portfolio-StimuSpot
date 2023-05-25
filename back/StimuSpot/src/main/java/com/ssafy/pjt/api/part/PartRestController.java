@@ -30,7 +30,6 @@ public class PartRestController {
 	@GetMapping("")
 	public ResponseEntity<?> getPartList(@RequestParam(required = true) int userNum) {
 		List<PartDto> list = service.getPartList(userNum); 
-		System.out.println(list);
 		try {
 			if (list == null || list.isEmpty())
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

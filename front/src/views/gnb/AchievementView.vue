@@ -12,7 +12,7 @@
           <div v-if="hasUserAchievement(achievement.achvTitle) != null">
             <div
               class="achvtitle"
-              style="background-color: rgba(255, 204, 91, 0.7)"
+              style="background-color: #e8cb66; color: white"
             >
               <p>{{ achievement.achvTitle }}</p>
             </div>
@@ -22,13 +22,13 @@
             >
               <img src="@/assets/achv_icon.png.png" alt="" />
               <p>
-                "{{ hasUserAchievement(achievement.achvTitle).achievedDate }}"에
+                {{ hasUserAchievement(achievement.achvTitle).achievedDate }}에
                 달성!
               </p>
             </div>
             <div
               class="achvcontent"
-              style="background-color: rgba(255, 204, 91, 0.7)"
+              style="background-color: #e86666; color: #fff"
             >
               {{ achievement.achvContent }}
             </div>
@@ -48,16 +48,19 @@
         </div>
       </div>
     </div>
+
+    <footer-info-2 />
   </div>
 </template>
 
 <script>
 import HeaderNav from "@/components/common/HeaderNav.vue";
 import { mapState } from "vuex";
+import FooterInfo2 from "../../components/common/FooterInfo2.vue";
 
 export default {
   name: "AchievementView",
-  components: { HeaderNav },
+  components: { HeaderNav, FooterInfo2 },
   computed: {
     ...mapState(["achievements"]),
     ...mapState(["userAchievements"]),
@@ -81,7 +84,7 @@ export default {
   position: absolute;
   width: 1470px;
   height: 880px;
-  top: calc(50% - 880px / 2 - 12px);
+  top: 30px;
   left: 320px;
 }
 
@@ -116,7 +119,11 @@ export default {
   border-radius: 8px;
   margin: auto;
   width: 200px;
-  margin-top: 15px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 

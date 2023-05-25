@@ -5,9 +5,9 @@
       <div class="description">
         가장 최근에 운동한 부위는 어디인가요?<br />
         운동 부위를 체크하고 운동 일기를 써보세요.<br />
-        내가 얼마나 자주 운동을 하고 있는지, 어느<br />
-        부위를 중심적으로 운동하고 있는지 알려주는<br />
-        서비스, ‘종서의 러브러브 다이어리'입니다.
+        내가 얼마나 자주 운동을 하고 있는지,<br />
+        어느 부위를 중심적으로 운동하고 있는지<br />
+        알려주는 서비스, ‘StimuSpot'입니다.
       </div>
       <router-link to="/user" class="btn"
         ><button-basic2 class="btn"></button-basic2
@@ -22,7 +22,7 @@
 <script>
 import ButtonBasic2 from "@/components/ui-element/ButtonBasic2.vue";
 import LogoMain from "../components/ui-element/LogoMain.vue";
-import FooterInfo from "@/components/common/Footer.vue";
+import FooterInfo from "@/components/common/FooterInfo.vue";
 
 export default {
   name: "HomeView",
@@ -43,7 +43,8 @@ export default {
   margin: 0;
   height: 100vh;
   width: 100vw;
-  background-image: url("C:/Users/SSAFY/Desktop/ssafit_final/StimuSpot/resources/img/Landing M Processed.png");
+  background-image: url("../../../resources/img/Landing M Processed.png");
+  /* background-image: url("C:/Users/SSAFY/Desktop/ssafit_final/StimuSpot/resources/img/Landing M Processed.png"); */
   /* background-image: url("/Users/jongseopark/Desktop/StimuSpot/resources/img/Landing M Processed.png"); */
   background-size: cover;
   background-repeat: no-repeat;

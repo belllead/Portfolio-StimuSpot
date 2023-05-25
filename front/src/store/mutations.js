@@ -20,11 +20,15 @@ export default {
   SELECT_DATE(state, date) {
     state.selectedDate = date;
   },
-  USER_LOGIN(state, userNum) {
-    state.loginUser = userNum;
+  SET_LOGIN_USER_NUM(state, userNum) {
+    state.loginUserNum = userNum;
+  },
+  SET_LOGIN_USER_NICKNAME(state, userNickname) {
+    state.loginUserNickname = userNickname;
   },
   USER_LOGOUT(state) {
-    state.loginUser = null;
+    state.loginUserNum = null;
+    state.loginUserName = null;
   },
   SET_PARTS(state, payload) {
     state.parts = payload;
@@ -38,8 +42,14 @@ export default {
   SET_SELECTED_DATES(state, payload) {
     state.selectedDates = payload;
   },
+  CLEAR_SELECTED_DATES(state) {
+    state.selectedDates = [];
+  },
   SET_DIARY(state, payload) {
     state.diary = payload;
+  },
+  CLEAR_DIARY(state) {
+    state.diary = null;
   },
   SET_DIARY_PARTS(state, payload) {
     state.diaryParts = payload;

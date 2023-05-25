@@ -1,22 +1,47 @@
+-- diary_id user_num diary_regdate part_ids
+
+-- 1 1 2023 05 01   1 2 5 
+-- 2 1 2023 05 03   2 5 
+-- 3 1 2023 05 10   5 9 10
+-- 4 1 2023 05 17   3 4 8
+-- 5 1 2023 05 22   4 7 9
+-- 6 1 2023 05 25   3 4 6
+-- 7 1 2023 05 21   2 4 1 7
+
+-- 8 2 2023 05 03   1 5 9
+-- 9 2 2023 05 02   2 8 10
+-- 10 2 2023 05 10   3 8 7
+
 DROP DATABASE IF EXISTS project;
-create database if not exists project;
-use project;
+CREATE DATABASE IF NOT EXISTS project CHARSET utf8mb4;
+USE project;
+
+-- set foreign_key_checks = 0;
 
 CREATE TABLE IF NOT EXISTS users (
- user_num     INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
- user_id       VARCHAR(20),
- user_pw       VARCHAR(20),
+ user_num INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ user_id VARCHAR(20) UNIQUE,
+ user_pw VARCHAR(20),
+ user_name VARCHAR(20),
  user_nickname VARCHAR(20),
- user_email    VARCHAR(45),  
- user_age      INT,
- user_selfie   VARCHAR(50)
+ user_email VARCHAR(45),  
+ user_age INT,
+ user_selfie VARCHAR(50)
 ); 
 
 INSERT INTO users 
-(user_id, user_pw, user_email, user_age)
+(user_id, user_pw, user_name, user_nickname, user_email, user_age)
 VALUES
-('ssafy', '1234', 'ssafy@naver.com', 27),
-('song', '1234', 'adam1229@naver.com', 28);
+('ssafy', '1234', '박종서', '코딩천재', 'ssafy@naver.com', 27),
+('adam1219', 'pass4321', '송윤제', '코딩바보', 'adam1229@naver.com', 28),
+('asdf', '1234', '홍길동', '조선', '123@naver.com', 24),
+('ssasdfy', '1234', '홍싸피', '장미', 'asdf@naver.com', 23),
+('rweqr', '1234', '김김김', '나무', 'asdfasd@naver.com', 30),
+('asdf1', '1234', '최홍만', '몰라', 'jhk@naver.com', 13),
+('asdfa', '1234', '박성수', '아무', 'ghjk@naver.com', 156),
+('asdbsd', '1234', '이규명', '거나', '12gsfdg@naver.com', 42),
+('jhkhj', '1234', '이재준', '냐옹', ',mhjgm@naver.com', 32),
+('ghjkghjk', '1234', '상상상', '피카', 'dfgh@naver.com', 22);
 
 CREATE TABLE friends (
 user_num      INT,
@@ -28,30 +53,45 @@ FOREIGN KEY (friend_num) REFERENCES users(user_num)
 
 INSERT INTO friends
 VALUES
-(1,2,"2023-05-21");
+(1,2,"2023-05-21"),
+(1,3,"2023-05-30"),
+(1,4,"2023-04-21"),
+(1,5,"2023-05-10"),
+(2,1,"2023-05-13");
+
+
 
 CREATE TABLE loginlog (
-user_num       INT,
-logdate        DATETIME,
+user_num INT,
+logdate DATETIME,
 FOREIGN KEY (user_num) REFERENCES users(user_num)
 );
 
 CREATE TABLE achievements (
-achv_id        INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-achv_title     VARCHAR(30), 
-achv_content   VARCHAR(50)
+achv_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+achv_title VARCHAR(30), 
+achv_content VARCHAR(50)
 );
 
 INSERT INTO achievements
 (achv_title, achv_content)
 VALUES
 ('시작이 반이다', '첫 운동 다이어리 작성과 함께 꾸준히 운동해봐요!'),
-('상체충', '하체 운동 없이 상체 운동만 10번 연속 시행한 당신, 아주 대단해요!');
+('운동 뉴비', '운동 다이어리 작성을 5회 완료하세요!'),
+('운동에 관하여', '운동 다이어리 작성을 10회 완료하세요!'),
+('꾸준함의 힘으로', '운동 다이어리를 연속 10일 작성해보세요!'),
+('밸런스는 중요하죠!', '20일 안에 모든 부위 운동을 완료해보세요!'),
+('이두 단련 I', '이두 운동을 5회 완료하고 다이어리를 작성해보세요!'),
+('삼두 단련 I', '삼두 운동을 5회 완료하고 다이어리를 작성해보세요!'),
+('복근 단련 I', '복근 운동을 5회 완료하고 다이어리를 작성해보세요!'),
+('어깨 단련 I', '어깨 운동을 5회 완료하고 다이어리를 작성해보세요!'),
+('허벅지 단련 I', '허벅지 운동을 5회 완료하고 다이어리를 작성해보세요!'),
+('상체에 집중하자', '하체 운동 없이 상체 운동만 10번 연속 시행한 당신, 아주 대단해요!');
 
 CREATE TABLE user_achieve(
-user_num       INT,
-achv_id        INT,
-achieved_date      Date,
+user_num INT,
+achv_id INT,
+achieved_date Date,
 FOREIGN KEY(user_num) REFERENCES users(user_num),
 FOREIGN KEY(achv_id) REFERENCES achievements(achv_id)
 );
@@ -60,91 +100,242 @@ INSERT INTO user_achieve
 VALUES
 (1,1,"2023-04-21"),
 (1,2,"2023-05-21"),
+(1,3,"2023-05-21"),
+(1,6,"2023-05-21"),
+(1,7,"2023-05-21"),
+(1,8,"2023-05-21"),
+(1,9,"2023-05-21"),
 (2,1,"2023-05-21");
 
 CREATE TABLE streak (
-streak_id        INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-user_num         INT,
+streak_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+user_num INT,
 streak_start_date DATE,
-streak_passed    INT,
+streak_passed INT,
 FOREIGN KEY(user_num) REFERENCES users(user_num)
 ); 
 
+INSERT INTO streak (user_num, streak_start_date, streak_passed)
+VALUES 
+(1, '2023-05-01', 1),
+(1, '2023-05-03', 1),
+(1, '2023-05-10', 1),
+(1, '2023-05-17', 1),
+(1, '2023-05-25', 1),
+(1, '2023-05-21', 2),
+(2, '2023-05-02', 2),
+(2, '2023-05-10', 1);
+
+
 CREATE TABLE diaries (
-diary_id        INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-user_num         INT,
-diary_title     VARCHAR(30),
-diary_regdate   DATE,
-diary_rating    INT,
-diary_content   VARCHAR(100),
+diary_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+user_num INT,
+diary_title VARCHAR(30),
+diary_regdate DATE,
+diary_rating INT,
+diary_content VARCHAR(100),
 FOREIGN KEY(user_num) REFERENCES users(user_num)
 );
 
--- INSERT INTO diaries
--- (user_num, diary_regdate, diary_rating, diary_content)
--- VALUES
--- (1,'2023-05-12', 2, '세상은 날씨였지만 운동 사실 별로 안했어요 ㅠㅜㅠ'),
--- (2,'2023-05-14', 1, '세상동 사실 별로 안했어요 ㅠㅜㅠ'),
--- (1,'2023-05-15', 4, '기 딱 좋은 날씨였지만 운동 사실 별로 안했어요 ㅠㅜㅠ'),
--- (1,'2023-05-16', 5, '만 운동 사실 별로 안했어요 ㅠㅜㅠ');
+INSERT INTO diaries
+(user_num, diary_title, diary_regdate, diary_rating, diary_content)
+VALUES
+(1,'비가 오는날 너무 힘드네요', '2023-05-01', 3, '비도 오고 그래서 몸이 아파서 운동하기 힘들어ㅠㅜㅠㅜ'),
+(1,'소근육도 확실하게', '2023-05-03', 5, '작은 근육까지도 정말 확실하게 세분하게 했어!'),
+(1,'진짜 이젠 모르겠어', '2023-05-10', 3, '내가 운동을 하는건지 운동이 나를 하는건지'),
+(1,'진짜 너무 잠 와 ', '2023-05-17', 1, '진짜 피곤하고 졸립고 눈은 감기고 할건 많고 진짜 이런 날도 운동을 해야해?'),
+(1,'이젠 몰라 나도', '2023-05-22', 3, '운동? 떄려쳐 오늘은 내 맘대로 막 먹을거야. 진짜 아무도 못 말려'),
+(1,'복근-이두-삼두', '2023-05-25', 5, '맛있다. 우마이. 소우 들리셔스. 그래 이거지. 운동 할 맛 나네'),
+(1,'오늘은 맑음', '2023-05-21', 3, '이젠 모르겠어 일기 숙제도 아니고 이게 뭐야'),
+(2,'비가 오는날 너무 힘드네요', '2023-05-01', 3, '비도 오고 그래서 몸이 아파서 운동하기 힘들어ㅠㅜㅠㅜ'),
+(2,'소근육도 확실하게', '2023-05-03', 5, '작은 근육까지도 정말 확실하게 세분하게 했어!'),
+(2,'진짜 이젠 모르겠어', '2023-05-10', 3, '내가 운동을 하는건지 운동이 나를 하는건지');
 
 CREATE TABLE parts (
-part_id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-part_name        VARCHAR(20),
-part_content     VARCHAR(100),
-part_icon        VARCHAR(50)
+part_id INT NOT NULL PRIMARY KEY,
+part_name VARCHAR(20),
+part_content VARCHAR(100),
+part_icon VARCHAR(50)
 );
 
+
 INSERT INTO parts
-(part_name, part_content)
+(part_id, part_name, part_content)
 VALUES
-('가슴', '가슴 운동입니다'),('전완근', '전완근 운동입니다'),('엉덩이', '엉덩이 운동입니다'),
-('복근', '복근 운동입니다'),
-('이두', '이두 운동입니다'),
-('삼두', '삼두 운동입니다'),
-('어깨', '어깨 운동입니다'),
-('등', '등 운동입니다'),
-('종아리', '종아리 운동입니다'),
-('허벅지', '허벅지 운동입니다');
+(4,'복근', '복부에 위치한 근육. 복벽의 한 부분이며 배의 앞쪽에 위치.'),
+(5,'이두', '팔 상박 앞쪽의 근육이며 흔히 말하는 알통이 바로 이 부위'),
+(6,'삼두', '팔 상박의 뒤쪽에 있는 근육. 이두근보다 크기가 월등히 크다'),
+(2,'전완근', '전완근은 앞팔의 근육이다. 팔에 있는 여러 가지 소근육 '),
+(7,'어깨', '어깨는 팔과 몸통을 이어지게 하는 쇄골, 견갑골, 상완골로 이루어진 복합체'),
+(8,'등', '등 상부의 근육은 어깨 근육을 안정시키는 결정적 역할을 한다'),
+(1,'가슴', '가슴을 덮고 있는 부채꼴 모양의 근육'),
+(3,'엉덩이', '엉덩이 근육은 우리 몸의 실질적인 움직임에 관여하는 중요한 근육'),
+(9,'종아리', '다리에 속하는 신체부위로 무릎 밑 볼록하게 튀어나온 뒷 부분'),
+(10,'허벅지', '전신 근육의 70%는 하체 근육이고 인체에서 가장 큰 근육이다.');
 
 CREATE TABLE diary_part (
-diary_id         INT,
-part_id          INT,
+diary_id INT,
+part_id INT,
 FOREIGN KEY(diary_id) REFERENCES diaries(diary_id),
 FOREIGN KEY(part_id) REFERENCES parts(part_id)
 );
 
--- INSERT INTO diary_part
--- VALUES
--- (1,2),
--- (1,3);
-
-
+INSERT INTO diary_part
+VALUES
+(1,1),
+(1,2),
+(1,5),
+(2,2),
+(2,5),
+(3,5),
+(3,9),
+(3,10),
+(4,3),
+(4,4),
+(4,8),
+(5,4),
+(5,7),
+(5,9),
+(6,3),
+(6,4),
+(6,6),
+(7,2),
+(7,4),
+(7,1),
+(7,7),
+(8,1),
+(8,5),
+(8,9),
+(9,2),
+(9,8),
+(9,10),
+(10,3),
+(10,8),
+(10,7); 
 
 CREATE TABLE user_part (
-user_num         INT,
-part_id          INT,
-last_workout     DATE,
+user_num INT,
+part_id INT,
+last_workout DATE,
 FOREIGN KEY(user_num) REFERENCES users(user_num),
 FOREIGN KEY(part_id) REFERENCES parts(part_id)
 );
 
 INSERT INTO user_part
-VALUES
-(1,1,'2023-05-10'),
-(1,2,'2023-05-13'),
-(1,3,'2023-05-15'),
-(1,4,'2023-05-13'),
-(1,5,'2023-05-11'),
-(1,6,'2023-05-12'),
-(1,7,'2023-05-13');
+VALUES 
+(1, 1, 20230521),
+(1, 2, 20230521),
+(1, 3, 20230525),
+(1, 4, 20230525),
+(1, 5, 20230510),
+(1, 6, 20230525),
+(1, 7, 20230522),
+(1, 8, 20230517),
+(1, 9, 20230522),
+(1, 10, 20230510);
+
+INSERT INTO user_part
+VALUES 
+(2, 1, 20230523),
+(2, 2, 20230502),
+(2, 3, 20230510),
+(2, 4, null),
+(2, 5, 20230503),
+(2, 6, null),
+(2, 7, 20230510),
+(2, 8, 20230510),
+(2, 9, 20230503),
+(2, 10, 20230502),
+(3, 1, null),
+(3, 2, null),
+(3, 3, null),
+(3, 4, null),
+(3, 5, null),
+(3, 6, null),
+(3, 7, null),
+(3, 8, null),
+(3, 9, null),
+(3, 10, null),
+(4, 1, null),
+(4, 2, null),
+(4, 3, null),
+(4, 4, null),
+(4, 5, null),
+(4, 6, null),
+(4, 7, null),
+(4, 8, null),
+(4, 9, null),
+(4, 10, null),
+(5, 1, null),
+(5, 2, null),
+(5, 3, null),
+(5, 4, null),
+(5, 5, null),
+(5, 6, null),
+(5, 7, null),
+(5, 8, null),
+(5, 9, null),
+(5, 10, null),
+(6, 1, null),
+(6, 2, null),
+(6, 3, null),
+(6, 4, null),
+(6, 5, null),
+(6, 6, null),
+(6, 7, null),
+(6, 8, null),
+(6, 9, null),
+(6, 10, null),
+(7, 1, null),
+(7, 2, null),
+(7, 3, null),
+(7, 4, null),
+(7, 5, null),
+(7, 6, null),
+(7, 7, null),
+(7, 8, null),
+(7, 9, null),
+(7, 10, null),
+(8, 1, null),
+(8, 2, null),
+(8, 3, null),
+(8, 4, null),
+(8, 5, null),
+(8, 6, null),
+(8, 7, null),
+(8, 8, null),
+(8, 9, null),
+(8, 10, null),
+(9, 1, null),
+(9, 2, null),
+(9, 3, null),
+(9, 4, null),
+(9, 5, null),
+(9, 6, null),
+(9, 7, null),
+(9, 8, null),
+(9, 9, null),
+(9, 10, null),
+(10, 1, null),
+(10, 2, null),
+(10, 3, null),
+(10, 4, null),
+(10, 5, null),
+(10, 6, null),
+(10, 7, null),
+(10, 8, null),
+(10, 9, null),
+(10, 10, null);
+
 
 CREATE TABLE scraps (
 scrap_id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 user_num  INT,
-scrap_url VARCHAR(30),
+scrap_title VARCHAR(50),
+scrap_url VARCHAR(50),
+scrap_vtitle VARCHAR(150),
+scrap_thumbnail VARCHAR(50),
 scrap_content  VARCHAR(100),
-scrap_title VARCHAR(30),
 scrap_regdate DATE,
 FOREIGN KEY(user_num) REFERENCES users(user_num)
 );
@@ -159,101 +350,9 @@ FOREIGN KEY(scrap_id) REFERENCES scraps(scrap_id)
 
 
 CREATE TABLE luck (
-luck_id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-luck_content    VARCHAR(45)
+luck_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+luck_content VARCHAR(150)
 );
-
-INSERT INTO luck (luck_content)
--- VALUES ('오늘의 나는 두고 가'); 
-VALUES ('내일의 나한테 맡기자');
-
-INSERT INTO streak (user_num, streak_start_date, streak_passed)
-VALUES (1, '2023-05-19', 4),
-(1, '2023-05-06', 2),
-(1, '2023-05-08', 3),
-(1, '2023-05-15', 6),
-(1, '2023-05-24', 1),
-(1, '2023-05-28', 3);
-
-
-
--- select * from users;
--- select * from streak;
--- desc streak;
-
--- SELECT *
--- 		FROM streak
--- 		ORDER BY streak_start_date DESC
--- 		LIMIT 20;
---         
--- DELETE from streak
--- where streak_id = 9;
-
--- SELECT streak_passed
--- 		FROM streak
--- 		ORDER BY streak_passed DESC;
--- SELECT *
--- 		FROM streak
--- 		ORDER BY streak_start_date DESC
--- 		LIMIT 1;
-
--- desc diaries;
--- SELECT * from diaries;
--- SELECT *
--- 		FROM diaries
--- 		WHERE diary_regdate = '2023-05-12'
--- 			AND user_num = 1;
---             
---             SELECT *
--- 		FROM diaries
--- 		WHERE diary_regdate BETWEEN '2023-05-13' AND '2023-05-16'
---         AND user_num = 2;
-
--- SELECT * from parts;
--- DESC parts;
-
--- SELECT * From diary_part;
-
--- SELECT * from users;
-
--- desc diaries;
--- SELECT * from diaries;
-
--- select * from parts;
--- select * from user_part;
-
-
--- insert into diaries (user_num, diary_title, diary_rating, diary_regdate, diary_content)
--- values
--- (2,
---  'test',
---  5,
---  '2023-03-15',
---  'test1'
--- );
-
--- SELECT * from achievements;
--- SELECT * from user_achieve;
-
--- SELECT ua.achv_id AS achvId, ac.achv_title AS achvTitle, ac.achv_content AS achvContent, ua.achieved_date AS achievedDate
--- 		FROM user_achieve ua
--- 		JOIN achievements ac 
--- 		ON ua.achv_id = ac.achv_id 
--- 		WHERE ua.user_num = 1;
---         
--- insert INTO user_part
--- values (1, 10, '2023-05-20'),
---  (1, 9, '2023-05-22'),
---  (1, 8, '2023-05-23');
--- select * from user_part;
--- select * from parts;
-
-
-
--- select * from luck;
-
-ALTER TABLE luck
-MODIFY luck_content varchar(150);
 
 INSERT INTO luck (luck_content)
 VALUES ('삶이 있는 한 희망은 있다.'),
@@ -356,27 +455,3 @@ VALUES ('삶이 있는 한 희망은 있다.'),
 ('성공으로 가는 엘리베이터는 고장입니다. 당신은 계단을 이용해야만 합니다. 한계단 한계단씩.'),
 ('길을 잃는다는 것은 곧 길을 알게 된다는 것이다.'),
 ('삶을 사는 데는 단 두가지 방법이 있다. 하나는 기적이 전혀 없다고 여기는 것이고 또 다른 하나는 모든 것이 기적이라고 여기는 방식이다.');
-
--- TRUNCATE TABLE user_part;
--- desc user_part;
--- SELECT * from user_part;
-
--- select * from diaries;
-
-INSERT INTO user_part
-VALUES (1, 1, 20230415),
-		(1, 2, 20230416),
-        (1, 3, 20230417),
-        (1, 4, 20230418),
-        (1, 5, 20230419),
-        (1, 6, 20230412),
-        (1, 7, 20230415),
-        (1, 8, 20230420),
-        (1, 9, 20230423),
-        (1, 10, 20230424);
-
--- UPDATE user_part
--- SET last_workout = '2023-05-25'
--- WHERE user_num = 1
--- AND part_id = 1;
-

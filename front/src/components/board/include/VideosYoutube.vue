@@ -74,7 +74,7 @@ export default {
     console.log("할당량 때문에 일단 기능 막아둠");
   },
   computed: {
-    ...mapState(["loginUser"]),
+    ...mapState(["loginUserNum"]),
     ...mapState({ videos: "youtubeVideos" }),
     ...mapState(["prevPageToken"]),
   },
@@ -88,7 +88,7 @@ export default {
     },
     newscrap(video) {
       this.modalview = !this.modalview;
-      this.Scrap.userNum = this.loginUser;
+      this.Scrap.userNum = this.loginUserNum;
       this.Scrap.scrapUrl = video.id.videoId;
       this.Scrap.scrapVtitle = video.snippet.title;
       this.Scrap.scrapThumbnail = video.snippet.thumbnails.high.url;
@@ -112,12 +112,12 @@ export default {
       }
     },
     nextPage() {
-      // this.$store.dispatch("getNextYoutubeVideos");
-      console.log("할당량 때문에 일단 기능 막아둠");
+      this.$store.dispatch("getNextYoutubeVideos");
+      // console.log("할당량 때문에 일단 기능 막아둠");
     },
     prevPage() {
-      // this.$store.dispatch("getPrevYoutubeVideos");
-      console.log("할당량 때문에 일단 기능 막아둠");
+      this.$store.dispatch("getPrevYoutubeVideos");
+      // console.log("할당량 때문에 일단 기능 막아둠");
     },
   },
 };

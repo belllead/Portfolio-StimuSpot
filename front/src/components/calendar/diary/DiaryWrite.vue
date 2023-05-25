@@ -292,10 +292,14 @@ export default {
   },
   methods: {
     registDiary() {
-      this.$store.dispatch("registDiary", {
-        diary: this.diary,
-        diaryParts: this.diaryParts,
-      });
+      this.$store
+        .dispatch("registDiary", {
+          diary: this.diary,
+          diaryParts: this.diaryParts,
+        })
+        .then(() => {
+          this.$emit("refreshDates");
+        });
     },
     modalClose() {
       this.$emit("modalClose");

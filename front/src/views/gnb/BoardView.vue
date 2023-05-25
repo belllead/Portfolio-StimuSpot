@@ -17,15 +17,17 @@
         <router-view />
       </div>
     </div>
+    <footer-info-2 style="pointer-events: none; z-index: -1" />
   </div>
 </template>
 
 <script>
 import ScrapsMy from "@/components/board/include/ScrapsMy.vue";
 import HeaderNav from "@/components/common/HeaderNav.vue";
+import FooterInfo2 from "../../components/common/FooterInfo2.vue";
 export default {
   name: "BoardView",
-  components: { HeaderNav, ScrapsMy },
+  components: { HeaderNav, ScrapsMy, FooterInfo2 },
   data() {
     return {
       boards: [
@@ -61,7 +63,7 @@ export default {
   position: absolute;
   width: 1470px;
   height: 880px;
-  top: calc(50% - 880px / 2 - 12px);
+  top: 30px;
   left: 320px;
   /* background: #ffffff; */
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);

@@ -14,6 +14,7 @@
         :key="'day_' + i"
         v-bind="day"
         @select="click"
+        @select2="selectDate"
         class="canlendar-cell"
       >
         <!-- <CalendarBadge
@@ -160,6 +161,9 @@ export default {
       // props로 받은 event(일정) 배열에서 화면에 표시하는 날과 같은 날을 가진 이벤트면 표시
       return this.events.filter((item) => item.date.isSame(day, "day"));
     },
+    selectDate(day) {
+      this.$emit("selectDate", day);
+    },
   },
 };
 </script>
@@ -174,7 +178,7 @@ export default {
   /* background-color: aqua; */
   position: absolute;
   left: 100px;
-  top: 160px;
+  top: 100px;
 }
 
 .calendar-header {

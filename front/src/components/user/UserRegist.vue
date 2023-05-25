@@ -118,6 +118,7 @@ export default {
         userAge: this.age,
         userSelfie: this.profileImg,
       };
+      console.log(user);
       this.$store.dispatch("registUser", user);
       this.$router.push({ path: "/user" });
     },

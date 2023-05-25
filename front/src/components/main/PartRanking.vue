@@ -1,14 +1,14 @@
 <template>
   <div class="main-partranking">
     <div class="subbox-partranking">
-      <div class="title">자극된지 오래된 순위</div>
+      <div class="title">자극된 지 오래된 순위</div>
       <br />
       <div class="margin">
         <div v-if="selectedPart" class="selectedranking">
-          <div class="ranking">{{ 0 }}</div>
-          <div class="icon">
+          <div class="ranking">-</div>
+          <!-- <div class="icon">
             <div class="icon-place"></div>
-          </div>
+          </div> -->
           <div class="name">{{ selectedPart }}</div>
           <div class="differ">
             {{
@@ -26,9 +26,9 @@
         </div>
         <div v-for="(el, index) in top3Parts()" :key="index" class="rankingbox">
           <div class="ranking">{{ index + 1 }}</div>
-          <div class="icon">
+          <!-- <div class="icon">
             <div class="icon-place"></div>
-          </div>
+          </div> -->
           <div class="name">{{ el.partName }}</div>
           <div class="differ">
             {{
@@ -42,9 +42,11 @@
         </div>
       </div>
     </div>
-    <router-link :to="{ name: 'PartRankingView' }"
-      ><button-basic-1 class="basic-btn"></button-basic-1>
-    </router-link>
+    <div class="btns">
+      <router-link :to="{ name: 'PartRankingView' }"
+        ><button-basic-1 class="basic-btn"></button-basic-1>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -86,19 +88,24 @@ export default {
   position: absolute;
   top: 0px;
   left: 0px;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 600;
 }
 
 .basic-btn {
   position: absolute;
-  top: 280px;
+  top: 300px;
   left: 1220px;
   width: 80px;
   height: 40px;
   color: #a0a0a0;
 }
 
+.rankingbox {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
 .subbox-partranking {
   position: absolute;
   width: 200px;
@@ -112,14 +119,15 @@ export default {
 
 .selectedranking {
   display: flex;
-  flex-direction: row;
-  background-color: antiquewhite;
-  border-radius: 8px;
+  background-color: #e8cb66;
+  border-radius: 4px;
+  justify-content: space-between;
+  color: white;
+  padding: 6px 0 0;
 }
 
-.rankingbox {
-  display: flex;
-  flex-direction: row;
+.selectedranking .differ {
+  color: white;
 }
 
 .ranking {
@@ -127,7 +135,7 @@ export default {
   margin-right: 5px;
 }
 
-.icon {
+/* .icon {
   margin: 3px;
 }
 
@@ -136,12 +144,13 @@ export default {
   height: 30px;
   background-color: gainsboro;
   border-radius: 30px;
-}
+} */
 
 .name {
   margin: 3px;
   width: 50px;
   height: 30px;
+  text-align: left;
 }
 
 .differ {

@@ -23,14 +23,15 @@
       </div> -->
     </div>
 
-    <div style="width: 100px; height: 100px; background-color: red"></div>
     <!-- modal -->
     <transition name="slide-modal">
       <div class="modalBg" v-if="modalShow">
         <write-modal
+          class="card"
           :modalType="modalType"
           :modalShow="modalShow"
           @modalClose="modalClose"
+          @refreshDates="refreshDates"
         />
       </div>
 
@@ -118,14 +119,12 @@ export default {
     };
   },
   computed: {
-    ...mapState(["diary", "diaryParts", "selectedDate"]),
-    selectedDates() {
-      return this.$store.state.selectedDates;
-    },
+    ...mapState(["diary", "diaryParts", "selectedDate", "selectedDates"]),
   },
   created() {
     this.$store.dispatch("setMonthlyDiaryDates");
     this.attributes[0].dates = this.selectedDates;
+    if (!this.selectedDates.length) this.$router.go(0);
   },
   methods: {
     selectDate(date) {
@@ -149,6 +148,13 @@ export default {
 
       this.modalType = "detail";
       this.modalShow = true;
+    },
+    refreshDates() {
+      console.log("됐을까?");
+      this.$store.dispatch("setMonthlyDiaryDates");
+      this.attributes[0].dates = this.selectedDates;
+      this.$router.go(0);
+      this.modalShow = false;
     },
     writeModalOpen() {
       // const today = dateFormat(new Date());
@@ -238,7 +244,7 @@ export default {
 
 .modalBg {
   position: absolute;
-  width: 1500px;
+  width: 1620px;
   height: 1000px;
   top: -48px;
   left: 76px;
@@ -253,6 +259,10 @@ export default {
 
   border-radius: 8px;
   z-index: 1;
+}
+
+.card {
+  margin: 32px 0 0 -80px;
 }
 .modal {
   position: absolute;

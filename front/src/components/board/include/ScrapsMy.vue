@@ -26,7 +26,7 @@
               :disabled="currentPage === 1"
               class="arrow-button top"
             >
-              <span class="arrow-up"></span>
+              <span class="arrow-up">&#8593;</span>
             </button>
             <br />
             <button
@@ -34,7 +34,7 @@
               :disabled="currentPage === totalPages"
               class="arrow-button bottom"
             >
-              <span class="arrow-down"></span>
+              <span class="arrow-down"> &#8595;</span>
             </button>
           </div>
         </div>
@@ -202,7 +202,7 @@ export default {
 .noscrap {
   width: 200px;
   height: 200px;
-  background-color: #d9d9d9;
+  /* background-color: #d9d9d9; */
   border-radius: 8px;
   margin: 10px;
   margin-top: 25px;
@@ -295,12 +295,12 @@ export default {
 }
 
 .arrow-up::before {
-  content: "v";
+  /* content: &#8593; */
   transform: rotate(180deg);
 }
 
 .arrow-down::before {
-  content: "v";
+  /* content: "v"; */
 }
 
 .view {
