@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.pjt.api.comment.service.CommentService;
@@ -35,8 +36,8 @@ public class CommentRestController {
 	CommentService service;
 	
 	@ApiOperation(value= "코멘트 리스트 조회", response = List.class)
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getCommentList(@PathVariable int id){
+	@GetMapping("/")
+	public ResponseEntity<?> getCommentList(@RequestParam(required = true) int id){
 		List<CommentDto> list = service.readCommentByScrap(id);
 		try {
 			if(list == null || list.isEmpty() ) return new ResponseEntity<String>(FAIL,HttpStatus.NO_CONTENT);
@@ -58,8 +59,8 @@ public class CommentRestController {
 	}
 	
 	@ApiOperation(value= "코멘트 삭제", response = String.class)
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteComment(@PathVariable int id){
+	@DeleteMapping("/")
+	public ResponseEntity<?> deleteComment(@RequestParam(required = true) int id){
 		try {
 			if(service.removeComment(id)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
 			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
@@ -67,4 +68,16 @@ public class CommentRestController {
 			return ErrorHandler.exceptionHandling(e);
 		}
 	}
+	
+	@ApiOperation(value= "스크랩 삭제로 인한 코멘트 삭제", response = String.class)
+	@DeleteMapping("/byscrap")
+	public ResponseEntity<?> deleteCommentByScrap(@RequestParam(required = true) int id){
+		try {
+			if(service.removeCommentByScrap(id)) return new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
+			else return new ResponseEntity<String>(FAIL,HttpStatus.NOT_ACCEPTABLE);
+		}catch(Exception e) {
+			return ErrorHandler.exceptionHandling(e);
+		}
+	}
+	
 }

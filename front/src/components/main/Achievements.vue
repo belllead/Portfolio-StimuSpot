@@ -1,34 +1,32 @@
 <template>
   <div class="main-achieve">
-    <h2>업적</h2>
-    <br />
-    <br />
+    <div class="title">업적</div>
     <div>
       <div class="main-achieve-list">
-        <div>
-          <div v-if="achievements[0] != null">
+        <div class="achv">
+          <div v-if="userAchievements[0] != null">
             <div class="main-achieve-container"></div>
-            <h4>*{{ achievements[0].achvTitle }}*</h4>
+            <h4>*{{ userAchievements[0].achvTitle }}*</h4>
           </div>
           <div v-else>
             <div class="main-achieve-container-grey"></div>
             <p class="word-grey">업적을 얻어보세요</p>
           </div>
         </div>
-        <div>
-          <div v-if="achievements[1] != null">
+        <div class="achv">
+          <div v-if="userAchievements[1] != null">
             <div class="main-achieve-container"></div>
-            <h4>*{{ achievements[1].achvTitle }}*</h4>
+            <h4>*{{ userAchievements[1].achvTitle }}*</h4>
           </div>
           <div v-else>
             <div class="main-achieve-container-grey"></div>
             <p class="word-grey">업적을 얻어보세요</p>
           </div>
         </div>
-        <div>
-          <div v-if="achievements[2] != null">
+        <div class="achv">
+          <div v-if="userAchievements[2] != null">
             <div class="main-achieve-container"></div>
-            <h4>*{{ achievements[2].achvTitle }}*</h4>
+            <h4>*{{ userAchievements[2].achvTitle }}*</h4>
           </div>
           <div v-else>
             <div class="main-achieve-container-grey"></div>
@@ -37,11 +35,16 @@
         </div>
       </div>
     </div>
-    <router-link to="/achievement" class="btn">전체보기</router-link>
+    <div class="btns">
+      <router-link :to="{ name: 'AchievementView' }"
+        ><button-basic-1 class="basic-btn"></button-basic-1>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
+import ButtonBasic1 from "../ui-element/ButtonBasic1.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -49,38 +52,65 @@ export default {
   data() {
     return {};
   },
-  components: {},
+  components: { ButtonBasic1 },
   computed: {
-    ...mapState(["achievements"]),
+    ...mapState(["userAchievements"]),
   },
   created() {
-    // this.$store.dispatch("getAchievements");
+    this.$store.dispatch("setUserAchieves");
   },
 };
 </script>
 
-<style>
+<style scoped>
+.title {
+  position: absolute;
+  left: 80px;
+  top: 570px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.basic-btn {
+  position: absolute;
+  left: 80px;
+  bottom: 5px;
+  width: 80px;
+  height: 40px;
+  color: #a0a0a0;
+}
+h4 {
+  margin-top: 15px;
+}
+
+.achv:hover {
+  transform: scale(1.05);
+}
+
 .main-achieve-list {
+  left: 40px;
+  bottom: -10px;
+  position: absolute;
   display: inline-flex;
   height: 200px;
 }
 
 .main-achieve-container {
-  background-image: url(@/assets/medal.png);
+  background-image: url(@/assets/achv_icon.png.png);
   background-size: contain;
-  width: 100px;
-  height: 100px;
-  margin-left: 10px;
-  margin-right: 10px;
+  width: 80px;
+  height: 80px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .main-achieve-container-grey {
-  background-image: url(@/assets/medal_grey.png);
+  background-image: url(@/assets/achv_icon_grey.png);
   background-size: contain;
-  width: 100px;
-  height: 100px;
-  margin-left: 10px;
-  margin-right: 10px;
+  width: 80px;
+  height: 80px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .word-grey {

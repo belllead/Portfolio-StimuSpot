@@ -4,10 +4,10 @@
     <!-- calendar -->
     <v-date-picker
       v-model="date"
-      @input="selectDate"
       :attributes="attributes"
       class="main-calendar"
       color="yellow"
+      @input="selectDate"
     />
 
     <div class="btns">
@@ -34,30 +34,47 @@
           <br />
           <div id="rating" class="main-calendar-rating-box">
             <div>
-              <div v-if="diary.diaryRating > 0" class="main-rating-container"></div>
+              <div
+                v-if="diary.diaryRating > 0"
+                class="main-rating-container"
+              ></div>
               <div v-else class="main-rating-container-grey"></div>
             </div>
             <div>
-              <div v-if="diary.diaryRating > 1" class="main-rating-container"></div>
+              <div
+                v-if="diary.diaryRating > 1"
+                class="main-rating-container"
+              ></div>
               <div v-else class="main-rating-container-grey"></div>
             </div>
             <div>
-              <div v-if="diary.diaryRating > 2" class="main-rating-container"></div>
+              <div
+                v-if="diary.diaryRating > 2"
+                class="main-rating-container"
+              ></div>
               <div v-else class="main-rating-container-grey"></div>
             </div>
             <div>
-              <div v-if="diary.diaryRating > 3" class="main-rating-container"></div>
+              <div
+                v-if="diary.diaryRating > 3"
+                class="main-rating-container"
+              ></div>
               <div v-else class="main-rating-container-grey"></div>
             </div>
             <div>
-              <div v-if="diary.diaryRating > 4" class="main-rating-container"></div>
+              <div
+                v-if="diary.diaryRating > 4"
+                class="main-rating-container"
+              ></div>
               <div v-else class="main-rating-container-grey"></div>
             </div>
           </div>
           <br />
           <label for="parts">자극 부위</label>
           <div class="view">
-            <span v-for="(part, i) in diaryParts" :key="i">{{ `${part} ` }}</span>
+            <span v-for="(part, i) in diaryParts" :key="i">{{
+              `${part} `
+            }}</span>
           </div>
           <br />
           <hr />
@@ -102,6 +119,7 @@ export default {
       },
     ]);
     return {
+      test: "",
       modalShow: false,
       masks: {
         weekdays: "WWW",
@@ -144,6 +162,7 @@ export default {
     },
     modalClose() {
       this.modalShow = false;
+      this.test = null;
     },
   },
 };

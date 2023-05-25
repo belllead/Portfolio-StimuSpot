@@ -83,10 +83,6 @@ export default {
   height: 880px;
   top: calc(50% - 880px / 2 - 12px);
   left: 320px;
-  /* border: solid black;
-  background: #ffffff;
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
-  border-radius: 8px; */
 }
 
 .achvbox {
@@ -111,7 +107,7 @@ export default {
   flex-direction: column;
 }
 
-.achv:hover{
+.achv:hover {
   transform: scale(1.05);
 }
 

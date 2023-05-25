@@ -28,7 +28,8 @@ export default {
     //   });
   },
   getInitialYoutubeVideos({ commit }, payload) {
-    const key = process.env.VUE_APP_YOUTUBE_API_KEY2;
+    const key = process.env.VUE_APP_YOUTUBE_API_KEY;
+    // const key = process.env.VUE_APP_YOUTUBE_API_KEY2;
     const API_URL = process.env.VUE_APP_YOUTUBE_API_URL;
 
     axios({
@@ -51,7 +52,8 @@ export default {
     });
   },
   getNextYoutubeVideos({ commit, state }) {
-    const key = process.env.VUE_APP_YOUTUBE_API_KEY2;
+    const key = process.env.VUE_APP_YOUTUBE_API_KEY;
+    // const key = process.env.VUE_APP_YOUTUBE_API_KEY2;
     const API_URL = process.env.VUE_APP_YOUTUBE_API_URL;
 
     axios({
@@ -74,7 +76,8 @@ export default {
     });
   },
   getPrevYoutubeVideos({ commit, state }) {
-    const key = process.env.VUE_APP_YOUTUBE_API_KEY2;
+    const key = process.env.VUE_APP_YOUTUBE_API_KEY;
+    // const key = process.env.VUE_APP_YOUTUBE_API_KEY2;
     const API_URL = process.env.VUE_APP_YOUTUBE_API_URL;
 
     axios({
@@ -148,6 +151,10 @@ export default {
       });
   },
 
+  userLogout({ commit }) {
+    commit("USER_LOGOUT");
+  },
+
   setParts({ commit, state }) {
     axios({
       method: "GET",
@@ -175,10 +182,12 @@ export default {
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
       },
-    }).then((res)=>{
-      commit("SET_ACHIEVES", res.data);
-      console.log(res);
-    }).catch((err) => {
+    })
+      .then((res) => {
+        commit("SET_ACHIEVES", res.data);
+        console.log(res);
+      })
+      .catch((err) => {
         console.log(err);
       });
   },
@@ -264,7 +273,7 @@ export default {
     });
   },
 
-  setScraps({commit, state}) {
+  setScraps({ commit, state }) {
     const API_URL = `http://localhost:9999/scrap-api/`;
     axios({
       url: API_URL,
@@ -275,53 +284,45 @@ export default {
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
       },
-    }).then((res)=>{
-      console.log(res.data);
-      commit("SET_SCRAPS",res.data);
-    }).catch((err)=>{
-      console.log(err);
-    });
+    })
+      .then((res) => {
+        console.log(res.data);
+        commit("SET_SCRAPS", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
-  
   createScrap({ commit }, scrap) {
-    axios({
+    commit;
+    return axios({
       method: "POST",
       url: `http://localhost:9999/scrap-api/`,
       data: scrap,
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
       },
-    })
-    .then((res) => {
-      console.log(res);
-      commit;
-    })
-    .catch((err) => {
-      console.log(err);
     });
   },
 
-  updateScrap({commit}, scrap){
+  updateScrap({ commit }, scrap) {
+    commit;
     const API_URL = `http://localhost:9999/scrap-api/`;
-    axios({
+    return axios({
       url: API_URL,
       method: "PUT",
       data: scrap,
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
       },
-    }).then((res)=>{
-      console.log(res);
-      commit;
-    }).catch((err)=>{
-      console.log(err);
     });
   },
 
-  deleteScrap({commit}, id){
+  deleteScrap({ commit }, id) {
+    commit;
     const API_URL = `http://localhost:9999/scrap-api/`;
-    axios({
+    return axios({
       url: API_URL,
       method: "DELETE",
       params: {
@@ -330,11 +331,89 @@ export default {
       headers: {
         "access-token": sessionStorage.getItem("access-token"),
       },
-    }).then((res)=>{
-      console.log(res);
-      commit;
-    }).catch((err)=>{
-      console.log(err);
     });
+  },
+
+  setComments({ commit }, id) {
+    const API_URL = `http://localhost:9999/comment-api/`;
+    axios({
+      url: API_URL,
+      method: "GET",
+      params: {
+        id: id,
+      },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        commit("SET_COMMENTS", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  registComment({ commit }, comment) {
+    commit;
+    const API_URL = `http://localhost:9999/comment-api/`;
+    return axios({
+      url: API_URL,
+      method: "POST",
+      data: comment,
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    });
+  },
+
+  deleteComment({ commit }, id) {
+    commit;
+    const API_URL = `http://localhost:9999/comment-api/`;
+    return axios({
+      url: API_URL,
+      method: "DELETE",
+      params: {
+        id: id,
+      },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    });
+  },
+
+  deleteCommentByScrap({ commit }, scrapId) {
+    commit;
+    const API_URL = `http://localhost:9999/comment-api/byscrap`;
+    return axios({
+      url: API_URL,
+      method: "DELETE",
+      params: {
+        id: scrapId,
+      },
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    });
+  },
+
+  registUser({ commit }, user) {
+    const API_URL = `http://localhost:9999/user-api/regist`;
+    axios({
+      url: API_URL,
+      method: "POST",
+      data: user,
+      headers: {
+        "access-token": sessionStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        commit;
+      })
+      .catch((err) => {
+        alert(err);
+      });
   },
 };

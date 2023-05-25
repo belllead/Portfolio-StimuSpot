@@ -7,30 +7,19 @@
           v-for="(scrap, index) in currentScraps"
           :key="index"
           @click="getDetail(scrap)"
-          @mouseenter="showScrapTitle(index)"
-          @mouseleave="hideScrapTitle(index)"
-        >
-          <div>
-            <div class="scrap_title">
-              {{ scrap.scrapTitle }}
-            </div>
-          </div>
-          <div>
-            <img
-              class="scrap_img"
-              :src="scrap.scrapThumbnail"
-              alt="Thumbnail"
-              style="max-width: 100%"
-            />
-          </div>
-        </div>
-        <div v-if="scrapCnt<=5" class="noscrap"></div>
-        <div v-if="scrapCnt<=4" class="noscrap"></div>
-        <div v-if="scrapCnt<=3" class="noscrap"></div>
-        <div v-if="scrapCnt<=2" class="noscrap"></div>
-        <div v-if="scrapCnt<=1" class="noscrap"></div>
-        <div v-if="scrapCnt<=0" class="noscrap"></div>
-        <div class = "btngroup">
+          :style="{
+            'background-image': `url(${scrap.scrapThumbnail})`,
+            'background-size': 'cover',
+            'background-position': 'center',
+          }"
+        ></div>
+        <div v-if="scrapCnt <= 5" class="noscrap"></div>
+        <div v-if="scrapCnt <= 4" class="noscrap"></div>
+        <div v-if="scrapCnt <= 3" class="noscrap"></div>
+        <div v-if="scrapCnt <= 2" class="noscrap"></div>
+        <div v-if="scrapCnt <= 1" class="noscrap"></div>
+        <div v-if="scrapCnt <= 0" class="noscrap"></div>
+        <div class="btngroup">
           <div>
             <button
               @click="previousPage"
@@ -50,17 +39,24 @@
           </div>
         </div>
       </div>
+      <div v-else class="scrapbox">
+        <div v-if="scrapCnt <= 5" class="noscrap"></div>
+        <div v-if="scrapCnt <= 4" class="noscrap"></div>
+        <div v-if="scrapCnt <= 3" class="noscrap"></div>
+        <div v-if="scrapCnt <= 2" class="noscrap"></div>
+        <div v-if="scrapCnt <= 1" class="noscrap"></div>
+        <div v-if="scrapCnt <= 0" class="noscrap"></div>
+      </div>
     </div>
     <transition name="slide-modal">
       <div class="scrapmodal" v-if="modalview == true">
         <div class="modalcontent" v-if="modalview == true">
           <div class="left">
-            <br>
-            <br>
-            <a :href="Scrap.scrapUrl">
-              <img :src="Scrap.scrapThumbnail" alt="thumbnail" />
-            </a><br/>
-            <h4>{{"< " + Scrap.scrapVtitle + " >"}}</h4>
+            <br />
+            <br />
+            <youtube :video-id="Scrap.scrapUrl" ref="youtube"></youtube>
+            <br />
+            <h4>{{ "< " + Scrap.scrapVtitle + " >" }}</h4>
             <label for="title">제목</label>
             <input
               class="view"
@@ -83,10 +79,10 @@
               <button @click="modalClose">닫기</button>
             </div>
           </div>
-          <hr>
+          <hr />
           <div class="right">
-            <!-- <comments-my :id="Scrap.scrapId"></comments-my> -->
-          </div> 
+            <comments-my :id="Scrap.scrapId"></comments-my>
+          </div>
         </div>
       </div>
     </transition>
@@ -94,12 +90,12 @@
 </template>
 
 <script>
-// import CommentsMy from "@/components/board/include/CommentsMy.vue";
+import CommentsMy from "@/components/board/include/CommentsMy.vue";
 import { mapState, mapGetters } from "vuex";
 export default {
   name: "ScrapsMy",
   components: {
-    // CommentsMy
+    CommentsMy,
   },
   data() {
     return {
@@ -108,7 +104,6 @@ export default {
       perPage: 6,
       plugin: null,
       modalview: false,
-      myVideos: [{}],
       Scrap: {
         scrapId: 0,
         userNum: "",
@@ -134,17 +129,12 @@ export default {
     ...mapState(["scraps"]),
     ...mapState(["comments"]),
     ...mapGetters(["scrapCnt"]),
+    ...mapGetters(["commentsCnt"]),
   },
   created() {
     this.$store.dispatch("setScraps");
   },
   methods: {
-    showScrapTitle(index) {
-    this.$set(this.scrapTitles, index, true); // 해당 인덱스의 scrap에 대한 title을 표시
-  },
-  hideScrapTitle(index) {
-    this.$set(this.scrapTitles, index, false); // 해당 인덱스의 scrap에 대한 title을 숨김
-  },
     previousPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
@@ -164,14 +154,27 @@ export default {
       this.modalview = false;
     },
     updateScrap() {
-      this.$store.dispatch("updateScrap", this.Scrap);
+      this.$store.dispatch("updateScrap", this.Scrap).then(() => {
+        this.$store.dispatch("setScraps");
+      });
       this.modalview = !this.modalview;
-      this.$router.go(this.$router.currentRoute)
     },
     deleteScrap() {
-      this.$store.dispatch("deleteScrap", this.Scrap.scrapId);
+      if (this.commentsCnt == 0) {
+        this.$store.dispatch("deleteScrap", this.Scrap.scrapId).then(() => {
+          this.$store.dispatch("setScraps");
+        });
+      } else {
+        this.$store
+          .dispatch("deleteCommentByScrap", this.Scrap.scrapId)
+          .then(() => {
+            return this.$store.dispatch("deleteScrap", this.Scrap.scrapId);
+          })
+          .then(() => {
+            this.$store.dispatch("setScraps");
+          });
+      }
       this.modalview = !this.modalview;
-      this.$router.go(this.$router.currentRoute)
     },
   },
 };
@@ -189,7 +192,7 @@ export default {
   width: 200px;
   height: 200px;
   /* border: solid black; */
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
   margin: 10px;
@@ -199,17 +202,17 @@ export default {
 .noscrap {
   width: 200px;
   height: 200px;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border-radius: 8px;
   margin: 10px;
   margin-top: 25px;
 }
 
-.scrap:hover{
+.scrap:hover {
   transform: scale(1.05);
 }
 
-.noscrap:hover{
+.noscrap:hover {
   transform: scale(1.05);
 }
 
@@ -244,35 +247,35 @@ export default {
   z-index: 1;
 }
 
-.modalcontent{
+.modalcontent {
   position: absolute;
   width: 1094px;
   height: 920px;
   left: 190px;
-  top: calc(50% - 920px/2);
-  background: #FFFFFF;
+  top: calc(50% - 920px / 2);
+  background: #ffffff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
   display: flex;
   flex-direction: row;
 }
 
-.left{
-  width:75%;
+.left {
+  width: 75%;
 }
 
-.right{
-  width:25%;
+.right {
+  width: 25%;
 }
 
-.btngroup{
-  display: flex; 
-  flex-direction: column; 
+.btngroup {
+  display: flex;
+  flex-direction: column;
   margin: auto;
 }
 
-.btns button{
-  background-color: #FFFFFF;
+.btns button {
+  background-color: #ffffff;
   border-radius: 4px;
   border: solid 1px D9D9D9;
   color: D9D9D9;

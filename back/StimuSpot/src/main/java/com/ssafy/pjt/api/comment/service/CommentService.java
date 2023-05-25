@@ -14,4 +14,7 @@ public interface CommentService {
 	
 	// 코멘트 삭제
 	public boolean removeComment(int id);
+	
+	// 스크랩 삭제로 인한 강제 삭제
+	public boolean removeCommentByScrap(int scrapId);
 }

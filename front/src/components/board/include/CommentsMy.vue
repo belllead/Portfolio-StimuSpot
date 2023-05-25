@@ -5,13 +5,13 @@
         <tbody>
           <tr v-for="(comment, index) in comments" :key="index">
             <td>{{ index + 1 }}</td>
-            <td>{{ comment.commentContent }} by {{ comment.commentWriter }}</td>
+            <td>{{ comment.commentContent }}</td>
             <button @click="deleteComment(comment.commentId)">삭제</button>
           </tr>
         </tbody>
       </table>
     </div>
-    <div v-else>댓글이 없습니다.</div>
+    <div v-else>메모가 없습니다.</div>
     <input type="text" v-model="content" />
     <button class="btn" @click="registComment">등록</button>
     <hr />
@@ -31,18 +31,20 @@ export default {
     };
   },
   methods: {
-    registComment() {
+    registComment(state) {
       let comment = {
         scrapId: this.id,
-        commentWriter: this.loginUser.user_nickname,
+        commentWriter: state.loginUser,
         commentContent: this.content,
       };
-      console.log("create comment with comment=", comment);
-      //   this.$store.dispatch("createComment", comment);
+      this.$store.dispatch("registComment", comment).then(() => {
+        this.$store.dispatch("setComments", this.id);
+      });
     },
     deleteComment(id) {
-      console.log("delete comment with comment_id=", id);
-      //   this.$store.dispatch("deleteComment", id);
+      this.$store.dispatch("deleteComment", id).then(() => {
+        this.$store.dispatch("setComments", this.id);
+      });
     },
   },
   computed: {
@@ -51,7 +53,7 @@ export default {
     ...mapGetters(["commentsCnt"]),
   },
   created() {
-    // this.$store.dispatch("setComments", this.id);
+    this.$store.dispatch("setComments", this.id);
   },
 };
 </script>

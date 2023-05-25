@@ -3,7 +3,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-
       href="https://fonts.googleapis.com/css2?family=Exo&family=Noto+Sans+KR:wght@100;400;600;800&display=swap"
       rel="stylesheet"
     />
@@ -14,11 +13,11 @@
 
       <router-link to="/main" class="nav-btn">Dashboard</router-link>
       <router-link to="/calendar" class="nav-btn">Diary</router-link>
-      <router-link to="/board" class="nav-btn">Board</router-link>
+      <router-link to="/board/1" class="nav-btn">Board</router-link>
       <router-link to="/achievement" class="nav-btn">Achievement</router-link>
       <router-link to="/part-ranking" class="nav-btn">Part Ranking</router-link>
     </header>
-    <footer>
+    <footer @click="logout">
       <div class="profile-img"></div>
       <span class="text-btn">로그아웃</span>
     </footer>
@@ -31,7 +30,12 @@ import LogoStaticStroke from "../ui-element/LogoStaticStroke.vue";
 export default {
   name: "HeaderNav",
   components: { LogoStaticStroke },
-
+  methods: {
+    logout() {
+      this.$store.dispatch("userLogout");
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 

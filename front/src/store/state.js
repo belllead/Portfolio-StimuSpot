@@ -20,20 +20,7 @@ export default {
   ],
   selectedDates: [],
   scraps: [],
-  comments: [
-    {
-      commentId: 1,
-      scrapId: 1,
-      commentWriter: "송윤제",
-      commentContent: "나도 해야지",
-    },
-    {
-      commentId: 2,
-      scrapId: 1,
-      commentWriter: "북극곰",
-      commentContent: "콜라 좋아",
-    },
-  ],
+  comments: [],
   youtubeVideos: [],
   nextPageToken: "",
   prevPageToken: "",

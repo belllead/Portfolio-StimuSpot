@@ -9,7 +9,7 @@
     >
       <div v-for="video in videos" :key="video.id.videoId" class="videobox">
         <div class="video" @click="newscrap(video)">
-            <img :src="`${video.snippet.thumbnails.high.url}`" alt="" />
+          <img :src="`${video.snippet.thumbnails.high.url}`" alt="" />
           <div class="videotitle">
             <div>{{ video.snippet.title }}</div>
           </div>
@@ -19,32 +19,31 @@
     <transition name="slide-modal2">
       <div class="scrapmodal2" v-if="modalview == true">
         <div class="modalcontent" v-if="modalview == true">
-            <br>
-            <br>
-            <a :href="Scrap.scrapUrl">
-              <img :src="Scrap.scrapThumbnail" alt="thumbnail" />
-            </a><br/>
-            <h4>{{"< " + Scrap.scrapVtitle + " >"}}</h4>
-            <label for="title">제목</label>
-            <input
-              class="view"
-              id="title"
-              type="text"
-              v-model="Scrap.scrapTitle"
-            />
-            <label for="content">내용</label>
-            <textarea
-              class="view"
-              id="content"
-              cols="100"
-              rows="15"
-              v-model="Scrap.scrapContent"
-            ></textarea
-            >
-            <div class="btns">
-              <button @click="createScrap">스크랩</button>
-              <button @click="modalClose">닫기</button>
-            </div>
+          <br />
+          <br />
+          <div>
+            <youtube :video-id="Scrap.scrapUrl" ref="youtube"></youtube><br />
+          </div>
+          <h4>{{ "< " + Scrap.scrapVtitle + " >" }}</h4>
+          <label for="title">제목</label>
+          <input
+            class="view"
+            id="title"
+            type="text"
+            v-model="Scrap.scrapTitle"
+          />
+          <label for="content">내용</label>
+          <textarea
+            class="view"
+            id="content"
+            cols="100"
+            rows="15"
+            v-model="Scrap.scrapContent"
+          ></textarea>
+          <div class="btns">
+            <button @click="createScrap">스크랩</button>
+            <button @click="modalClose">닫기</button>
+          </div>
         </div>
       </div>
     </transition>
@@ -71,7 +70,7 @@ export default {
   },
   props: { bodyPart: String },
   created() {
-    // this.$store.dispatch("getInitialYoutubeVideos", this.bodyPart);
+    this.$store.dispatch("getInitialYoutubeVideos", this.bodyPart);
     console.log("할당량 때문에 일단 기능 막아둠");
   },
   computed: {
@@ -81,9 +80,11 @@ export default {
   },
   methods: {
     createScrap() {
-      this.$store.dispatch("createScrap", this.Scrap);
+      this.$store.dispatch("createScrap", this.Scrap).then(() => {
+        this.$store.dispatch("setScraps");
+      });
       this.modalview = !this.modalview;
-      this.$router.go(this.$router.currentRoute)
+      // this.$router.go(this.$router.currentRoute);
     },
     newscrap(video) {
       this.modalview = !this.modalview;
@@ -91,6 +92,8 @@ export default {
       this.Scrap.scrapUrl = video.id.videoId;
       this.Scrap.scrapVtitle = video.snippet.title;
       this.Scrap.scrapThumbnail = video.snippet.thumbnails.high.url;
+      this.Scrap.scrapTitle = "";
+      this.Scrap.scrapContent = "";
     },
     modalClose() {
       this.modalview = false;
@@ -157,7 +160,7 @@ export default {
   transform: scale(1.05);
 }
 
-.video img{
+.video img {
   margin: 8px;
   width: 400px;
   height: 200px;
@@ -197,20 +200,20 @@ export default {
   border-radius: 8px;
 }
 
-.modalcontent{
+.modalcontent {
   position: absolute;
   width: 1094px;
   height: 920px;
   left: 190px;
-  top: calc(50% - 920px/2);
-  background: #FFFFFF;
+  top: calc(50% - 920px / 2);
+  background: #ffffff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
 }
-.btns button{
-  background-color: #FFFFFF;
+.btns button {
+  background-color: #ffffff;
   border-radius: 4px;
   border: solid 1px D9D9D9;
   color: D9D9D9;

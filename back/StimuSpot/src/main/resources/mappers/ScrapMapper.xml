@@ -41,9 +41,8 @@
 
 	<!-- 스크랩 삭제 -->
 	<delete id="deleteScrap" parameterType="int">
-		DELETE from scraps
-		WHERE
-		scrap_id = #{id};
+		DELETE FROM scraps 
+		WHERE scrap_id = #{id};
 	</delete>
 
 	<!-- 스크랩 수정 -->
@@ -55,4 +54,4 @@
 		scrap_id = #{scrapId};
 	</update>
 
-</mapper>
+</mapper>																								

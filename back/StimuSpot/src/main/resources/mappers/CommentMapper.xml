@@ -33,4 +33,11 @@
 		comment_id = #{id};
 	</delete>
 	
+	<!-- 스크랩 삭제로 인한 코멘트 삭제 -->
+	<delete id="deleteCommentByScrap" parameterType="int">
+		DELETE from comments
+		WHERE
+		scrap_id = #{id};
+	</delete>
+	
 </mapper>

@@ -23,13 +23,17 @@ export default {
   USER_LOGIN(state, userNum) {
     state.loginUser = userNum;
   },
+  USER_LOGOUT(state) {
+    sessionStorage.clear();
+    state.loginUser = null;
+  },
   SET_PARTS(state, payload) {
     state.parts = payload;
   },
-  SET_ACHIEVES(state, payload){
+  SET_ACHIEVES(state, payload) {
     state.achievements = payload;
   },
-  SET_USERACHIEVES(state, payload){
+  SET_USERACHIEVES(state, payload) {
     state.userAchievements = payload;
   },
   SET_SELECTED_DATES(state, payload) {
@@ -50,10 +54,13 @@ export default {
   SET_TODAY_LUCK_ID(state, payload) {
     state.todayLuckId = payload;
   },
-  SET_SCRAPS(state, payload){
+  SET_SCRAPS(state, payload) {
     state.scraps = payload;
   },
-  SET_SCRAP(state,payload){
+  SET_SCRAP(state, payload) {
     state.scrap = payload;
+  },
+  SET_COMMENTS(state, payload) {
+    state.comments = payload;
   },
 };

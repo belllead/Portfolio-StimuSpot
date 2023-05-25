@@ -25,7 +25,7 @@ import ScrapsMy from "@/components/board/include/ScrapsMy.vue";
 import HeaderNav from "@/components/common/HeaderNav.vue";
 export default {
   name: "BoardView",
-  components: { HeaderNav, ScrapsMy},
+  components: { HeaderNav, ScrapsMy },
   data() {
     return {
       boards: [
@@ -42,22 +42,21 @@ export default {
       ],
     };
   },
-  created() {
-    this.$router.push({ name: "BoardAbs" });
-  },
+  // created() {
+  //   this.$router.push({ name: "BoardAbs" });
+  // },
   methods: {
     selectboard(boardname) {
       this.$router.push({ name: boardname });
     },
     modalClose() {
       this.modalview = false;
-  },
+    },
   },
 };
 </script>
 
 <style scoped>
-
 .boardcontainer {
   position: absolute;
   width: 1470px;
