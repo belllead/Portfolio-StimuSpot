@@ -99,7 +99,7 @@ export default {
 .card-group {
   position: absolute;
   display: flex;
-  top: 60px;
+  top: 30px;
   left: 320px;
 }
 .calendar-card {

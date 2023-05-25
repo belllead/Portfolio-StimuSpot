@@ -1,5 +1,7 @@
 <template>
   <div class="calendar">
+    <div class="calendar-month">{{ nowMonth }}</div>
+
     <div class="calendar-header">
       <div v-for="day of daysWeek" :key="day" class="calendar-day">
         {{ day }}
@@ -14,40 +16,40 @@
         @select="click"
         class="canlendar-cell"
       >
-        <CalendarBadge
+        <!-- <CalendarBadge
           v-for="(badge, i) of getBadges(day)"
           :key="`badge_${i}`"
           v-bind="badge"
-        />
+        /> -->
       </CalendarCell>
     </div>
 
-    <div>
+    <div class="calendar-footer">
       <div class="calendar-date">
         <span class="calendar-prev" @click="next(-1)"
           ><button-arrow-left class="sqr-btn"
         /></span>
-        <h3 class="calendar-month">{{ nowMonth }}</h3>
         <span class="calendar-next" @click="next(1)"
           ><button-arrow-right class="sqr-btn"
         /></span>
       </div>
-      <div class="calendar-btn" @click="$emit('add', $event)">+</div>
+      <!-- <div class="calendar-btn" @click="$emit('add', $event)">+</div> -->
     </div>
   </div>
 </template>
 
 <script>
 import CalendarCell from "./composition/CalendarCell.vue";
-import CalendarBadge from "./composition/CalendarBadge.vue";
+// import CalendarBadge from "./composition/CalendarBadge.vue";
 import ButtonArrowLeft from "../ui-element/ButtonArrowLeft.vue";
 import ButtonArrowRight from "../ui-element/ButtonArrowRight.vue";
+import { dateFormat } from "@/util/dateFormat";
 
 export default {
   name: "CalendarIndex",
   components: {
     CalendarCell,
-    CalendarBadge,
+    // CalendarBadge,
     ButtonArrowLeft,
     ButtonArrowRight,
   },
@@ -67,7 +69,15 @@ export default {
       daysWeek: ["일", "월", "화", "수", "목", "금", "토"],
     };
   },
+  created() {
+    this.$store.dispatch("setMonthlyDiaryDates");
+    this.date = this.$moment().clone();
+  },
   computed: {
+    selectedDates() {
+      return this.$store.state.selectedDates;
+    },
+
     // 달력 상단에 띄우는 지금 보고 있는 년월 정보
     // 현재 날짜 기준으로 렌더링
     nowMonth() {
@@ -83,26 +93,23 @@ export default {
       const monthEnd = this.date.clone().endOf("month");
       // 이번 달의 시작 날짜가 속한 주의 시작하는 날짜(일요일)
       const weekStart = monthStart.clone().startOf("week");
-      // console.log(
-      //   [...Array(monthEnd.diff(weekStart, "days") >= 35 ? 42 : 35)].map(
-      //     (_, i) => {
-      //       const day = weekStart.clone().add(i, "day");
-      //       const active = this.active(day);
-      //       return { day, active, date: this.date };
-      //     }
-      //   )
-      // );
       // 이번 달의 끝 날짜와 시작 주의 첫 날짜 차이가 35보다 크거나 같으면
       // 42개의 원소를 가진 배열 반환 / 작으면 35개 원소 => 6주를 표기할지 5주를 표기할지
       // 해당 원소는 객체로 채움
       // day: 해당 원소가 나타내는 날짜 = 달력에 제일 처음 보이는 (시작 주의 시작일) 날짜 + 인덱스
       // active: 활성화된 날짜인지
       // date: 기준일
+      const diaryDates = this.$store.state.selectedDates;
       return [...Array(monthEnd.diff(weekStart, "days") >= 35 ? 42 : 35)].map(
         (_, i) => {
           const day = weekStart.clone().add(i, "day");
           const active = this.active(day);
-          return { day, active, date: this.date };
+          let hasDiary = false;
+          const date = dateFormat(day._d);
+          for (let i = 0; i < diaryDates.length; i++) {
+            if (diaryDates[i] == date) hasDiary = true;
+          }
+          return { day, active, date: this.date, hasDiary };
         }
       );
     },
@@ -154,9 +161,6 @@ export default {
       return this.events.filter((item) => item.date.isSame(day, "day"));
     },
   },
-  created() {
-    this.date = this.$moment().clone();
-  },
 };
 </script>
 
@@ -198,26 +202,41 @@ export default {
   /* gap: 2px; */
 }
 
-/* ------------------ */
+.calendar-footer {
+  position: absolute;
+  right: -20px;
+  bottom: -68px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .calendar-date {
   display: flex;
   align-items: center;
+  position: absolute;
+  right: 0;
   height: 50px;
   padding: 10px 20px;
 }
 .calendar-date span {
-  height: 25px;
-  width: 25px;
+  height: 40px;
+  width: 40px;
   cursor: pointer;
   text-align: center;
 }
-.calendar-month {
-  margin: 0 5px;
-  min-width: 110px;
-  text-align: center;
-  text-transform: uppercase;
-  color: #3c32c9;
+
+.calendar-prev {
+  margin-right: 8px;
 }
+
+.calendar-month {
+  margin: 0 20px 40px;
+  /* min-width: 110px; */
+  text-align: end;
+  text-transform: uppercase;
+  color: #a0a0a0;
+}
+/* ------------------ */
 
 .calendar-btn {
   height: 30px;

@@ -16,9 +16,9 @@
         <!-- <part-ranking-ui></part-ranking-ui> -->
       </div>
     </div>
-    <div>
+    <!-- <div>
       <streak-ui></streak-ui>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -51,7 +51,7 @@ export default {
   width: 1470px;
   justify-content: space-between;
   position: absolute;
-  top: 60px;
+  top: 30px;
   left: 320px;
 }
 .left {

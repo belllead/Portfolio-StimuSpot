@@ -1,198 +1,15 @@
 <template>
   <div class="modal" v-if="modalShow">
-    <div class="regist_form">
-      <label for="title">제목</label>
-      <input
-        type="text"
-        id="title"
-        class="view"
-        name="diaryTitle"
-        v-model="diary.diaryTitle"
-        ref="diaryTitle"
-      />
-
-      <label for="regdate">날짜</label>
-      <input
-        type="text"
-        id="regdate"
-        class="view"
-        name="diaryRegdate"
-        v-model="diary.diaryRegdate"
-        ref="diaryRegdate"
-      /><br />
-      <label for="rating">성취도</label>
-      <div class="starpoint_wrap" id="rating">
-        <div class="starpoint_box">
-          <label for="starpoint_1" class="label_star" title="0.5"
-            ><span class="blind">0.5</span></label
-          >
-          <label for="starpoint_2" class="label_star" title="1"
-            ><span class="blind">1</span></label
-          >
-          <label for="starpoint_3" class="label_star" title="1.5"
-            ><span class="blind">1.5</span></label
-          >
-          <label for="starpoint_4" class="label_star" title="2"
-            ><span class="blind">2</span></label
-          >
-          <label for="starpoint_5" class="label_star" title="2.5"
-            ><span class="blind">2.5</span></label
-          >
-          <label for="starpoint_6" class="label_star" title="3"
-            ><span class="blind">3</span></label
-          >
-          <label for="starpoint_7" class="label_star" title="3.5"
-            ><span class="blind">3.5</span></label
-          >
-          <label for="starpoint_8" class="label_star" title="4"
-            ><span class="blind">4</span></label
-          >
-          <label for="starpoint_9" class="label_star" title="4.5"
-            ><span class="blind">4.5</span></label
-          >
-          <label for="starpoint_10" class="label_star" title="5"
-            ><span class="blind">5</span></label
-          >
-          <input
-            type="radio"
-            name="starpoint"
-            id="starpoint_1"
-            class="star_radio"
-            v-model="diary.diaryRating"
-            value="0.5"
-          />
-          <input
-            type="radio"
-            name="starpoint"
-            id="starpoint_2"
-            class="star_radio"
-            v-model="diary.diaryRating"
-            value="1"
-          />
-          <input
-            type="radio"
-            name="starpoint"
-            id="starpoint_3"
-            class="star_radio"
-            v-model="diary.diaryRating"
-            value="1.5"
-          />
-          <input
-            type="radio"
-            name="starpoint"
-            id="starpoint_4"
-            class="star_radio"
-            v-model="diary.diaryRating"
-            value="2"
-          />
-          <input
-            type="radio"
-            name="starpoint"
-            id="starpoint_5"
-            class="star_radio"
-            v-model="diary.diaryRating"
-            value="2.5"
-          />
-          <input
-            type="radio"
-            name="starpoint"
-            id="starpoint_6"
-            class="star_radio"
-            v-model="diary.diaryRating"
-            value="3"
-          />
-          <input
-            type="radio"
-            name="starpoint"
-            id="starpoint_7"
-            class="star_radio"
-            v-model="diary.diaryRating"
-            value="3.5"
-          />
-          <input
-            type="radio"
-            name="starpoint"
-            id="starpoint_8"
-            class="star_radio"
-            v-model="diary.diaryRating"
-            value="4"
-          />
-          <input
-            type="radio"
-            name="starpoint"
-            id="starpoint_9"
-            class="star_radio"
-            v-model="diary.diaryRating"
-            value="4.5"
-          />
-          <input
-            type="radio"
-            name="starpoint"
-            id="starpoint_10"
-            class="star_radio"
-            v-model="diary.diaryRating"
-            value="5"
-          />
-          <span class="starpoint_bg"></span>
-        </div>
-      </div>
-      <br />
-      <label for="parts">자극 부위</label>
-      <div class="parts">
-        <input type="checkbox" id="check1" value="bicep" v-model="DiaryParts" />
-        <label for="check1">이두</label>
-        <input
-          type="checkbox"
-          id="check2"
-          value="tricep"
-          v-model="DiaryParts"
-        />
-        <label for="check2">삼두</label>
-        <input
-          type="checkbox"
-          id="check3"
-          value="forearm"
-          v-model="DiaryParts"
-        />
-        <label for="check3">전완근</label>
-        <input
-          type="checkbox"
-          id="check4"
-          value="shoulder"
-          v-model="DiaryParts"
-        />
-        <label for="check4">어깨</label>
-        <input type="checkbox" id="check5" value="chest" v-model="DiaryParts" />
-        <label for="check5">가슴</label>
-        <input type="checkbox" id="check6" value="abs" v-model="DiaryParts" />
-        <label for="check6">복근</label>
-        <input type="checkbox" id="check7" value="back" v-model="DiaryParts" />
-        <label for="check7">등</label>
-        <input type="checkbox" id="check8" value="glute" v-model="DiaryParts" />
-        <label for="check8">엉덩이</label>
-        <input type="checkbox" id="check9" value="thigh" v-model="DiaryParts" />
-        <label for="check9">허벅지</label>
-        <input type="checkbox" id="check10" value="calf" v-model="DiaryParts" />
-        <label for="check10">종아리</label>
-      </div>
-      <label for="content">내용</label>
-      <textarea
-        id="content"
-        name="diary_content"
-        v-model="diary.diaryContent"
-        ref="diary_content"
-      ></textarea
-      ><br />
-      <button @click="registDiary">등록</button>
-      <button @click="modifyDiary">수정</button>
-    </div>
-    <router-link to="/calendar" class="btn">수정하기</router-link>
-    <button @click="modalClose">창 닫기</button>
+    <diary-detail v-if="modalType == 'detail'" @modalClose="modalClose" />
+    <diary-write v-if="modalType == 'write'" @modalClose="modalClose" />
   </div>
 </template>
 
 <script>
+import DiaryDetail from "../../calendar/diary/DiaryDetail.vue";
+import DiaryWrite from "../../calendar/diary/DiaryWrite.vue";
 export default {
+  components: { DiaryDetail, DiaryWrite },
   name: "WriteModal",
   data() {
     return {
@@ -207,7 +24,13 @@ export default {
     };
   },
   props: {
+    modalType: String,
     modalShow: Boolean,
+  },
+  methods: {
+    modalClose() {
+      this.$emit("modalClose");
+    },
   },
 };
 </script>

@@ -14,7 +14,9 @@
       <router-link :to="{ name: 'CalendarView' }"
         ><button-basic-1 class="basic-btn"></button-basic-1>
       </router-link>
-      <button-basic-6 class="sqr-btn" @click="writeModalShow"></button-basic-6>
+      <div class="click" @click="writeModalOpen">
+        <button-basic-6 class="diary-btn" />
+      </div>
       <!-- <div class="arrow-btns">
         <button-arrow-left class="left-btn" />
         <button-arrow-right class="right-btn" />
@@ -24,7 +26,11 @@
     <div style="width: 100px; height: 100px; background-color: red"></div>
     <!-- modal -->
     <div class="modalBg" v-if="modalShow"></div>
-    <write-modal :modalShow="modalShow" />
+    <write-modal
+      :modalType="modalType"
+      :modalShow="modalShow"
+      @modalClose="modalClose"
+    />
 
     <!-- <div class="modal" v-if="modalShow">
       <label for="title">제목</label>
@@ -113,6 +119,7 @@ export default {
       year,
       month,
       attributes,
+      modalType: "",
     };
   },
   computed: {
@@ -127,6 +134,8 @@ export default {
   },
   methods: {
     selectDate(date) {
+      if (!date) return;
+
       const selected = dateFormat(date);
 
       let flag = true;
@@ -143,6 +152,30 @@ export default {
       this.$store.dispatch("selectDate", selected);
       this.$store.dispatch("getDiary", selected);
 
+      this.modalType = "detail";
+      this.modalShow = true;
+    },
+    writeModalOpen() {
+      // const today = dateFormat(new Date());
+
+      // let flag = true;
+
+      // for (var d of this.selectedDates) {
+      //   if (today == d) {
+      //     flag = false;
+      //     break;
+      //   }
+      // }
+
+      // if (flag) {
+      //   this.modalType = "write";
+      // } else {
+      //   this.$store.dispatch("selectDate", today);
+      //   this.$store.dispatch("getDiary", today);
+
+      //   this.modalType = "detail";
+      // }
+      this.modalType = "write";
       this.modalShow = true;
     },
     modalClose() {
@@ -189,8 +222,8 @@ export default {
   color: #a0a0a0;
 }
 
-.sqr-btn {
-  width: 40px;
+.diary-btn {
+  width: 80px;
   height: 40px;
   color: #a0a0a0;
 }
@@ -271,6 +304,4 @@ export default {
 .main-calendar-rating-box {
   display: inline-flex;
 }
-
-/* 여기부터 가져온 거 */
 </style>

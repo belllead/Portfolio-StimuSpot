@@ -38,7 +38,7 @@
 import { mapState } from "vuex";
 export default {
   name: "ButtonBasic5",
-  props: { refreshChance: String },
+  props: { refreshChance: Number },
   computed: {
     ...mapState(["selectedPart"]),
   },

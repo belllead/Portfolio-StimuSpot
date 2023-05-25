@@ -3,7 +3,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-
       href="https://fonts.googleapis.com/css2?family=Exo&family=Noto+Sans+KR:wght@100;400;600;800&display=swap"
       rel="stylesheet"
     />
@@ -20,7 +19,7 @@
     </header>
     <footer>
       <div class="profile-img"></div>
-      <span class="text-btn">로그아웃</span>
+      <span class="text-btn" @click="logout">OOO님 안녕하세요!</span>
     </footer>
   </div>
 </template>
@@ -31,7 +30,13 @@ import LogoStaticStroke from "../ui-element/LogoStaticStroke.vue";
 export default {
   name: "HeaderNav",
   components: { LogoStaticStroke },
-
+  methods: {
+    logout() {
+      sessionStorage.removeItem("access-token");
+      this.$store.commit("USER_LOGOUT");
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 

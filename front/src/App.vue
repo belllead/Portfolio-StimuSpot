@@ -22,7 +22,7 @@ body {
   background-color: #eff5f5;
 }
 
-body {
-  margin: 0%;
+.click {
+  cursor: pointer;
 }
 </style>

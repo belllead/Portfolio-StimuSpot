@@ -1,6 +1,7 @@
 <template>
   <div :class="['cell', ...allClass]" @click="click">
     <div class="cell__day">{{ number }}</div>
+    <div class="diary-mark" v-if="hasDiary"></div>
     <div class="cell__body">
       <slot></slot>
     </div>
@@ -14,6 +15,7 @@ export default {
     day: Object,
     active: Boolean,
     date: Object,
+    hasDiary: Boolean,
   },
   computed: {
     allClass() {
@@ -83,12 +85,13 @@ export default {
   color: red;
 }
 .cell--now {
-  background-color: #08e200;
+  background-color: #e8cb66;
+
   /* border: 1px solid #8080808c; */
 }
 .cell--active {
   /* border: 1px solid #08e200; */
-  background-color: aqua;
+  background-color: #e86666;
 }
 /* .cell--now .cell__day {
   color: #08e200;
@@ -106,5 +109,13 @@ export default {
 .cell:hover {
   z-index: 2;
   background-color: aqua;
+}
+
+.diary-mark {
+  width: 8px;
+  height: 8px;
+  border-radius: 40px;
+  background-color: #e86666;
+  margin: 16px 26px 0;
 }
 </style>

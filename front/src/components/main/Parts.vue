@@ -249,6 +249,7 @@
       </g>
       <g
         id="chest"
+        class="click"
         :class="{
           focused: selectedPart === '가슴',
           'fill-ani-100': is100('가슴'),
@@ -260,7 +261,7 @@
           'fill-ani-40': is40('가슴'),
           'fill-ani-30': is30('가슴'),
           'fill-ani-20': is20('가슴'),
-          'fill-ani-10': is10('가슴'),
+          'fill-ani-0': is0('가슴'),
         }"
         @click="selectChest"
       >
@@ -279,6 +280,7 @@
       </g>
       <g
         id="shoulder"
+        class="click"
         :class="{
           focused: selectedPart === '어깨',
           'fill-ani-100': is100('어깨'),
@@ -290,7 +292,7 @@
           'fill-ani-40': is40('어깨'),
           'fill-ani-30': is30('어깨'),
           'fill-ani-20': is20('어깨'),
-          'fill-ani-10': is10('어깨'),
+          'fill-ani-0': is0('어깨'),
         }"
         @click="selectShoulder"
       >
@@ -321,6 +323,7 @@
       </g>
       <g
         id="bicep"
+        class="click"
         :class="{
           focused: selectedPart === '이두',
           'fill-ani-100': is100('이두'),
@@ -332,7 +335,7 @@
           'fill-ani-40': is40('이두'),
           'fill-ani-30': is30('이두'),
           'fill-ani-20': is20('이두'),
-          'fill-ani-10': is10('이두'),
+          'fill-ani-0': is0('이두'),
         }"
         @click="selectBicep"
       >
@@ -363,6 +366,7 @@
       </g>
       <g
         id="forearm"
+        class="click"
         :class="{
           focused: selectedPart === '전완근',
           'fill-ani-100': is100('전완근'),
@@ -375,6 +379,7 @@
           'fill-ani-30': is30('전완근'),
           'fill-ani-20': is20('전완근'),
           'fill-ani-10': is10('전완근'),
+          'fill-ani-0': is0('전완근'),
         }"
         @click="selectForearm"
       >
@@ -441,6 +446,7 @@
       </g>
       <g
         id="abs"
+        class="click"
         :class="{
           focused: selectedPart === '복근',
           'fill-ani-100': is100('복근'),
@@ -453,6 +459,7 @@
           'fill-ani-30': is30('복근'),
           'fill-ani-20': is20('복근'),
           'fill-ani-10': is10('복근'),
+          'fill-ani-0': is0('복근'),
         }"
         @click="selectAbs"
       >
@@ -507,6 +514,7 @@
       </g>
       <g
         id="back"
+        class="click"
         :class="{
           focused: selectedPart === '등',
           'fill-ani-100': is100('등'),
@@ -518,7 +526,7 @@
           'fill-ani-40': is40('등'),
           'fill-ani-30': is30('등'),
           'fill-ani-20': is20('등'),
-          'fill-ani-10': is10('등'),
+          'fill-ani-0': is0('등'),
         }"
         @click="selectBack"
       >
@@ -567,6 +575,7 @@
       </g>
       <g
         id="tricep"
+        class="click"
         :class="{
           focused: selectedPart === '삼두',
           'fill-ani-100': is100('삼두'),
@@ -579,6 +588,7 @@
           'fill-ani-30': is30('삼두'),
           'fill-ani-20': is20('삼두'),
           'fill-ani-10': is10('삼두'),
+          'fill-ani-0': is0('삼두'),
         }"
         @click="selectTricep"
       >
@@ -609,6 +619,7 @@
       </g>
       <g
         id="glute"
+        class="click"
         :class="{
           focused: selectedPart === '엉덩이',
           'fill-ani-100': is100('엉덩이'),
@@ -621,6 +632,7 @@
           'fill-ani-30': is30('엉덩이'),
           'fill-ani-20': is20('엉덩이'),
           'fill-ani-10': is10('엉덩이'),
+          'fill-ani-0': is0('엉덩이'),
         }"
         @click="selectGlute"
       >
@@ -640,6 +652,7 @@
       </g>
       <g
         id="thigh"
+        class="click"
         :class="{
           focused: selectedPart === '허벅지',
           'fill-ani-100': is100('허벅지'),
@@ -652,6 +665,7 @@
           'fill-ani-30': is30('허벅지'),
           'fill-ani-20': is20('허벅지'),
           'fill-ani-10': is10('허벅지'),
+          'fill-ani-0': is0('허벅지'),
         }"
         @click="selectThigh"
       >
@@ -718,6 +732,7 @@
       </g>
       <g
         id="calf"
+        class="click"
         :class="{
           focused: selectedPart === '종아리',
           'fill-ani-100': is100('종아리'),
@@ -730,6 +745,7 @@
           'fill-ani-30': is30('종아리'),
           'fill-ani-20': is20('종아리'),
           'fill-ani-10': is10('종아리'),
+          'fill-ani-0': is0('종아리'),
         }"
         @click="selectCalf"
       >
@@ -785,7 +801,7 @@
     </svg>
     <button-basic-4
       v-if="selectedPart"
-      class="basic-btn"
+      class="basic-btn click"
       :selectedPart="selectedPart"
       @movePage="moveToBoard"
     ></button-basic-4>
@@ -890,6 +906,9 @@ export default {
     is10(partName) {
       if (this.partScores[`${partMap[`${partName}`]}`] == 1) return true;
     },
+    is0(partName) {
+      if (this.partScores[`${partMap[`${partName}`]}`] == 0) return true;
+    },
     clearSelectedPart(event) {
       const body = this.$el.querySelector("g");
       const btn = this.$el.querySelector(".basic-btn");
@@ -941,6 +960,11 @@ export default {
 }
 
 #etc {
+  animation: fill-ani-100-gray 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s
+    forwards;
+}
+
+.fill-ani-0 {
   animation: fill-ani-100-gray 5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s
     forwards;
 }
