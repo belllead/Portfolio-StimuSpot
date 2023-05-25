@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.pjt.model.dao.UserPartDao">
+
+	<select id="getLastWorkout" resultType="String">
+		SELECT last_workout AS lastWorkout
+		FROM user_part
+		WHERE user_num = #{userNum}
+		AND part_id = #{partId}
+	</select>
+
+	<update id="updateLastWorkout">
+		UPDATE user_part
+		SET last_workout = #{lastWorkout}
+		WHERE user_num = #{userNum}
+		AND part_id = #{partId}
+	</update>
+
+</mapper>
