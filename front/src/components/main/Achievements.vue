@@ -109,7 +109,7 @@ h4 {
 .main-achieve-container-grey {
   background-image: url(@/assets/achv_icon_grey.png);
   background-size: contain;
-  width: 640px;
+  width: 64px;
   height: 64px;
   margin-left: 15px;
   margin-right: 15px;
