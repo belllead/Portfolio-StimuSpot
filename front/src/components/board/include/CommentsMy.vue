@@ -45,6 +45,7 @@ export default {
       this.$store.dispatch("deleteComment", id).then(() => {
         this.$store.dispatch("setComments", this.id);
       });
+      this.content = null;
     },
   },
   computed: {
