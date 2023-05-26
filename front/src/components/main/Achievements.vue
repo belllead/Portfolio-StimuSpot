@@ -9,7 +9,7 @@
         </div>
         <div v-else>
           <div class="main-achieve-container-grey"></div>
-          <p class="word-grey">업적을 얻어보세요</p>
+          <h4 class="word-grey">업적을 얻어보세요</h4>
         </div>
       </div>
       <div class="achv">
@@ -19,7 +19,7 @@
         </div>
         <div v-else>
           <div class="main-achieve-container-grey"></div>
-          <p class="word-grey">업적을 얻어보세요</p>
+          <h4 class="word-grey">업적을 얻어보세요</h4>
         </div>
       </div>
       <div class="achv">
@@ -29,7 +29,7 @@
         </div>
         <div v-else>
           <div class="main-achieve-container-grey"></div>
-          <p class="word-grey">업적을 얻어보세요</p>
+          <h4 class="word-grey">업적을 얻어보세요</h4>
         </div>
       </div>
     </div>
